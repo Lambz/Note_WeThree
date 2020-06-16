@@ -8,11 +8,10 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CategoriesTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //Test Edit
         // Do any additional setup after loading the view.
     }
 
