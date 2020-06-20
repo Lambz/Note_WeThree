@@ -14,6 +14,7 @@
 		904435B62497ED46009B9067 /* Note_WeThree.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 904435B42497ED46009B9067 /* Note_WeThree.xcdatamodeld */; };
 		904435B82497ED47009B9067 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 904435B72497ED47009B9067 /* Assets.xcassets */; };
 		904435BB2497ED47009B9067 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 904435B92497ED47009B9067 /* LaunchScreen.storyboard */; };
+		B5778029249D85EB00FE2E88 /* StrechyTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5778028249D85EB00FE2E88 /* StrechyTableHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		904435B72497ED47009B9067 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		904435BA2497ED47009B9067 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		904435BC2497ED47009B9067 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B5778028249D85EB00FE2E88 /* StrechyTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrechyTableHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				904435B92497ED47009B9067 /* LaunchScreen.storyboard */,
 				904435BC2497ED47009B9067 /* Info.plist */,
 				904435B42497ED46009B9067 /* Note_WeThree.xcdatamodeld */,
+				B5778028249D85EB00FE2E88 /* StrechyTableHeaderView.swift */,
 			);
 			path = Note_WeThree;
 			sourceTree = "<group>";
@@ -144,6 +147,7 @@
 				904435B02497ED46009B9067 /* CategoriesTableViewController.swift in Sources */,
 				904435AC2497ED46009B9067 /* AppDelegate.swift in Sources */,
 				904435B62497ED46009B9067 /* Note_WeThree.xcdatamodeld in Sources */,
+				B5778029249D85EB00FE2E88 /* StrechyTableHeaderView.swift in Sources */,
 				904435AE2497ED46009B9067 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
