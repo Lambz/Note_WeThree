@@ -13,10 +13,6 @@ class CategoriesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        let headerView = StrechyTableHeaderView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 250))
-
-        headerView.labelView.text = "Folders"
-        self.tableView.tableHeaderView = headerView
     }
 
 
