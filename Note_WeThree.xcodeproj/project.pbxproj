@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		903077F7249ED81000A301E0 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903077F6249ED81000A301E0 /* Note.swift */; };
 		904435AC2497ED46009B9067 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904435AB2497ED46009B9067 /* AppDelegate.swift */; };
 		904435AE2497ED46009B9067 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904435AD2497ED46009B9067 /* SceneDelegate.swift */; };
 		904435B02497ED46009B9067 /* CategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904435AF2497ED46009B9067 /* CategoriesTableViewController.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		903077F6249ED81000A301E0 /* Note.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		904435A82497ED46009B9067 /* Note_WeThree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Note_WeThree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		904435AB2497ED46009B9067 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		904435AD2497ED46009B9067 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 				904435BC2497ED47009B9067 /* Info.plist */,
 				904435B42497ED46009B9067 /* Note_WeThree.xcdatamodeld */,
 				B5778028249D85EB00FE2E88 /* StrechyTableHeaderView.swift */,
+				903077F6249ED81000A301E0 /* Note.swift */,
 			);
 			path = Note_WeThree;
 			sourceTree = "<group>";
@@ -149,6 +152,7 @@
 				904435B62497ED46009B9067 /* Note_WeThree.xcdatamodeld in Sources */,
 				B5778029249D85EB00FE2E88 /* StrechyTableHeaderView.swift in Sources */,
 				904435AE2497ED46009B9067 /* SceneDelegate.swift in Sources */,
+				903077F7249ED81000A301E0 /* Note.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
