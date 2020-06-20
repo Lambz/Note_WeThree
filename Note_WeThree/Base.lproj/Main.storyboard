@@ -175,78 +175,75 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jMv-He-0o1">
-                                <rect key="frame" x="8" y="458" width="398" height="342"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vBv-Bo-ggL">
+                                <rect key="frame" x="20" y="74" width="374" height="650"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lds-OU-ljn">
-                                        <rect key="frame" x="16" y="8" width="366" height="326"/>
-                                        <gestureRecognizers/>
-                                        <connections>
-                                            <outletCollection property="gestureRecognizers" destination="uos-1b-GDE" appends="YES" id="pJF-5P-DNn"/>
-                                        </connections>
-                                    </imageView>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="Lds-OU-ljn" firstAttribute="top" secondItem="jMv-He-0o1" secondAttribute="top" constant="16" id="3bV-3K-jXm"/>
-                                    <constraint firstItem="Lds-OU-ljn" firstAttribute="leading" secondItem="jMv-He-0o1" secondAttribute="leading" constant="16" id="Lts-KL-zZc"/>
-                                    <constraint firstAttribute="bottom" secondItem="Lds-OU-ljn" secondAttribute="bottom" constant="16" id="gGb-ee-gkh"/>
-                                    <constraint firstAttribute="trailing" secondItem="Lds-OU-ljn" secondAttribute="trailing" constant="16" id="gSm-jA-4wW"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HgM-Jc-Qzv">
-                                <rect key="frame" x="8" y="118" width="398" height="314"/>
-                                <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Note's Name" textAlignment="justified" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="knR-Nz-jAZ">
-                                        <rect key="frame" x="8" y="8" width="382" height="34"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date and Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JMA-Yt-zMn">
+                                        <rect key="frame" x="8" y="8" width="366" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title of the note" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6Ue-4z-Py1">
+                                        <rect key="frame" x="20" y="53" width="346" height="34"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" text="Note Description" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="waf-Tq-Slb">
-                                        <rect key="frame" x="8" y="50" width="382" height="236"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Note's Description" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="m0V-tC-ABg">
+                                        <rect key="frame" x="20" y="95" width="346" height="248"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nvD-Tz-iiP">
+                                        <rect key="frame" x="20" y="368" width="346" height="274"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="waf-Tq-Slb" secondAttribute="bottom" constant="8" id="lM8-N4-On4"/>
-                                    <constraint firstItem="waf-Tq-Slb" firstAttribute="top" secondItem="knR-Nz-jAZ" secondAttribute="bottom" constant="17" id="n1Q-k8-8EE"/>
-                                </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U9U-PY-KZm">
+                                <rect key="frame" x="149" y="751" width="91" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <state key="normal" title="Camera" image="camera" catalog="system"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QQI-ui-C1s">
+                                <rect key="frame" x="222" y="751" width="74" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Audio" image="mic" catalog="system"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v5U-Ph-oDT">
+                                <rect key="frame" x="310" y="751" width="34" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Back"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FZG-6T-xWv">
+                                <rect key="frame" x="70" y="746" width="68" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Delete" image="trash.fill" catalog="system"/>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemGray4Color" red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="jMv-He-0o1" firstAttribute="top" secondItem="HgM-Jc-Qzv" secondAttribute="bottom" constant="8" id="AQF-12-9S3"/>
-                            <constraint firstItem="jMv-He-0o1" firstAttribute="leading" secondItem="TtU-XV-Ny7" secondAttribute="leading" constant="8" id="BPg-dg-BtF"/>
-                            <constraint firstItem="jMv-He-0o1" firstAttribute="top" secondItem="HgM-Jc-Qzv" secondAttribute="bottom" constant="8" id="Ela-5z-FmX"/>
-                            <constraint firstItem="HgM-Jc-Qzv" firstAttribute="leading" secondItem="TtU-XV-Ny7" secondAttribute="leading" constant="8" id="Vk9-U6-iwl"/>
-                            <constraint firstItem="HgM-Jc-Qzv" firstAttribute="top" secondItem="TtU-XV-Ny7" secondAttribute="top" constant="8" id="Vki-pU-hYt"/>
-                            <constraint firstItem="TtU-XV-Ny7" firstAttribute="trailing" secondItem="HgM-Jc-Qzv" secondAttribute="trailing" constant="8" id="iY4-MY-Bfh"/>
-                            <constraint firstItem="TtU-XV-Ny7" firstAttribute="bottom" secondItem="jMv-He-0o1" secondAttribute="bottom" constant="8" id="qe9-Oa-0Au"/>
-                            <constraint firstItem="TtU-XV-Ny7" firstAttribute="trailing" secondItem="jMv-He-0o1" secondAttribute="trailing" constant="8" id="smc-q6-8yH"/>
-                        </constraints>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="TtU-XV-Ny7"/>
                     </view>
                     <navigationItem key="navigationItem" title="Notes Details" id="vKZ-Cs-wRT">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="AgP-aB-wwu"/>
                         <rightBarButtonItems>
                             <barButtonItem style="plain" systemItem="save" id="hBF-UN-BJl"/>
-                            <barButtonItem style="plain" id="W5P-z8-nuO">
-                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="LzK-Ra-L2B">
-                                    <rect key="frame" x="273" y="8" width="76" height="40"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" title="Cancel"/>
-                                </button>
-                            </barButtonItem>
+                            <barButtonItem title="shareBtn" image="arrowshape.turn.up.right.fill" catalog="system" landscapeImage="arrowshape.turn.up.right.fill" id="KHw-76-gGQ"/>
                         </rightBarButtonItems>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k7v-aB-fvU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="uos-1b-GDE"/>
             </objects>
-            <point key="canvasLocation" x="251" y="-691"/>
+            <point key="canvasLocation" x="113.04347826086958" y="-692.41071428571422"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="EvZ-o1-LgL">
@@ -290,7 +287,11 @@
         <segue reference="zYl-S2-h2D"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="arrowshape.turn.up.right.fill" catalog="system" width="128" height="106"/>
+        <image name="camera" catalog="system" width="128" height="96"/>
         <image name="folder" catalog="system" width="128" height="95"/>
+        <image name="mic" catalog="system" width="108" height="128"/>
         <image name="square.and.pencil" catalog="system" width="128" height="118"/>
+        <image name="trash.fill" catalog="system" width="121" height="128"/>
     </resources>
 </document>
