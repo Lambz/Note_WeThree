@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		903077EF249D72BC00A301E0 /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903077EE249D72BC00A301E0 /* Categories.swift */; };
+		903077EF249D72BC00A301E0 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903077EE249D72BC00A301E0 /* Category.swift */; };
 		903077F1249D73AC00A301E0 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903077F0249D73AC00A301E0 /* Note.swift */; };
 		903077F3249D86AE00A301E0 /* NotesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903077F2249D86AE00A301E0 /* NotesHelper.swift */; };
 		904435AC2497ED46009B9067 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904435AB2497ED46009B9067 /* AppDelegate.swift */; };
@@ -20,7 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		903077EE249D72BC00A301E0 /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
+		903077EE249D72BC00A301E0 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		903077F0249D73AC00A301E0 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		903077F2249D86AE00A301E0 /* NotesHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesHelper.swift; sourceTree = "<group>"; };
 		904435A82497ED46009B9067 /* Note_WeThree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Note_WeThree.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -58,7 +58,7 @@
 		903077F5249DB72200A301E0 /* ModelClasses */ = {
 			isa = PBXGroup;
 			children = (
-				903077EE249D72BC00A301E0 /* Categories.swift */,
+				903077EE249D72BC00A301E0 /* Category.swift */,
 				903077F0249D73AC00A301E0 /* Note.swift */,
 			);
 			path = ModelClasses;
@@ -169,7 +169,7 @@
 				904435B02497ED46009B9067 /* CategoriesTableViewController.swift in Sources */,
 				903077F3249D86AE00A301E0 /* NotesHelper.swift in Sources */,
 				904435AC2497ED46009B9067 /* AppDelegate.swift in Sources */,
-				903077EF249D72BC00A301E0 /* Categories.swift in Sources */,
+				903077EF249D72BC00A301E0 /* Category.swift in Sources */,
 				904435B62497ED46009B9067 /* Note_WeThree.xcdatamodeld in Sources */,
 				904435AE2497ED46009B9067 /* SceneDelegate.swift in Sources */,
 				903077F1249D73AC00A301E0 /* Note.swift in Sources */,
