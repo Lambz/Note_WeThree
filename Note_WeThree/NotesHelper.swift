@@ -341,4 +341,47 @@ class NotesHelper
         note.mCategoryName = toCategory
         addNote(toCategory: toCategory, note: note)
     }
+    
+    /// Function to move Note from One Category to Another
+    /// - Parameters:
+    ///   - fromCategory: Origin Category Name
+    ///   - fromIndex: Index of the Category in the Origin Category
+    ///   - toCategory: Index of the Category where Node needs to be moved
+    /// - Throws: Throws InvalidCategoryException if the Category does not exist and throws InvalidIndexException if index of toCategory is greater than Categories Array
+    internal func moveNote(fromCategory: String, fromIndex: Int, toCategory: Int) throws
+    {
+        if mNotes[fromCategory] == nil
+        {
+            throw CustomExceptions.InvalidCategoryException
+        }
+        if mCategories.count <= toCategory
+        {
+            throw CustomExceptions.InavlidIndexException
+        }
+        let note = mNotes[fromCategory]![fromIndex]
+        deleteNote(note: note)
+        note.mCategoryName = mCategories[toCategory]
+        addNote(toCategory: mCategories[toCategory], note: note)
+    }
+    
+    /// Function to move Note from One Category to Another
+    /// - Parameters:
+    ///   - fromCategory: Origin Category Name
+    ///   - toCategory: Index of the Category where Node needs to be moved
+    ///   - note: Note Object to be moved
+    /// - Throws: Throws InvalidCategoryException if the Category does not exist and throws InvalidIndexException if index of toCategory is greater than Categories Array
+    internal func moveNote(fromCategory: String, toCategory: Int, note: Note) throws
+    {
+        if mNotes[fromCategory] == nil
+        {
+            throw CustomExceptions.InvalidCategoryException
+        }
+        if mCategories.count <= toCategory
+        {
+            throw CustomExceptions.InavlidIndexException
+        }
+        deleteNote(note: note)
+        note.mCategoryName = mCategories[toCategory]
+        addNote(toCategory: mCategories[toCategory], note: note)
+    }
 }
