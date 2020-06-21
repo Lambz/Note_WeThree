@@ -22,6 +22,7 @@ class NotesHelper
 {
     private var mNotes: [Note]
     private var mCategories: [String]
+    private var mCategoryNoteCount: [Int:Int]
     private static var mInstance: NotesHelper?
     
     /// Parameterised Constructor to load all the Categories and Notes at the startup time
@@ -29,6 +30,7 @@ class NotesHelper
     {
         self.mNotes = []
         self.mCategories = []
+        self.mCategoryNoteCount = [:]
     }
     
     /// This Function creates an instance of NotesHelper Class and returns it, implementing Singleton Design Pattern
@@ -60,6 +62,34 @@ class NotesHelper
         for result in results
         {
             mCategories.append( result.value(forKey: "category") as! String)
+        }
+        loadCategoryNoteCount(context: context)
+    }
+    
+    /// Counts the Number of Notes grouped by Category
+    /// - Parameter context: NSManagedObjectContext to be able to access Database
+    private func loadCategoryNoteCount(context: NSManagedObjectContext)
+    {
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Notes")
+        var results: [NSManagedObject] = []
+        do
+        {
+            results = try context.fetch(fetchRequest)
+        }
+        catch
+        {
+            print(error)
+        }
+        for result in results
+        {
+            if mCategoryNoteCount[mCategories.firstIndex(of: result.value(forKey: "category") as! String)!] == nil
+            {
+                mCategoryNoteCount[mCategories.firstIndex(of: result.value(forKey: "category") as! String)!] = 1
+            }
+            else
+            {
+                mCategoryNoteCount[mCategories.firstIndex(of: result.value(forKey: "category") as! String)!]! += 1
+            }
         }
     }
     
@@ -182,6 +212,19 @@ class NotesHelper
     internal func getNumberOfCategories() -> Int
     {
         return mCategories.count
+    }
+    
+    /// Function gets the Number of Notes for a particular Category
+    /// - Parameter forCategory: Index of Category
+    /// - Throws: InavlidIndexException if the passed index is greated than Categories
+    /// - Returns: Number of Notes for a particular Category
+    internal func getNumberOfNotes(forCategory: Int) throws -> Int
+    {
+        if mCategories.count <= forCategory
+        {
+            throw CustomExceptions.InavlidIndexException
+        }
+        return mCategoryNoteCount[forCategory]!
     }
     
 //    /// Function that returns a number of Notes in a particular Category
