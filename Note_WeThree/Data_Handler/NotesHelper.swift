@@ -31,6 +31,17 @@ class NotesHelper
         self.mCategories = []
     }
     
+    /// This Function creates an instance of NotesHelper Class and returns it, implementing Singleton Design Pattern
+    /// - Returns: Instance of NotesHelper
+    internal static func getInstance() -> NotesHelper
+    {
+        if(mInstance == nil)
+        {
+            mInstance = NotesHelper()
+        }
+        return mInstance!
+    }
+    
     /// Function loads all the Categories in memory
     /// - Parameter context: It is NSManagedObjectContext to be able to access Database
     internal func loadAllCategories(context: NSManagedObjectContext)
@@ -42,7 +53,8 @@ class NotesHelper
         {
             results = try context.fetch(fetchRequest)
         }
-        catch {
+        catch
+        {
             print(error)
         }
         for result in results
