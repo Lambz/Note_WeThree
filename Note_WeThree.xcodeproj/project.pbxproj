@@ -45,6 +45,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		90078CCD24A021EC00676164 /* Data_Handler */ = {
+			isa = PBXGroup;
+			children = (
+				904435B42497ED46009B9067 /* Note_WeThree.xcdatamodeld */,
+				903077F6249ED81000A301E0 /* Note.swift */,
+				903077F8249ED82A00A301E0 /* NotesHelper.swift */,
+			);
+			path = Data_Handler;
+			sourceTree = "<group>";
+		};
 		9044359F2497ED46009B9067 = {
 			isa = PBXGroup;
 			children = (
@@ -71,10 +81,8 @@
 				904435B72497ED47009B9067 /* Assets.xcassets */,
 				904435B92497ED47009B9067 /* LaunchScreen.storyboard */,
 				904435BC2497ED47009B9067 /* Info.plist */,
-				904435B42497ED46009B9067 /* Note_WeThree.xcdatamodeld */,
 				B5778028249D85EB00FE2E88 /* StrechyTableHeaderView.swift */,
-				903077F6249ED81000A301E0 /* Note.swift */,
-				903077F8249ED82A00A301E0 /* NotesHelper.swift */,
+				90078CCD24A021EC00676164 /* Data_Handler */,
 			);
 			path = Note_WeThree;
 			sourceTree = "<group>";

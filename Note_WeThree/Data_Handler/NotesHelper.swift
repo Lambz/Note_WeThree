@@ -17,7 +17,7 @@ enum CustomExceptions: Error
     case InvalidCategoryException
 }
 
-/// Notes Helper class, handles all the Note Data Operations. Implements Singleton Design Pattern. The class only interacts with database on the load up of App and at the resiging of app. While the app is in operationg all the Notes and Categories remain in the memory
+/// Notes Helper class, handles all the Note Data Operations. Implements Singleton Design Pattern.
 class NotesHelper
 {
     private var mNotes: [Note]
