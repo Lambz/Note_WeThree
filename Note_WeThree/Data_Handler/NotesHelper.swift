@@ -458,4 +458,27 @@ class NotesHelper
             try moveNote(note: note, toCategory: toCategory, context: context)
         }
     }
+    
+    /// Function to update Category
+    /// - Parameters:
+    ///   - oldCategory: Index of the Old Category
+    ///   - newCategory: Name of the new Category
+    ///   - context: NSManagedObjectContext object to be able to access Database
+    internal func updateCategory(oldCategory: Int, newCategory: String, context: NSManagedObjectContext)
+    {
+        removeCategory(withIndex: oldCategory, context: context)
+        addCategory(named: newCategory, context: context)
+    }
+    
+    /// Function to update a Note
+    /// - Parameters:
+    ///   - oldNote: Object of the Note to be replaced
+    ///   - newNote: Object of the Note to be replaced with
+    ///   - context: NSManagedObjectContext object to be able to access Database
+    /// - Throws: InvalidCategoryException if passed Note's Category does not exist
+    internal func updateNote(oldNote: Note, newNote: Note, context: NSManagedObjectContext) throws
+    {
+        deleteNote(note: oldNote, context: context)
+        try addNote(note: newNote, context: context)
+    }
 }
