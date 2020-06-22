@@ -414,4 +414,28 @@ class NotesHelper
         note.mCategoryName = mCategories[toCategory]
         addNoteInDatabase(note: note, context: context)
     }
+    
+    /// Deletes Mutiple Notes
+    /// - Parameters:
+    ///   - notes: Array of Notes to be Deleted
+    ///   - context: NSManagedObjectContext object to be able to access Database
+    internal func deleteMultipleNotes(notes: [Note], context: NSManagedObjectContext)
+    {
+        for note in notes
+        {
+            deleteNote(note: note, context: context)
+        }
+    }
+    
+    /// Deletes Multiple Categories in one call
+    /// - Parameters:
+    ///   - categories: Array of Index of Categories to be deleted
+    ///   - context: NSManagedObjectContext object to be able to access Database
+    internal func deleteMultipleCategories(categories: [Int], context: NSManagedObjectContext)
+    {
+        for category in categories
+        {
+            removeCategory(withIndex: category, context: context)
+        }
+    }
 }
