@@ -14,7 +14,7 @@ class CategoryViewController: UIViewController {
     @IBOutlet weak var categoryTableView: UITableView!
 //    context variable
     var appContext: NSManagedObjectContext!
-    var categoryName: String?
+    var categoryName: UITextField?
     override func viewDidLoad() {
         super.viewDidLoad()
 //        context for core data operations
@@ -44,8 +44,8 @@ class CategoryViewController: UIViewController {
         let alertForCategory = UIAlertController(title: "Lets' add a category", message: "", preferredStyle: .alert)
         alertForCategory.addTextField(configurationHandler: addCategoryName)
         alertForCategory.addAction(UIAlertAction(title: "Add", style: .default, handler: { (action) in
-            if(self.categoryName != nil) {
-                NotesHelper.getInstance().addCategory(named: self.categoryName!, context: self.appContext)
+            if(self.categoryName?.text != nil) {
+                NotesHelper.getInstance().addCategory(named: (self.categoryName?.text)!, context: self.appContext)
                 self.categoryTableView.reloadData()
             }
         }))
@@ -54,12 +54,18 @@ class CategoryViewController: UIViewController {
         
     }
     
+    
+//    handler for textfield for add category
     func addCategoryName(textField: UITextField) {
-        self.categoryName = textField.text
-        textField.placeholder = "Enter Category Name"
+        self.categoryName = textField
+        self.categoryName?.placeholder = "Enter Category Name"
     }
 }
-//  methods for table data handling
+
+
+
+
+//  MARK: methods for table data handling
 extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -76,14 +82,18 @@ extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    
+//    MARK: swipe gesture for deletion of the categories
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let delete = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completion) in
+            
             NotesHelper.getInstance().removeCategory(withIndex: indexPath.row, context: self.appContext)
+            //        reloads data
+            self.categoryTableView.reloadData()
+            completion(true)
         }
         
-//        reloads data
-        self.categoryTableView.reloadData()
         delete.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
         delete.image = UIImage(systemName: "trash.fill")
         return UISwipeActionsConfiguration(actions: [delete])
