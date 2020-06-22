@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		844BA19924A0377F0013313B /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA19824A0377F0013313B /* CategoryModel.swift */; };
+		844BA19B24A037DC0013313B /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA19A24A037DC0013313B /* CategoryCell.swift */; };
+		844BA19D24A038960013313B /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA19C24A038960013313B /* CategoryViewController.swift */; };
 		903077F7249ED81000A301E0 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903077F6249ED81000A301E0 /* Note.swift */; };
 		903077F9249ED82A00A301E0 /* NotesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903077F8249ED82A00A301E0 /* NotesHelper.swift */; };
 		904435AC2497ED46009B9067 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904435AB2497ED46009B9067 /* AppDelegate.swift */; };
@@ -18,6 +21,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		844BA19824A0377F0013313B /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
+		844BA19A24A037DC0013313B /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		844BA19C24A038960013313B /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		903077F6249ED81000A301E0 /* Note.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		903077F8249ED82A00A301E0 /* NotesHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesHelper.swift; sourceTree = "<group>"; };
 		904435A82497ED46009B9067 /* Note_WeThree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Note_WeThree.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -41,6 +47,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		844BA19E24A039A20013313B /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				844BA19A24A037DC0013313B /* CategoryCell.swift */,
+				844BA19C24A038960013313B /* CategoryViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		844BA19F24A039BD0013313B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				844BA19824A0377F0013313B /* CategoryModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		844BA1A024A039CF0013313B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				904435B12497ED46009B9067 /* Main.storyboard */,
+				904435B92497ED47009B9067 /* LaunchScreen.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		90078CCD24A021EC00676164 /* Data_Handler */ = {
 			isa = PBXGroup;
 			children = (
@@ -70,13 +102,14 @@
 		904435AA2497ED46009B9067 /* Note_WeThree */ = {
 			isa = PBXGroup;
 			children = (
+				844BA1A024A039CF0013313B /* Views */,
+				844BA19F24A039BD0013313B /* Models */,
 				904435AB2497ED46009B9067 /* AppDelegate.swift */,
 				904435AD2497ED46009B9067 /* SceneDelegate.swift */,
-				904435B12497ED46009B9067 /* Main.storyboard */,
 				904435B72497ED47009B9067 /* Assets.xcassets */,
-				904435B92497ED47009B9067 /* LaunchScreen.storyboard */,
 				904435BC2497ED47009B9067 /* Info.plist */,
 				90078CCD24A021EC00676164 /* Data_Handler */,
+				844BA19E24A039A20013313B /* View Controllers */,
 			);
 			path = Note_WeThree;
 			sourceTree = "<group>";
@@ -153,7 +186,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				903077F9249ED82A00A301E0 /* NotesHelper.swift in Sources */,
+				844BA19924A0377F0013313B /* CategoryModel.swift in Sources */,
 				904435AC2497ED46009B9067 /* AppDelegate.swift in Sources */,
+				844BA19B24A037DC0013313B /* CategoryCell.swift in Sources */,
+				844BA19D24A038960013313B /* CategoryViewController.swift in Sources */,
 				904435B62497ED46009B9067 /* Note_WeThree.xcdatamodeld in Sources */,
 				904435AE2497ED46009B9067 /* SceneDelegate.swift in Sources */,
 				903077F7249ED81000A301E0 /* Note.swift in Sources */,
