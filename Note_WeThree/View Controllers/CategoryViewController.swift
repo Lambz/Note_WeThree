@@ -14,7 +14,10 @@ class CategoryViewController: UIViewController {
     @IBOutlet weak var categoryTableView: UITableView!
 //    context variable
     var appContext: NSManagedObjectContext!
+
     var categoryName: UITextField?
+    var tappedCellIndex: Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 //        context for core data operations
@@ -99,5 +102,10 @@ extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
         return UISwipeActionsConfiguration(actions: [delete])
         
     }
+    
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        NoteListViewController.index = tappedCellIndex
+//    }
 }
 
