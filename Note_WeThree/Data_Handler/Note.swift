@@ -32,7 +32,7 @@ class Note
         self.mCategoryName = categoryName
     }
     
-    /// Constructor consisting of all the variables except for ID. It is for when user makes a new Note
+    /// Constructor consisting of all the variables.
     /// - Parameters:
     ///   - title: Title of the Note
     ///   - message: Message of the Note
@@ -52,26 +52,4 @@ class Note
         self.mCategoryName = categoryName
         self.mAudioFileLocation = audioFileLocation
     }
-    
-//    /// Constructor consisting of all the variables. It is for when the Data is loaded from Core Data
-//    /// - Parameters:
-//    ///   - id: Id of the Note
-//    ///   - title: Title of the Note
-//    ///   - message: Message of the Note
-//    ///   - lat: Latitude of when the Message was created
-//    ///   - long: Longitude of when the Message was created
-//    ///   - image: Image associated with the Note
-//    ///   - date: Date of creation of Note
-//    ///   - categoryName: Category Name of the Note
-//    ///   - audioFileLocation: Location of the audio file associated with the Note
-//    init(title: String, message: String?, lat: Double?, long: Double?, image: UIImage?, date: Date, categoryName: String, audioFileLocation: String?) {
-//        self.mTitle = title
-//        self.mMessage = message
-//        self.mLat = lat
-//        self.mLong = long
-//        self.mImage = image
-//        self.mDate = date
-//        self.mCategoryName = categoryName
-//        self.mAudioFileLocation = audioFileLocation
-//    }
 }
