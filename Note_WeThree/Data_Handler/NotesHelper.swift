@@ -115,6 +115,7 @@ class NotesHelper
         mCategories.append(named)
         mCategories.sort()
         addCategoryInDatabase(named: named,context: context)
+        loadCategoryNoteCount(context: context)
     }
     
     /// Adds Category in CoreData
