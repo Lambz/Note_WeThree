@@ -348,9 +348,8 @@ class NotesHelper
     
     /// Function to delete Note from Notes Array
     /// - Parameters:
-    ///   - note: <#note description#>
-    ///   - context: <#context description#>
-    /// - Throws: Throws InvalidCategoryException if the Category does not exist
+    ///   - note: Note Object to be deleted
+    ///   - context: NSManagedObjectContext object to be able to access Database
     internal func deleteNote(note: Note, context: NSManagedObjectContext)
     {
         for i in 0..<mNotes.count
@@ -361,95 +360,58 @@ class NotesHelper
                 break
             }
         }
+        deleteNoteFromDatabase(note: note, context: context)
     }
-    //
-    //    /// Function to delete Note from Notes Array
-    //    /// - Parameter note: Note Object
-    //    internal func deleteNote(note: Note)
-    //    {
-    //        for category in mNotes.keys
-    //        {
-    //            mNotes[category]!.removeAll { (note1) -> Bool in
-    //                note1 === note
-    //            }
-    //        }
-    //    }
-    //
-    //    /// Function to move Note from One Category to Another
-    //    /// - Parameters:
-    //    ///   - fromCategory: Origin Category Name
-    //    ///   - fromIndex: Index of the Category in the Origin Category
-    //    ///   - toCategory: Category to where the Note is to be moved
-    //    /// - Throws: Throws InvalidCategoryException if the Category does not exist
-    //    internal func moveNote(fromCategory: String, fromIndex: Int, toCategory: String) throws
-    //    {
-    //        if mNotes[fromCategory] == nil
-    //        {
-    //            throw CustomExceptions.InvalidCategoryException
-    //        }
-    //        let note = mNotes[fromCategory]![fromIndex]
-    //        deleteNote(note: note)
-    //        note.mCategoryName = toCategory
-    //        addNote(toCategory: toCategory, note: note)
-    //    }
-    //
-    //    /// Function to move Note from One Category to Another
-    //    /// - Parameters:
-    //    ///   - fromCategory: Origin Category Name
-    //    ///   - toCategory: Category to where the Note is to be moved
-    //    ///   - note: Note Object to be moved
-    //    /// - Throws: Throws InvalidCategoryException if the Category does not exist
-    //    internal func moveNote(fromCategory: String, toCategory: String, note: Note) throws
-    //    {
-    //        if mNotes[fromCategory] == nil
-    //        {
-    //            throw CustomExceptions.InvalidCategoryException
-    //        }
-    //        deleteNote(note: note)
-    //        note.mCategoryName = toCategory
-    //        addNote(toCategory: toCategory, note: note)
-    //    }
-    //
-    //    /// Function to move Note from One Category to Another
-    //    /// - Parameters:
-    //    ///   - fromCategory: Origin Category Name
-    //    ///   - fromIndex: Index of the Category in the Origin Category
-    //    ///   - toCategory: Index of the Category where Node needs to be moved
-    //    /// - Throws: Throws InvalidCategoryException if the Category does not exist and throws InvalidIndexException if index of toCategory is greater than Categories Array
-    //    internal func moveNote(fromCategory: String, fromIndex: Int, toCategory: Int) throws
-    //    {
-    //        if mNotes[fromCategory] == nil
-    //        {
-    //            throw CustomExceptions.InvalidCategoryException
-    //        }
-    //        if mCategories.count <= toCategory
-    //        {
-    //            throw CustomExceptions.InavlidIndexException
-    //        }
-    //        let note = mNotes[fromCategory]![fromIndex]
-    //        deleteNote(note: note)
-    //        note.mCategoryName = mCategories[toCategory]
-    //        addNote(toCategory: mCategories[toCategory], note: note)
-    //    }
-    //
-    //    /// Function to move Note from One Category to Another
-    //    /// - Parameters:
-    //    ///   - fromCategory: Origin Category Name
-    //    ///   - toCategory: Index of the Category where Node needs to be moved
-    //    ///   - note: Note Object to be moved
-    //    /// - Throws: Throws InvalidCategoryException if the Category does not exist and throws InvalidIndexException if index of toCategory is greater than Categories Array
-    //    internal func moveNote(fromCategory: String, toCategory: Int, note: Note) throws
-    //    {
-    //        if mNotes[fromCategory] == nil
-    //        {
-    //            throw CustomExceptions.InvalidCategoryException
-    //        }
-    //        if mCategories.count <= toCategory
-    //        {
-    //            throw CustomExceptions.InavlidIndexException
-    //        }
-    //        deleteNote(note: note)
-    //        note.mCategoryName = mCategories[toCategory]
-    //        addNote(toCategory: mCategories[toCategory], note: note)
-    //    }
+    
+    /// Function to delete Note from Database
+    /// - Parameters:
+    ///   - note: Note Object to be deleted
+    ///   - context: NSManagedObjectContext object to be able to access Database
+    private func deleteNoteFromDatabase(note: Note, context: NSManagedObjectContext)
+    {
+        let fetch_request = NSFetchRequest<NSFetchRequestResult>(entityName: "Notes")
+        let p1 = NSPredicate(format: "category = %@", note.mCategoryName)
+        let p2 = NSPredicate(format: "title = %@", note.mTitle)
+        fetch_request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [p1,p2])
+        do
+        {
+            let notes = try context.fetch(fetch_request)
+            for note1 in notes
+            {
+                let object_to_delete = note1 as! NSManagedObject
+                context.delete(object_to_delete)
+                do
+                {
+                    try context.save()
+                }
+                catch
+                {
+                    print(error)
+                }
+            }
+        }
+        catch
+        {
+            print(error)
+        }
+    }
+    
+    /// Function to move Note from One Category to Another
+    /// - Parameters:
+    ///   - fromCategory: Origin Category Name
+    ///   - fromIndex: Index of the Category in the Origin Category
+    ///   - toCategory: Category to where the Note is to be moved
+    ///   - note: Note Object to be moved
+    ///   - context: NSManagedObjectContext object to be able to access Database
+    /// - Throws: InavlidIndexException if the passed index is greated than Categories
+    internal func moveNote(note: Note, toCategory: Int, context: NSManagedObjectContext) throws
+    {
+        if mCategories.count <= toCategory
+        {
+            throw CustomExceptions.InavlidIndexException
+        }
+        deleteNote(note: note, context: context)
+        note.mCategoryName = mCategories[toCategory]
+        addNoteInDatabase(note: note, context: context)
+    }
 }
