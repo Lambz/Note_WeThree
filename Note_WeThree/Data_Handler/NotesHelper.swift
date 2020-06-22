@@ -70,6 +70,11 @@ class NotesHelper
     /// - Parameter context: NSManagedObjectContext to be able to access Database
     private func loadCategoryNoteCount(context: NSManagedObjectContext)
     {
+        mCategoryNoteCount = [:]
+        for i in 0..<mCategories.count
+        {
+            mCategoryNoteCount[i] = 0
+        }
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Notes")
         var results: [NSManagedObject] = []
         do
@@ -306,6 +311,7 @@ class NotesHelper
         mNotes.append(note)
         sortNotes()
         addNoteInDatabase(note: note, context: context)
+        loadCategoryNoteCount(context: context)
     }
     
     
