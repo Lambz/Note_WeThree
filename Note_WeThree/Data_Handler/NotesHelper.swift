@@ -438,4 +438,24 @@ class NotesHelper
             removeCategory(withIndex: category, context: context)
         }
     }
+    
+    /// Function to move multiple Notes from One Category to Another
+    /// - Parameters:
+    ///   - fromCategory: Origin Category Name
+    ///   - fromIndex: Index of the Category in the Origin Category
+    ///   - toCategory: Category to where the Note is to be moved
+    ///   - context: NSManagedObjectContext object to be able to access Database
+    ///   - notes: Array of the Notes to be Moved
+    /// - Throws: InavlidIndexException if the passed index is greated than Categories
+    internal func moveNotes(notes: [Note], toCategory: Int, context: NSManagedObjectContext) throws
+    {
+        if mCategories.count <= toCategory
+        {
+            throw CustomExceptions.InavlidIndexException
+        }
+        for note in notes
+        {
+            try moveNote(note: note, toCategory: toCategory, context: context)
+        }
+    }
 }
