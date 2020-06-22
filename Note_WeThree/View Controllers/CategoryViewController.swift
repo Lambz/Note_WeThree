@@ -14,7 +14,7 @@ class CategoryViewController: UIViewController {
     @IBOutlet weak var categoryTableView: UITableView!
 //    context variable
     var appContext: NSManagedObjectContext!
-    
+    var categoryName: String?
     override func viewDidLoad() {
         super.viewDidLoad()
 //        context for core data operations
@@ -39,14 +39,29 @@ class CategoryViewController: UIViewController {
     
     
     
-//    MARK: button to add category
+    //    MARK: button to add category
     @IBAction func addCategory(_ sender: Any) {
-        
+        let alertForCategory = UIAlertController(title: "Lets' add a category", message: "", preferredStyle: .alert)
+        alertForCategory.addTextField(configurationHandler: addCategoryName)
+        alertForCategory.addAction(UIAlertAction(title: "Add", style: .default, handler: { (action) in
+            if(self.categoryName != nil) {
+                NotesHelper.getInstance().addCategory(named: self.categoryName!, context: self.appContext)
+                self.categoryTableView.reloadData()
+            }
+        }))
+        alertForCategory.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+        self.present(alertForCategory, animated: true, completion: nil)
         
     }
+    
+    func addCategoryName(textField: UITextField) {
+        self.categoryName = textField.text
+        textField.placeholder = "Enter Category Name"
+    }
 }
-//  for table data handling
+//  methods for table data handling
 extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return NotesHelper.getInstance().getNumberOfCategories()
@@ -56,10 +71,23 @@ extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = categoryTableView.dequeueReusableCell(withIdentifier: "categoryCell", for: indexPath) as! CategoryCell
-        
         cell.setValues(index: indexPath.row)
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let delete = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completion) in
+            NotesHelper.getInstance().removeCategory(withIndex: indexPath.row, context: self.appContext)
+        }
+        
+//        reloads data
+        self.categoryTableView.reloadData()
+        delete.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+        delete.image = UIImage(systemName: "trash.fill")
+        return UISwipeActionsConfiguration(actions: [delete])
+        
     }
 }
 

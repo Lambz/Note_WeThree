@@ -20,7 +20,7 @@ class CategoryCell: UITableViewCell {
             self.categoryCount.text = try "\(NotesHelper.getInstance().getNumberOfNotes(forCategory: index)) item(s)"
         }
         catch {
-            print("error")
+            print(error)
         }
         self.cellImage.image = UIImage(systemName: "folder")
     }

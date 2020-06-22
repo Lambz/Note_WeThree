@@ -97,7 +97,7 @@
                             </button>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" id="k6M-M9-DoO">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="GDS-4B-nI5">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="GDS-4B-nI5">
                                 <rect key="frame" x="344" y="0.0" width="50" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="44"/>
@@ -205,7 +205,7 @@
             <objects>
                 <viewController id="PNz-XS-HGL" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DV5-DE-Wec">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vBv-Bo-ggL">
@@ -317,7 +317,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="zYl-S2-h2D"/>
+        <segue reference="UJy-u4-lxk"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrowshape.turn.up.right.fill" catalog="system" width="128" height="106"/>
