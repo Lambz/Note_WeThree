@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		844BA19924A0377F0013313B /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA19824A0377F0013313B /* CategoryModel.swift */; };
-		844BA1A124A065D20013313B /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA19C24A038960013313B /* CategoryViewController.swift */; };
+		84149F5324A169BE0028CAF4 /* NoteListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84149F5224A169BE0028CAF4 /* NoteListViewController.swift */; };
+		84149F5424A16A560028CAF4 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA19C24A038960013313B /* CategoryViewController.swift */; };
 		844BA1A224A068810013313B /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA19A24A037DC0013313B /* CategoryCell.swift */; };
 		903077F7249ED81000A301E0 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903077F6249ED81000A301E0 /* Note.swift */; };
 		903077F9249ED82A00A301E0 /* NotesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903077F8249ED82A00A301E0 /* NotesHelper.swift */; };
@@ -21,7 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		844BA19824A0377F0013313B /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
+		84149F5224A169BE0028CAF4 /* NoteListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListViewController.swift; sourceTree = "<group>"; };
 		844BA19A24A037DC0013313B /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		844BA19C24A038960013313B /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		903077F6249ED81000A301E0 /* Note.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
@@ -50,7 +50,7 @@
 		844BA19E24A039A20013313B /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				844BA19A24A037DC0013313B /* CategoryCell.swift */,
+				84149F5224A169BE0028CAF4 /* NoteListViewController.swift */,
 				844BA19C24A038960013313B /* CategoryViewController.swift */,
 			);
 			path = "View Controllers";
@@ -59,7 +59,7 @@
 		844BA19F24A039BD0013313B /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				844BA19824A0377F0013313B /* CategoryModel.swift */,
+				844BA19A24A037DC0013313B /* CategoryCell.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -185,11 +185,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84149F5324A169BE0028CAF4 /* NoteListViewController.swift in Sources */,
 				903077F9249ED82A00A301E0 /* NotesHelper.swift in Sources */,
-				844BA19924A0377F0013313B /* CategoryModel.swift in Sources */,
 				904435AC2497ED46009B9067 /* AppDelegate.swift in Sources */,
 				844BA1A224A068810013313B /* CategoryCell.swift in Sources */,
-				844BA1A124A065D20013313B /* CategoryViewController.swift in Sources */,
+				84149F5424A16A560028CAF4 /* CategoryViewController.swift in Sources */,
 				904435B62497ED46009B9067 /* Note_WeThree.xcdatamodeld in Sources */,
 				904435AE2497ED46009B9067 /* SceneDelegate.swift in Sources */,
 				903077F7249ED81000A301E0 /* Note.swift in Sources */,

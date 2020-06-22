@@ -103,9 +103,14 @@ extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
         
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.tappedCellIndex = indexPath.row
+    }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        NoteListViewController.index = tappedCellIndex
-//    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationView = segue.destination as? NoteListViewController {
+            destinationView.indexValue = self.tappedCellIndex
+        }
+    }
 }
 
