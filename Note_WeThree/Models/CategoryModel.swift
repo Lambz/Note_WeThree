@@ -7,7 +7,8 @@
 //
 
 import UIKit
-
+//This class stores the data for category cell
+//contains the vars and initializer for the cell
 class CategoryModel {
    
     var cellImage: UIImage

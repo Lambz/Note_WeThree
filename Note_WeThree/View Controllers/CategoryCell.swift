@@ -7,11 +7,24 @@
 //
 
 import UIKit
-
+import Foundation
 class CategoryCell: UITableViewCell {
     
     @IBOutlet weak var categoryCount: UILabel!
     @IBOutlet weak var categoryName: UILabel!
     @IBOutlet weak var cellImage: UIImageView!
+
+    func setValues(index: Int) {
+        do {
+            self.categoryName.text = try NotesHelper.getInstance().getCategory(at: index)
+            self.categoryCount.text = try "\(NotesHelper.getInstance().getNumberOfNotes(forCategory: index)) item(s)"
+        }
+        catch {
+            print("error")
+        }
+        self.cellImage.image = UIImage(systemName: "folder")
+    }
+    
+    
     
 }

@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		844BA19924A0377F0013313B /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA19824A0377F0013313B /* CategoryModel.swift */; };
-		844BA19B24A037DC0013313B /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA19A24A037DC0013313B /* CategoryCell.swift */; };
-		844BA19D24A038960013313B /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA19C24A038960013313B /* CategoryViewController.swift */; };
+		844BA1A124A065D20013313B /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA19C24A038960013313B /* CategoryViewController.swift */; };
+		844BA1A224A068810013313B /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA19A24A037DC0013313B /* CategoryCell.swift */; };
 		903077F7249ED81000A301E0 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903077F6249ED81000A301E0 /* Note.swift */; };
 		903077F9249ED82A00A301E0 /* NotesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903077F8249ED82A00A301E0 /* NotesHelper.swift */; };
 		904435AC2497ED46009B9067 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904435AB2497ED46009B9067 /* AppDelegate.swift */; };
@@ -188,8 +188,8 @@
 				903077F9249ED82A00A301E0 /* NotesHelper.swift in Sources */,
 				844BA19924A0377F0013313B /* CategoryModel.swift in Sources */,
 				904435AC2497ED46009B9067 /* AppDelegate.swift in Sources */,
-				844BA19B24A037DC0013313B /* CategoryCell.swift in Sources */,
-				844BA19D24A038960013313B /* CategoryViewController.swift in Sources */,
+				844BA1A224A068810013313B /* CategoryCell.swift in Sources */,
+				844BA1A124A065D20013313B /* CategoryViewController.swift in Sources */,
 				904435B62497ED46009B9067 /* Note_WeThree.xcdatamodeld in Sources */,
 				904435AE2497ED46009B9067 /* SceneDelegate.swift in Sources */,
 				903077F7249ED81000A301E0 /* Note.swift in Sources */,
