@@ -58,7 +58,6 @@
                                             <outlet property="categoryCount" destination="6WM-2l-2ld" id="jSp-6i-N9A"/>
                                             <outlet property="categoryName" destination="T2q-d6-E9X" id="SlB-Sb-e1O"/>
                                             <outlet property="cellImage" destination="QCf-Ui-YVm" id="ggV-BY-ezx"/>
-                                            <segue destination="saD-TF-dU5" kind="show" identifier="noteListScreen" id="dww-6b-YWh"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -99,6 +98,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="categoryTableView" destination="c1n-bM-XwD" id="lIY-bL-LeV"/>
+                        <segue destination="saD-TF-dU5" kind="show" identifier="noteListScreen" id="5EV-ED-mZd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="snn-o2-E7h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -114,10 +114,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AhY-IU-OF4">
-                                <rect key="frame" x="0.0" y="128.5" width="414" height="691.5"/>
+                                <rect key="frame" x="0.0" y="141" width="414" height="679"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="77" id="kHQ-ed-3uk">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="noteCell" rowHeight="77" id="kHQ-ed-3uk">
                                         <rect key="frame" x="0.0" y="28" width="414" height="77"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kHQ-ed-3uk" id="TI0-Gk-u8g">
@@ -149,6 +149,9 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="MBv-3T-d41" firstAttribute="leading" secondItem="g1u-zy-TLC" secondAttribute="trailing" constant="20" id="NgV-ll-ZfR"/>
+                                                            </constraints>
                                                         </stackView>
                                                     </subviews>
                                                     <constraints>
@@ -166,9 +169,9 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q08-d1-Dbz">
-                                <rect key="frame" x="184.5" y="88" width="45" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q08-d1-Dbz">
+                                <rect key="frame" x="0.0" y="88" width="414" height="53"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="44"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -190,14 +193,14 @@
                             <constraint firstItem="E51-s7-Eqx" firstAttribute="trailing" secondItem="lLm-x7-0WO" secondAttribute="trailing" constant="20" id="El5-yq-Qbi"/>
                             <constraint firstItem="AhY-IU-OF4" firstAttribute="leading" secondItem="lLm-x7-0WO" secondAttribute="leading" id="FSm-Fi-HFF"/>
                             <constraint firstItem="o97-kN-ng6" firstAttribute="centerX" secondItem="D93-K2-vzS" secondAttribute="centerX" id="Faa-qI-BJj"/>
-                            <constraint firstItem="AhY-IU-OF4" firstAttribute="top" secondItem="q08-d1-Dbz" secondAttribute="bottom" constant="20" id="FuH-6J-Mcf"/>
-                            <constraint firstItem="q08-d1-Dbz" firstAttribute="centerX" secondItem="D93-K2-vzS" secondAttribute="centerX" id="GJZ-Uy-ghf"/>
-                            <constraint firstItem="q08-d1-Dbz" firstAttribute="leading" secondItem="lLm-x7-0WO" secondAttribute="leading" constant="184.5" id="Seo-9W-prw"/>
+                            <constraint firstItem="AhY-IU-OF4" firstAttribute="top" secondItem="q08-d1-Dbz" secondAttribute="bottom" id="Gub-oa-rVP"/>
                             <constraint firstItem="E51-s7-Eqx" firstAttribute="bottom" secondItem="o97-kN-ng6" secondAttribute="bottom" id="XW2-Gy-Oki"/>
+                            <constraint firstItem="q08-d1-Dbz" firstAttribute="leading" secondItem="lLm-x7-0WO" secondAttribute="leading" id="a5l-FU-xhf"/>
                             <constraint firstItem="E51-s7-Eqx" firstAttribute="trailing" secondItem="o97-kN-ng6" secondAttribute="trailing" id="aGQ-nV-yyV"/>
-                            <constraint firstItem="q08-d1-Dbz" firstAttribute="top" secondItem="lLm-x7-0WO" secondAttribute="top" id="ly4-zw-o4M"/>
+                            <constraint firstItem="q08-d1-Dbz" firstAttribute="top" secondItem="lLm-x7-0WO" secondAttribute="top" id="wYG-vq-pFV"/>
                             <constraint firstItem="lLm-x7-0WO" firstAttribute="trailing" secondItem="AhY-IU-OF4" secondAttribute="trailing" id="yt5-Kr-wvw"/>
                             <constraint firstItem="E51-s7-Eqx" firstAttribute="bottom" secondItem="lLm-x7-0WO" secondAttribute="bottom" id="z8m-Te-SIM"/>
+                            <constraint firstItem="lLm-x7-0WO" firstAttribute="trailing" secondItem="q08-d1-Dbz" secondAttribute="trailing" id="zly-Pb-S8H"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="lLm-x7-0WO"/>
                     </view>
@@ -227,7 +230,9 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="834"/>
                                 <items>
                                     <navigationItem title="Select a Folder" id="5P9-se-aFf">
-                                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="d0e-ih-bXa"/>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="d0e-ih-bXa">
+                                            <color key="tintColor" red="0.85882352939999995" green="0.68235294120000001" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
