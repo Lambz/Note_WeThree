@@ -117,7 +117,7 @@
                                 <rect key="frame" x="0.0" y="141" width="414" height="679"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="noteCell" rowHeight="77" id="kHQ-ed-3uk">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="noteCell" rowHeight="77" id="kHQ-ed-3uk" customClass="NoteCell" customModule="Note_WeThree" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="77"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kHQ-ed-3uk" id="TI0-Gk-u8g">
@@ -213,7 +213,7 @@
                         <outlet property="categoryLabel" destination="q08-d1-Dbz" id="oL0-Zk-KuE"/>
                         <outlet property="noteListTableView" destination="AhY-IU-OF4" id="1Dp-9k-KDQ"/>
                         <segue destination="PNz-XS-HGL" kind="show" identifier="noteScreen" id="Ym5-rh-Mqa"/>
-                        <segue destination="ADW-rA-ecK" kind="presentation" id="zGb-ky-wE8"/>
+                        <segue destination="ADW-rA-ecK" kind="presentation" identifier="goBackNoteList" id="zGb-ky-wE8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fvi-Zj-YAv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -284,8 +284,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="G3Z-dr-LNg"/>
                     </view>
+                    <connections>
+                        <segue destination="XP3-Ph-mVf" kind="unwind" unwindAction="calledAfterFolderSelection:" id="gHU-YL-81o"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PCt-0w-a76" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="XP3-Ph-mVf" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1587" y="-275"/>
         </scene>
