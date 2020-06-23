@@ -207,13 +207,80 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="tIP-RC-d6s" kind="presentation" identifier="moveScreen" id="30J-FI-YdD"/>
                         <segue destination="PNz-XS-HGL" kind="show" identifier="noteScreen" id="Ym5-rh-Mqa"/>
+                        <segue destination="ADW-rA-ecK" kind="presentation" id="zGb-ky-wE8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fvi-Zj-YAv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2869.5652173913045" y="-664.28571428571422"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="2zx-Qg-aGL">
+            <objects>
+                <viewController id="ADW-rA-ecK" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="09R-6l-cfE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kUD-rU-sK1">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="834"/>
+                                <items>
+                                    <navigationItem title="Select a Folder" id="5P9-se-aFf">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="d0e-ih-bXa"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="76F-qZ-FIf">
+                                <rect key="frame" x="20" y="70" width="374" height="738"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="qfq-Yc-PCH">
+                                        <rect key="frame" x="0.0" y="28" width="374" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qfq-Yc-PCH" id="J7m-ZX-ewj">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9mW-g3-nOu">
+                                                    <rect key="frame" x="33" y="-1" width="187.5" height="50"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="folder" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="5Zc-O4-z6N">
+                                                            <rect key="frame" x="0.0" y="1" width="23.5" height="47.5"/>
+                                                            <color key="tintColor" red="0.85882352939999995" green="0.68235294120000001" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </imageView>
+                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" text="Folder Name" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="SQt-lI-l4c">
+                                                            <rect key="frame" x="31.5" y="0.0" width="156" height="50"/>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                            <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        </textView>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="76F-qZ-FIf" firstAttribute="leading" secondItem="09R-6l-cfE" secondAttribute="leadingMargin" id="0yl-Nx-oo5"/>
+                            <constraint firstAttribute="bottom" secondItem="kUD-rU-sK1" secondAttribute="bottom" constant="8" id="8f6-AJ-osS"/>
+                            <constraint firstAttribute="trailing" secondItem="kUD-rU-sK1" secondAttribute="trailing" id="A7C-tD-KF7"/>
+                            <constraint firstItem="76F-qZ-FIf" firstAttribute="top" secondItem="09R-6l-cfE" secondAttribute="topMargin" constant="70" id="KXQ-dw-Agi"/>
+                            <constraint firstItem="kUD-rU-sK1" firstAttribute="top" secondItem="09R-6l-cfE" secondAttribute="top" id="XTD-zl-Bch"/>
+                            <constraint firstItem="kUD-rU-sK1" firstAttribute="leading" secondItem="09R-6l-cfE" secondAttribute="leading" id="ZZq-u8-CMX"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="76F-qZ-FIf" secondAttribute="trailing" id="dlZ-bG-dw2"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="76F-qZ-FIf" secondAttribute="bottom" id="jKf-a4-fe9"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="G3Z-dr-LNg"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PCt-0w-a76" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2773.913043478261" y="14.732142857142856"/>
         </scene>
         <!--Notes Details-->
         <scene sceneID="Bhz-gz-6Tb">
@@ -352,24 +419,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DTI-fX-CUb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1274" y="-700"/>
-        </scene>
-        <!--Select a folder-->
-        <scene sceneID="kL3-Q3-UhB">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tIP-RC-d6s" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Select a folder" id="9jr-OQ-2Md">
-                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="Kwv-jE-Awb"/>
-                    </navigationItem>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="l41-9B-YPf">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Yt4-mM-gyP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2870" y="29"/>
         </scene>
     </scenes>
     <resources>
