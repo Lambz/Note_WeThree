@@ -255,6 +255,9 @@
                                     <navigationItem title="Select a Folder" id="5P9-se-aFf">
                                         <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="d0e-ih-bXa">
                                             <color key="tintColor" red="0.85882352939999995" green="0.68235294120000001" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <action selector="cancelButtonPressed:" destination="ADW-rA-ecK" id="8iN-wo-Uft"/>
+                                            </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
@@ -306,6 +309,7 @@
                         <viewLayoutGuide key="safeArea" id="G3Z-dr-LNg"/>
                     </view>
                     <connections>
+                        <outlet property="categorySelectionTableView" destination="76F-qZ-FIf" id="MQk-fH-9SB"/>
                         <segue destination="XP3-Ph-mVf" kind="unwind" identifier="goBackToNoteList" unwindAction="calledAfterFolderSelection:" id="gHU-YL-81o"/>
                     </connections>
                 </viewController>

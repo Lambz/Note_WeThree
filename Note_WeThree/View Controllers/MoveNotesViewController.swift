@@ -11,8 +11,11 @@ import CoreData
 
 class MoveNotesViewController: UIViewController {
     
+//    to leave the move if same category selected
     var categoryToLeave: Int!
+//    context for core data operations
     var moveCategoryContext: NSManagedObjectContext!
+//    selected category stored for previous view
     var selectedCategory: Int?
     
     @IBOutlet weak var categorySelectionTableView: UITableView!
@@ -24,12 +27,23 @@ class MoveNotesViewController: UIViewController {
         self.moveCategoryContext = moveCategoryDelegate.persistentContainer.viewContext
         NotesHelper.getInstance().loadAllCategories(context: moveCategoryContext)
         
-//        
-//        categorySelectionTableView.delegate = self
-//        categorySelectionTableView.dataSource = self
+        
+        categorySelectionTableView.delegate = self
+        categorySelectionTableView.dataSource = self
     }
     
     
+//    MARK: method implements cancel button tap
+    @IBAction func cancelButtonPressed(_ sender: Any) {
+//        sets value to nil
+        self.selectedCategory = nil
+        performSegue(withIdentifier: "goBackToNoteList", sender: self)
+        
+    }
+    
+    
+    
+//    updates the values in note list view if category selected
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if(selectedCategory != nil) {
@@ -43,18 +57,38 @@ class MoveNotesViewController: UIViewController {
     }
 }
 
-//
-//extension MoveNotesViewController: UITableViewDelegate, UITableViewDataSource {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        <#code#>
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        <#code#>
-//    }
-//
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        self.selectedCategory = indexPath.row
-//        performSegue(withIdentifier: "goBackToNoteList", sender: self)
-//    }
-//}
+
+
+// MARK: to handle table delegate functions
+extension MoveNotesViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return NotesHelper.getInstance().getNumberOfCategories()
+        
+    }
+
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = categorySelectionTableView.dequeueReusableCell(withIdentifier: "categoryCell", for: indexPath) as! CategoryCell
+        cell.setValues(index: indexPath.row)
+        
+        return cell
+        
+    }
+
+    
+    
+//    MARK: handles the cell tap
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+//        leaves the updatation if same category selected
+        if(indexPath.row != categoryToLeave) {
+            self.selectedCategory = indexPath.row
+        }
+        performSegue(withIdentifier: "goBackToNoteList", sender: self)
+        
+    }
+    
+}

@@ -9,11 +9,11 @@
 /* Begin PBXBuildFile section */
 		84149F5424A16A560028CAF4 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA19C24A038960013313B /* CategoryViewController.swift */; };
 		84149F5524A17C4C0028CAF4 /* NoteListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84149F5224A169BE0028CAF4 /* NoteListViewController.swift */; };
-		84149F5724A189170028CAF4 /* MoveNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84149F5624A189170028CAF4 /* MoveNotesViewController.swift */; };
 		84149F5924A189560028CAF4 /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84149F5824A189560028CAF4 /* NoteViewController.swift */; };
 		84149F5B24A1898A0028CAF4 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84149F5A24A1898A0028CAF4 /* MapViewController.swift */; };
 		84149F5D24A18FFB0028CAF4 /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84149F5C24A18FFB0028CAF4 /* NoteCell.swift */; };
 		844BA1A224A068810013313B /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA19A24A037DC0013313B /* CategoryCell.swift */; };
+		84A8D00724A2CA2D00EFCA67 /* MoveNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84149F5624A189170028CAF4 /* MoveNotesViewController.swift */; };
 		903077F7249ED81000A301E0 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903077F6249ED81000A301E0 /* Note.swift */; };
 		903077F9249ED82A00A301E0 /* NotesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903077F8249ED82A00A301E0 /* NotesHelper.swift */; };
 		904435AC2497ED46009B9067 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904435AB2497ED46009B9067 /* AppDelegate.swift */; };
@@ -200,12 +200,12 @@
 				84149F5B24A1898A0028CAF4 /* MapViewController.swift in Sources */,
 				84149F5524A17C4C0028CAF4 /* NoteListViewController.swift in Sources */,
 				903077F9249ED82A00A301E0 /* NotesHelper.swift in Sources */,
+				84A8D00724A2CA2D00EFCA67 /* MoveNotesViewController.swift in Sources */,
 				84149F5D24A18FFB0028CAF4 /* NoteCell.swift in Sources */,
 				904435AC2497ED46009B9067 /* AppDelegate.swift in Sources */,
 				844BA1A224A068810013313B /* CategoryCell.swift in Sources */,
 				84149F5424A16A560028CAF4 /* CategoryViewController.swift in Sources */,
 				904435B62497ED46009B9067 /* Note_WeThree.xcdatamodeld in Sources */,
-				84149F5724A189170028CAF4 /* MoveNotesViewController.swift in Sources */,
 				904435AE2497ED46009B9067 /* SceneDelegate.swift in Sources */,
 				84149F5924A189560028CAF4 /* NoteViewController.swift in Sources */,
 				903077F7249ED81000A301E0 /* Note.swift in Sources */,
