@@ -10,10 +10,14 @@ import UIKit
 
 class NoteListViewController: UIViewController {
     
-    var indexValue: Int?
+    var indexValue: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print(indexValue)
     }
 }

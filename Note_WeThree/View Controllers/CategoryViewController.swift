@@ -16,7 +16,7 @@ class CategoryViewController: UIViewController {
     var appContext: NSManagedObjectContext!
 
     var categoryName: UITextField?
-    var tappedCellIndex: Int?
+    var tappedCellIndex: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
