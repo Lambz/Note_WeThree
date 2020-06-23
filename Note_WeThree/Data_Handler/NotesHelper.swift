@@ -370,6 +370,22 @@ class NotesHelper
         deleteNoteFromDatabase(note: note, context: context)
     }
     
+    
+    /// Deletes a Note
+    /// - Parameters:
+    ///   - at: Index of the Note
+    ///   - context: NSManagedObjectContext object to be able to access Database
+    /// - Throws: InvalidIndexException, if Index is greater than Notes Array
+    internal func deleteNote(at: Int, context: NSManagedObjectContext) throws
+    {
+        if mNotes.count <= at
+        {
+            throw CustomExceptions.InavlidIndexException
+        }
+        let note = mNotes[at]
+        deleteNoteFromDatabase(note: note, context: context)
+    }
+    
     /// Function to delete Note from Database
     /// - Parameters:
     ///   - note: Note Object to be deleted
@@ -405,7 +421,6 @@ class NotesHelper
     
     /// Function to move Note from One Category to Another
     /// - Parameters:
-    ///   - fromCategory: Origin Category Name
     ///   - fromIndex: Index of the Category in the Origin Category
     ///   - toCategory: Category to where the Note is to be moved
     ///   - note: Note Object to be moved
@@ -422,6 +437,25 @@ class NotesHelper
         addNoteInDatabase(note: note, context: context)
     }
     
+    
+    /// Function to move Note from One Category to Another
+    /// - Parameters:
+    ///   - withIndex: Index of the Note to be moved
+    ///   - toCategory: Category to where the Note is to be moved
+    ///   - context:  NSManagedObjectContext object to be able to access Database
+    /// - Throws: InavlidIndexException if the passed index is greated than Categories or if Index is greater than Notes Array
+    internal func moveNote(withIndex: Int, toCategory: Int, context: NSManagedObjectContext) throws
+    {
+        if mCategories.count <= toCategory || mNotes.count <= withIndex
+        {
+            throw CustomExceptions.InavlidIndexException
+        }
+        let note = mNotes[withIndex]
+        deleteNote(note: note, context: context)
+        note.mCategoryName = mCategories[toCategory]
+        addNoteInDatabase(note: note, context: context)
+    }
+    
     /// Deletes Mutiple Notes
     /// - Parameters:
     ///   - notes: Array of Notes to be Deleted
@@ -431,6 +465,19 @@ class NotesHelper
         for note in notes
         {
             deleteNote(note: note, context: context)
+        }
+    }
+    
+    /// Deletes Mutiple Notes
+    /// - Parameters:
+    ///   - withIndexes: Indexes of Notes to be deleted
+    ///   - context: NSManagedObjectContext object to be able to access Database
+    /// - Throws: InvalidIndexException, if Index is greater than Notes Array
+    internal func deleteMultipleNotes(withIndexes: [Int], context: NSManagedObjectContext) throws
+    {
+        for index in withIndexes
+        {
+            try deleteNote(at: index, context: context)
         }
     }
     
@@ -453,7 +500,7 @@ class NotesHelper
     ///   - toCategory: Category to where the Note is to be moved
     ///   - context: NSManagedObjectContext object to be able to access Database
     ///   - notes: Array of the Notes to be Moved
-    /// - Throws: InavlidIndexException if the passed index is greated than Categories
+    /// - Throws: InavlidIndexException if the passed index is greated than Categories or if Index is greater than Notes Array
     internal func moveNotes(notes: [Note], toCategory: Int, context: NSManagedObjectContext) throws
     {
         if mCategories.count <= toCategory
@@ -463,6 +510,26 @@ class NotesHelper
         for note in notes
         {
             try moveNote(note: note, toCategory: toCategory, context: context)
+        }
+    }
+    
+    /// Function to move multiple Notes from One Category to Another
+    /// - Parameters:
+    ///   - fromCategory: Origin Category Name
+    ///   - fromIndex: Index of the Category in the Origin Category
+    ///   - toCategory: Category to where the Note is to be moved
+    ///   - context: NSManagedObjectContext object to be able to access Database
+    ///   - notes: Array of the Notes to be Moved
+    /// - Throws: InavlidIndexException if the passed index is greated than Categories  or if Index is greater than Notes Array
+    internal func moveNotes(withIndexes: [Int], toCategory: Int, context: NSManagedObjectContext) throws
+    {
+        if mCategories.count <= toCategory
+        {
+            throw CustomExceptions.InavlidIndexException
+        }
+        for index in withIndexes
+        {
+            try moveNote(withIndex: index, toCategory: toCategory, context: context)
         }
     }
     
@@ -486,6 +553,18 @@ class NotesHelper
     internal func updateNote(oldNote: Note, newNote: Note, context: NSManagedObjectContext) throws
     {
         deleteNote(note: oldNote, context: context)
+        try addNote(note: newNote, context: context)
+    }
+    
+    /// Function to update a Note
+    /// - Parameters:
+    ///   - newNote: Object of the Note to be replaced with
+    ///   - context: NSManagedObjectContext object to be able to access Database
+    ///   - withIndex: Index of the note to be deleted
+    /// - Throws: InvalidCategoryException if passed Note's Category does not exist  or if Index is greater than Notes Array
+    internal func updateNote(oldNote withIndex: Int, newNote: Note, context: NSManagedObjectContext) throws
+    {
+        try deleteNote(at: withIndex, context: context)
         try addNote(note: newNote, context: context)
     }
 }
