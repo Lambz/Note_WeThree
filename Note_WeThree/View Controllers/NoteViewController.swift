@@ -9,7 +9,12 @@
 import UIKit
 
 class NoteViewController: UIViewController {
+    
+    var selectedNote: Int?
+    var forCategory: Int?
+    
     override func viewDidLoad() {
+        super.viewDidLoad()
         
     }
 }
