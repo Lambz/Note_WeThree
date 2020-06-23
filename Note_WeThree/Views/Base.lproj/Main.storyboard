@@ -175,28 +175,43 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E51-s7-Eqx">
+                                <rect key="frame" x="322" y="840" width="72" height="22"/>
+                                <color key="tintColor" red="0.85882352939999995" green="0.68235294120000001" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" image="square.and.pencil" catalog="system"/>
+                                <connections>
+                                    <action selector="newNoteButtonPressed:" destination="saD-TF-dU5" eventType="touchUpInside" id="Psh-eL-Gbg"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of notes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o97-kN-ng6">
-                                <rect key="frame" x="-20" y="841.5" width="454" height="20.5"/>
+                                <rect key="frame" x="142.5" y="841.5" width="129" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.85882352939999995" green="0.68235294120000001" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E51-s7-Eqx">
-                                <rect key="frame" x="359.5" y="840" width="74.5" height="22"/>
-                                <color key="tintColor" red="0.85882352939999995" green="0.68235294120000001" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Button" image="square.and.pencil" catalog="system"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nva-BS-rRD">
+                                <rect key="frame" x="20" y="840" width="102.5" height="30"/>
+                                <state key="normal" title="Move">
+                                    <color key="titleColor" red="0.85882352939999995" green="0.68235294120000001" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="moveButtonPressed:" destination="saD-TF-dU5" eventType="touchUpInside" id="no0-YZ-n6a"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="E51-s7-Eqx" firstAttribute="top" secondItem="AhY-IU-OF4" secondAttribute="bottom" constant="20" id="2AB-lH-Eeg"/>
+                            <constraint firstItem="Nva-BS-rRD" firstAttribute="leading" secondItem="D93-K2-vzS" secondAttribute="leadingMargin" id="2Zm-XM-Qpd"/>
+                            <constraint firstItem="E51-s7-Eqx" firstAttribute="leading" secondItem="o97-kN-ng6" secondAttribute="trailing" constant="20" id="8UP-e4-AtZ"/>
                             <constraint firstItem="E51-s7-Eqx" firstAttribute="trailing" secondItem="lLm-x7-0WO" secondAttribute="trailing" constant="20" id="El5-yq-Qbi"/>
                             <constraint firstItem="AhY-IU-OF4" firstAttribute="leading" secondItem="lLm-x7-0WO" secondAttribute="leading" id="FSm-Fi-HFF"/>
                             <constraint firstItem="o97-kN-ng6" firstAttribute="centerX" secondItem="D93-K2-vzS" secondAttribute="centerX" id="Faa-qI-BJj"/>
                             <constraint firstItem="AhY-IU-OF4" firstAttribute="top" secondItem="q08-d1-Dbz" secondAttribute="bottom" id="Gub-oa-rVP"/>
-                            <constraint firstItem="E51-s7-Eqx" firstAttribute="bottom" secondItem="o97-kN-ng6" secondAttribute="bottom" id="XW2-Gy-Oki"/>
                             <constraint firstItem="q08-d1-Dbz" firstAttribute="leading" secondItem="lLm-x7-0WO" secondAttribute="leading" id="a5l-FU-xhf"/>
-                            <constraint firstItem="E51-s7-Eqx" firstAttribute="trailing" secondItem="o97-kN-ng6" secondAttribute="trailing" id="aGQ-nV-yyV"/>
+                            <constraint firstItem="Nva-BS-rRD" firstAttribute="top" secondItem="E51-s7-Eqx" secondAttribute="top" id="k77-qx-aLu"/>
+                            <constraint firstItem="o97-kN-ng6" firstAttribute="leading" secondItem="Nva-BS-rRD" secondAttribute="trailing" constant="20" id="nCM-ck-9te"/>
+                            <constraint firstItem="lLm-x7-0WO" firstAttribute="bottom" secondItem="o97-kN-ng6" secondAttribute="bottom" id="qNo-sk-NhP"/>
                             <constraint firstItem="q08-d1-Dbz" firstAttribute="top" secondItem="lLm-x7-0WO" secondAttribute="top" id="wYG-vq-pFV"/>
                             <constraint firstItem="lLm-x7-0WO" firstAttribute="trailing" secondItem="AhY-IU-OF4" secondAttribute="trailing" id="yt5-Kr-wvw"/>
                             <constraint firstItem="E51-s7-Eqx" firstAttribute="bottom" secondItem="lLm-x7-0WO" secondAttribute="bottom" id="z8m-Te-SIM"/>
@@ -205,12 +220,18 @@
                         <viewLayoutGuide key="safeArea" id="lLm-x7-0WO"/>
                     </view>
                     <navigationItem key="navigationItem" id="Ola-yi-CGm">
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="WNh-1u-8kK">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="WNh-1u-8kK">
                             <color key="tintColor" red="0.85882352939999995" green="0.68235294120000001" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="editButtonPressed:" destination="saD-TF-dU5" id="gxW-Bs-WX4"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="categoryLabel" destination="q08-d1-Dbz" id="oL0-Zk-KuE"/>
+                        <outlet property="editButtonLabel" destination="WNh-1u-8kK" id="BPX-q9-b8Y"/>
+                        <outlet property="moveButtonLabel" destination="Nva-BS-rRD" id="buu-tI-ddR"/>
+                        <outlet property="noOfNotesLabel" destination="o97-kN-ng6" id="Fw4-su-V0F"/>
                         <outlet property="noteListTableView" destination="AhY-IU-OF4" id="1Dp-9k-KDQ"/>
                         <segue destination="PNz-XS-HGL" kind="show" identifier="noteScreen" id="Ym5-rh-Mqa"/>
                         <segue destination="ADW-rA-ecK" kind="presentation" identifier="goBackNoteList" id="zGb-ky-wE8"/>
@@ -218,7 +239,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fvi-Zj-YAv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1587" y="-1049"/>
+            <point key="canvasLocation" x="1586.9565217391305" y="-1049.3303571428571"/>
         </scene>
         <!--Move Notes View Controller-->
         <scene sceneID="2zx-Qg-aGL">
@@ -285,7 +306,7 @@
                         <viewLayoutGuide key="safeArea" id="G3Z-dr-LNg"/>
                     </view>
                     <connections>
-                        <segue destination="XP3-Ph-mVf" kind="unwind" unwindAction="calledAfterFolderSelection:" id="gHU-YL-81o"/>
+                        <segue destination="XP3-Ph-mVf" kind="unwind" identifier="goBackToNoteList" unwindAction="calledAfterFolderSelection:" id="gHU-YL-81o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PCt-0w-a76" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
