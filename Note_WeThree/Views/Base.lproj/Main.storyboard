@@ -58,7 +58,7 @@
                                             <outlet property="categoryCount" destination="6WM-2l-2ld" id="jSp-6i-N9A"/>
                                             <outlet property="categoryName" destination="T2q-d6-E9X" id="SlB-Sb-e1O"/>
                                             <outlet property="cellImage" destination="QCf-Ui-YVm" id="ggV-BY-ezx"/>
-                                            <segue destination="saD-TF-dU5" kind="show" id="dww-6b-YWh"/>
+                                            <segue destination="saD-TF-dU5" kind="show" identifier="noteListScreen" id="dww-6b-YWh"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -218,7 +218,7 @@
         <!--Notes Details-->
         <scene sceneID="Bhz-gz-6Tb">
             <objects>
-                <viewController id="PNz-XS-HGL" sceneMemberID="viewController">
+                <viewController id="PNz-XS-HGL" customClass="NoteViewController" customModule="Note_WeThree" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DV5-DE-Wec">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -300,7 +300,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="32Y-QJ-NqI" kind="show" id="PHi-lI-fe8"/>
+                        <segue destination="32Y-QJ-NqI" kind="show" identifier="mapScreen" id="PHi-lI-fe8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k7v-aB-fvU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -308,10 +308,10 @@
             </objects>
             <point key="canvasLocation" x="3550.7246376811595" y="-664.28571428571422"/>
         </scene>
-        <!--View Controller-->
+        <!--Map View Controller-->
         <scene sceneID="mYC-TA-RoU">
             <objects>
-                <viewController id="32Y-QJ-NqI" sceneMemberID="viewController">
+                <viewController id="32Y-QJ-NqI" customClass="MapViewController" customModule="Note_WeThree" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="icB-gW-CGh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -353,12 +353,14 @@
             </objects>
             <point key="canvasLocation" x="1274" y="-700"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Select a folder-->
         <scene sceneID="kL3-Q3-UhB">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tIP-RC-d6s" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="9jr-OQ-2Md"/>
+                    <navigationItem key="navigationItem" title="Select a folder" id="9jr-OQ-2Md">
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="Kwv-jE-Awb"/>
+                    </navigationItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="l41-9B-YPf">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
