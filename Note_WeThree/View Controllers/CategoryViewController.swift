@@ -114,11 +114,14 @@ extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
 //    selects the row value and sends it to next view
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tappedCellIndex = indexPath.row
+        performSegue(withIdentifier: "noteListScreen", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationView = segue.destination as? NoteListViewController {
-            destinationView.indexValue = self.tappedCellIndex
+            if let indexCell = self.tappedCellIndex {
+                destinationView.indexValue = indexCell
+            }
         }
     }
     
