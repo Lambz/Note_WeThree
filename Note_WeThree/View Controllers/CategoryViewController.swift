@@ -16,7 +16,7 @@ class CategoryViewController: UIViewController {
     var appContext: NSManagedObjectContext!
 
     var categoryName: UITextField?
-    var tappedCellIndex: Int = 0
+    var tappedCellIndex: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +24,7 @@ class CategoryViewController: UIViewController {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         self.appContext = appDelegate.persistentContainer.viewContext
         NotesHelper.getInstance().loadAllCategories(context: appContext)
+        
 //        sets up delegate for table view
         categoryTableView.delegate = self
         categoryTableView.dataSource = self
@@ -62,6 +63,12 @@ class CategoryViewController: UIViewController {
     func addCategoryName(textField: UITextField) {
         self.categoryName = textField
         self.categoryName?.placeholder = "Enter Category Name"
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.categoryTableView.reloadData()
+        self.tappedCellIndex = nil
     }
 }
 
@@ -103,6 +110,8 @@ extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
         
     }
     
+    
+//    selects the row value and sends it to next view
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tappedCellIndex = indexPath.row
     }
@@ -112,5 +121,7 @@ extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
             destinationView.indexValue = self.tappedCellIndex
         }
     }
+    
+    
 }
 

@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import CoreData
 
 class NoteListViewController: UIViewController {
     
-    var indexValue: Int = 0
+    var indexValue: Int?
+    var notesContext: NSManagedObjectContext!
     
     @IBOutlet weak var categoryLabel: UILabel!
     @IBOutlet weak var noteListTableView: UITableView!
@@ -18,28 +20,35 @@ class NoteListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        let notesDelegate = UIApplication.shared.delegate as! AppDelegate
+        self.notesContext = notesDelegate.persistentContainer.viewContext
+        do {
+            try NotesHelper.getInstance().loadNotes(withCategory: indexValue!, context: self.notesContext)
+        }
+        catch {
+            print(error)
+        }
 //        sets up the delegate
         noteListTableView.delegate = self
         noteListTableView.dataSource = self
 
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        print(indexValue)
-    }
+    
 }
 
 
 extension NoteListViewController: UITableViewDelegate, UITableViewDataSource {
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        <#code#>
+        return 0
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+        let cell = UITableViewCell()
+        
+        return cell
     }
-    
-     
+
+
 }
