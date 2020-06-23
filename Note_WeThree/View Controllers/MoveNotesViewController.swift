@@ -9,7 +9,13 @@
 import UIKit
 
 class MoveNotesViewController: UIViewController {
+    
+    var indexToLeave: Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    
+    
 }

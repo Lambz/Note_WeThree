@@ -40,6 +40,10 @@ class NoteListViewController: UIViewController {
 
     }
     
+    @IBAction func calledAfterFolderSelection(_ unwindSegue: UIStoryboardSegue) {
+        NotesHelper.getInstance().moveNotes(withIndexes: NoteList, toCategory: selectedCategory, context: <#T##NSManagedObjectContext#>)
+    }
+    
     
 }
 
@@ -73,14 +77,19 @@ extension NoteListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
         let delete = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completion) in
-        
-            NotesHelper.getInstance().deleteNote(note: indexPath.row, context: self.notesContext)
-        //        reloads data
-        self.noteListTableView.reloadData()
-        completion(true)
+            do {
+                try NotesHelper.getInstance().deleteNote(at: indexPath.row, context: self.notesContext)
+            }
+            catch {
+                print(error)
+            }
+            //        reloads data
+            self.noteListTableView.reloadData()
+            completion(true)
         }
-        
+
         delete.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
         delete.image = UIImage(systemName: "trash.fill")
         return UISwipeActionsConfiguration(actions: [delete])
