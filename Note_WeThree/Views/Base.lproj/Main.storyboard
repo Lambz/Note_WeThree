@@ -406,6 +406,9 @@
                                     <segment title="Automobile"/>
                                     <segment title="Walking"/>
                                 </segments>
+                                <connections>
+                                    <action selector="transportationTypeChanged:" destination="32Y-QJ-NqI" eventType="valueChanged" id="HYz-eJ-ZR3"/>
+                                </connections>
                             </segmentedControl>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zXS-4v-NKw" userLabel="findwayview">
                                 <rect key="frame" x="20" y="787" width="120" height="55"/>
@@ -444,6 +447,9 @@
                                         <state key="normal" title="Find Way">
                                             <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="findWayButtonClicked:" destination="32Y-QJ-NqI" eventType="touchUpInside" id="CuA-Lz-JXA"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -502,6 +508,9 @@
                                             <constraint firstAttribute="width" constant="25" id="xi4-tO-VXT"/>
                                         </constraints>
                                         <state key="normal" image="location" catalog="system"/>
+                                        <connections>
+                                            <action selector="centerLocation:" destination="32Y-QJ-NqI" eventType="touchUpInside" id="Ftf-M1-lPh"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -549,6 +558,10 @@
                         <viewLayoutGuide key="safeArea" id="LY5-iW-Ih8"/>
                     </view>
                     <navigationItem key="navigationItem" id="vAE-gg-Leh"/>
+                    <connections>
+                        <outlet property="mMapView" destination="89D-TG-lNk" id="cTC-9K-KBc"/>
+                        <outlet property="mSegmentedControl" destination="avn-zx-vFL" id="pel-Yd-fgu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZIS-9Y-0Af" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
