@@ -19,13 +19,14 @@ class MapViewController: UIViewController {
     @IBOutlet weak var mSegmentedControl: UISegmentedControl!
     @IBOutlet weak var mBackButton: UIButton!
     
+    // To Set the value of the location of the note
     var mDestination: CLLocation?
     {
         didSet
         {
             if mDestination != nil
             {
-            self.addAnnotation()
+                self.addAnnotation()
             }
         }
     }
@@ -44,12 +45,14 @@ class MapViewController: UIViewController {
         mBackButton.tintColor = UIColor.systemBlue
     }
     
+    /// Sets up the Location Manager
     func setupLocationManager()
     {
         mLocationManager.delegate = self
         mLocationManager.desiredAccuracy = kCLLocationAccuracyBest
     }
     
+    /// Add the Notes Location as Annotation
     private func addAnnotation()
     {
         mMapView.removeAnnotations(mMapView.annotations)
@@ -77,6 +80,7 @@ class MapViewController: UIViewController {
         })
     }
     
+    /// Checks if the Location Services is enabled or not
     func checkLocationServices()
     {
         if CLLocationManager.locationServicesEnabled()
@@ -90,6 +94,7 @@ class MapViewController: UIViewController {
         }
     }
     
+    /// Checks Location Authorization / Permissions Status
     func checkLocationAuthorization()
     {
         switch CLLocationManager.authorizationStatus()
@@ -114,6 +119,7 @@ class MapViewController: UIViewController {
         }
     }
     
+    /// Centers the View on User Location
     func centerViewOnUserLocation()
     {
         if let location = mLocationManager.location?.coordinate
@@ -123,10 +129,13 @@ class MapViewController: UIViewController {
         }
     }
     
+    /// Action Function for the Center Location to user Button
+    /// - Parameter sender: Center Location to user Button
     @IBAction func centerLocation(_ sender: Any) {
         centerViewOnUserLocation()
     }
     
+    /// Function to display directions on the MapView
     func getDirections()
     {
         guard let location = mLocationManager.location?.coordinate else
@@ -160,6 +169,9 @@ class MapViewController: UIViewController {
         }
     }
     
+    /// Function to create a Direction Request
+    /// - Parameter coordinate: Origin Coordinates
+    /// - Returns: Direction Request Object
     func createDirectionRequest(from coordinate: CLLocationCoordinate2D) -> MKDirections.Request
     {
         let destination_coordinate = mDestination!.coordinate
@@ -174,15 +186,20 @@ class MapViewController: UIViewController {
         return request
     }
     
+    /// Action Function for Find Way Button
+    /// - Parameter sender: Find Way Button
     @IBAction func findWayButtonClicked(_ sender: Any) {
         getDirections()
     }
     
+    /// Removes previous Directions displayed on MapView
     func removeOverlaysAndAnnotations()
     {
         mMapView.removeOverlays(mMapView.overlays)
     }
     
+    /// Value changed Function for Segmented Control ( Automobile / Walking)
+    /// - Parameter sender: Segmented Control ( Automobile / Walking)
     @IBAction func transportationTypeChanged(_ sender: Any) {
         switch mSegmentedControl.selectedSegmentIndex {
         case 0:
@@ -194,6 +211,10 @@ class MapViewController: UIViewController {
         }
     }
     
+    /// Generalised Function to show Alerts
+    /// - Parameters:
+    ///   - title: Title of Alert
+    ///   - message: Message in Alert
     func showAlert(title: String, message: String)
     {
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
@@ -201,14 +222,20 @@ class MapViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    /// Function to hide Navigation Bar
+    /// - Parameter animated: if view appearance will be animated or not
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
+    /// Function to show Navigation Bar
+    /// - Parameter animated: if view disappearance will be animated or not
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
+    /// Action Function for Back Button. Pop's this View from stack
+    /// - Parameter sender: Back Button
     @IBAction func backPressed(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -217,6 +244,10 @@ class MapViewController: UIViewController {
 extension MapViewController: CLLocationManagerDelegate
 {
     
+    /// In-built function called when Location Authorization / Permission Changed
+    /// - Parameters:
+    ///   - manager: CLLocation Manager
+    ///   - status: Status of Authorization / Permission
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         checkLocationAuthorization()
     }
@@ -224,6 +255,11 @@ extension MapViewController: CLLocationManagerDelegate
 
 extension MapViewController: MKMapViewDelegate
 {
+    /// In-built function called when a overlay has to be displayed. Using it to display different color lines when automobile or walking is used
+    /// - Parameters:
+    ///   - mapView: MapView on which overlay is being drawn
+    ///   - overlay: Overlay that is being drawn
+    /// - Returns: Overlay Rendered Object which will render the Overlay
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer(overlay: overlay as! MKPolyline)
         if(mTransportType == .automobile)
