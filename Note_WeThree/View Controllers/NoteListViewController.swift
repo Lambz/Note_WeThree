@@ -12,12 +12,34 @@ class NoteListViewController: UIViewController {
     
     var indexValue: Int = 0
     
+    @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet weak var noteListTableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+//        sets up the delegate
+        noteListTableView.delegate = self
+        noteListTableView.dataSource = self
 
     }
     
     override func viewWillAppear(_ animated: Bool) {
         print(indexValue)
     }
+}
+
+
+extension NoteListViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        <#code#>
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        <#code#>
+    }
+    
+     
 }
