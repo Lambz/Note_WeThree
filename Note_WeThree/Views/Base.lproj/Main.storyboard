@@ -536,7 +536,10 @@
                                     <constraint firstAttribute="height" constant="25" id="1ad-j7-ilS"/>
                                     <constraint firstAttribute="width" constant="25" id="Wnh-3q-73D"/>
                                 </constraints>
-                                <state key="normal" image="Arrows-Back-icon"/>
+                                <state key="normal" image="back"/>
+                                <connections>
+                                    <action selector="backPressed:" destination="32Y-QJ-NqI" eventType="touchUpInside" id="8bR-wd-B9I"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -559,6 +562,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="vAE-gg-Leh"/>
                     <connections>
+                        <outlet property="mBackButton" destination="dfv-P3-vmr" id="wZl-YZ-7eO"/>
                         <outlet property="mMapView" destination="89D-TG-lNk" id="cTC-9K-KBc"/>
                         <outlet property="mSegmentedControl" destination="avn-zx-vFL" id="pel-Yd-fgu"/>
                     </connections>
@@ -587,7 +591,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Arrows-Back-icon" width="512" height="512"/>
+        <image name="back" width="512" height="512"/>
         <image name="camera" catalog="system" width="128" height="96"/>
         <image name="folder" catalog="system" width="128" height="95"/>
         <image name="info.circle" catalog="system" width="128" height="121"/>

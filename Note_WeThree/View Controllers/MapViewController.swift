@@ -17,6 +17,7 @@ class MapViewController: UIViewController {
     let SPAN = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
     var mTransportType: MKDirectionsTransportType = .automobile
     @IBOutlet weak var mSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var mBackButton: UIButton!
     
     var mDestination: CLLocation?
     {
@@ -31,7 +32,16 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupBackButton()
         checkLocationServices()
+    }
+    
+    /// Setting the Style for the back button, while hiding navigation bar and having floating back button
+    func setupBackButton()
+    {
+        let image = UIImage(named: "back")?.withRenderingMode(.alwaysTemplate)
+        mBackButton.setImage(image, for: .normal)
+        mBackButton.tintColor = UIColor.systemBlue
     }
     
     func setupLocationManager()
@@ -189,6 +199,18 @@ class MapViewController: UIViewController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "okay", style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    @IBAction func backPressed(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
     }
 }
 
