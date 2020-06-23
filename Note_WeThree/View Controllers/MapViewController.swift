@@ -11,43 +11,60 @@ import MapKit
 import CoreLocation
 
 class MapViewController: UIViewController {
-    @IBOutlet weak var mMapView: MKMapView!
     
+    @IBOutlet weak var mMapView: MKMapView!
     let mLocationManager = CLLocationManager()
-    let REGION_IN_METERS: Double = 10000
-    var mDestination: CLLocation?
+    let SPAN = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
     var mTransportType: MKDirectionsTransportType = .automobile
     @IBOutlet weak var mSegmentedControl: UISegmentedControl!
+    
+    var mDestination: CLLocation?
+    {
+        didSet
+        {
+            if mDestination != nil
+            {
+            self.addAnnotation()
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         checkLocationServices()
-        removeTapGestures()
-        addDoubleTapGesture()
-    }
-    
-    func addDoubleTapGesture()
-    {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(addAnnotation))
-        tap.numberOfTapsRequired = 2
-        mMapView.addGestureRecognizer(tap)
-    }
-    
-    func removeTapGestures()
-    {
-        if (mMapView.subviews[0].gestureRecognizers != nil){
-            for gesture in mMapView.subviews[0].gestureRecognizers!{
-                if (gesture is UITapGestureRecognizer){
-                    mMapView.subviews[0].removeGestureRecognizer(gesture)
-                }
-            }
-        }
     }
     
     func setupLocationManager()
     {
         mLocationManager.delegate = self
         mLocationManager.desiredAccuracy = kCLLocationAccuracyBest
+    }
+    
+    private func addAnnotation()
+    {
+        mMapView.removeAnnotations(mMapView.annotations)
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = mDestination!.coordinate
+        CLGeocoder().reverseGeocodeLocation(self.mDestination!, completionHandler: {(placemarks, error) -> Void in
+            if error != nil {
+                print("Reverse geocoder failed with error" + error!.localizedDescription )
+                return
+            }
+            
+            if placemarks?.count ?? 0 > 0 {
+                let pm = placemarks![0]
+                annotation.title = pm.thoroughfare ?? "nil" + ", " + pm.subThoroughfare!
+                annotation.subtitle = pm.subLocality
+                self.mMapView.addAnnotation(annotation)
+                print(pm)
+            }
+            else
+            {
+                annotation.title = "Unknown Place"
+                self.mMapView.addAnnotation(annotation)
+                print("Problem with the data received from geocoder")
+            }
+        })
     }
     
     func checkLocationServices()
@@ -91,43 +108,13 @@ class MapViewController: UIViewController {
     {
         if let location = mLocationManager.location?.coordinate
         {
-            let region = MKCoordinateRegion.init(center: location, latitudinalMeters: self.REGION_IN_METERS, longitudinalMeters: self.REGION_IN_METERS)
+            let region = MKCoordinateRegion.init(center: location, span: SPAN)
             mMapView.setRegion(region, animated: true)
         }
     }
     
     @IBAction func centerLocation(_ sender: Any) {
         centerViewOnUserLocation()
-    }
-    
-    
-    @objc func addAnnotation(gestureRecognizer:UITapGestureRecognizer){
-        removeOverlaysAndAnnotations()
-        let touchPoint = gestureRecognizer.location(in: mMapView)
-        let newCoordinates = mMapView.convert(touchPoint, toCoordinateFrom: mMapView)
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = newCoordinates
-        mDestination = CLLocation(latitude: newCoordinates.latitude, longitude: newCoordinates.longitude)
-        CLGeocoder().reverseGeocodeLocation(self.mDestination!, completionHandler: {(placemarks, error) -> Void in
-            if error != nil {
-                print("Reverse geocoder failed with error" + error!.localizedDescription )
-                return
-            }
-            
-            if placemarks?.count ?? 0 > 0 {
-                let pm = placemarks![0]
-                annotation.title = pm.thoroughfare ?? "nil" + ", " + pm.subThoroughfare!
-                annotation.subtitle = pm.subLocality
-                self.mMapView.addAnnotation(annotation)
-                print(pm)
-            }
-            else
-            {
-                annotation.title = "Unknown Place"
-                self.mMapView.addAnnotation(annotation)
-                print("Problem with the data received from geocoder")
-            }
-        })
     }
     
     func getDirections()
@@ -184,7 +171,6 @@ class MapViewController: UIViewController {
     func removeOverlaysAndAnnotations()
     {
         mMapView.removeOverlays(mMapView.overlays)
-        mMapView.removeAnnotations(mMapView.annotations)
     }
     
     @IBAction func transportationTypeChanged(_ sender: Any) {
