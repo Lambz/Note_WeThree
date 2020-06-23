@@ -103,7 +103,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="snn-o2-E7h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2046" y="-700"/>
+            <point key="canvasLocation" x="949" y="-1027"/>
         </scene>
         <!--Note List View Controller-->
         <scene sceneID="1Dk-eK-rqe">
@@ -210,18 +210,20 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="categoryLabel" destination="q08-d1-Dbz" id="oL0-Zk-KuE"/>
+                        <outlet property="noteListTableView" destination="AhY-IU-OF4" id="1Dp-9k-KDQ"/>
                         <segue destination="PNz-XS-HGL" kind="show" identifier="noteScreen" id="Ym5-rh-Mqa"/>
                         <segue destination="ADW-rA-ecK" kind="presentation" id="zGb-ky-wE8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fvi-Zj-YAv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2869.5652173913045" y="-664.28571428571422"/>
+            <point key="canvasLocation" x="1587" y="-1049"/>
         </scene>
-        <!--View Controller-->
+        <!--Move Notes View Controller-->
         <scene sceneID="2zx-Qg-aGL">
             <objects>
-                <viewController id="ADW-rA-ecK" sceneMemberID="viewController">
+                <viewController id="ADW-rA-ecK" customClass="MoveNotesViewController" customModule="Note_WeThree" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="09R-6l-cfE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -285,7 +287,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PCt-0w-a76" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2773.913043478261" y="14.732142857142856"/>
+            <point key="canvasLocation" x="1587" y="-275"/>
         </scene>
         <!--Notes Details-->
         <scene sceneID="Bhz-gz-6Tb">
@@ -378,7 +380,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k7v-aB-fvU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="uos-1b-GDE"/>
             </objects>
-            <point key="canvasLocation" x="3550.7246376811595" y="-664.28571428571422"/>
+            <point key="canvasLocation" x="2380" y="-1027"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="mYC-TA-RoU">
@@ -405,7 +407,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZIS-9Y-0Af" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4461" y="-664"/>
+            <point key="canvasLocation" x="3174" y="-1049"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="EvZ-o1-LgL">
@@ -423,7 +425,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DTI-fX-CUb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1274" y="-700"/>
+            <point key="canvasLocation" x="243" y="-1026"/>
         </scene>
     </scenes>
     <resources>
