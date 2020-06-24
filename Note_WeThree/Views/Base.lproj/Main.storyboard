@@ -425,6 +425,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="dateLabel" destination="JMA-Yt-zMn" id="CBf-su-x1V"/>
+                        <outlet property="micButton" destination="QQI-ui-C1s" id="MKo-dB-8TM"/>
                         <outlet property="noteImage" destination="nvD-Tz-iiP" id="oAq-7O-crR"/>
                         <outlet property="noteText" destination="m0V-tC-ABg" id="8Ny-WO-L2Z"/>
                         <outlet property="noteTitle" destination="6Ue-4z-Py1" id="4li-vO-6NI"/>
