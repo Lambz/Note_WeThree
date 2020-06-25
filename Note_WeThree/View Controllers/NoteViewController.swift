@@ -190,6 +190,16 @@ class NoteViewController: UIViewController {
         self.present(actionSheet, animated: true, completion: nil)
     }
     
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if let destinationView = segue.destination as? MapViewController {
+            let location = CLLocation(latitude: CLLocationDegrees(exactly: self.latitude!)!, longitude: CLLocationDegrees(self.longitude!))
+            destinationView.mDestination = location
+        }
+        
+    }
+    
 }
 
 

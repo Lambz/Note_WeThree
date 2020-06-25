@@ -250,17 +250,29 @@ extension NoteListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = noteListTableView.dequeueReusableCell(withIdentifier: "noteCell", for: indexPath) as! NoteCell
-        cell.setValues(index: indexPath.row)
-        
-        return cell
+        var cell = noteListTableView.dequeueReusableCell(withIdentifier: "noteCell")
+        if cell == nil
+        {
+            cell = UITableViewCell(style: .subtitle, reuseIdentifier: "noteCell")
+        }
+        do
+        {
+            let note = try NotesHelper.getInstance().getNote(at: indexPath.row)
+            cell?.textLabel?.text = note.mTitle
+            cell?.detailTextLabel?.text = note.mMessage
+        }
+        catch
+        {
+            print(error)
+        }
+        return cell!
     }
     
     
     
     //    MARK: note deletion method by swipe
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
+
         let delete = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completion) in
             do {
                 try NotesHelper.getInstance().deleteNote(at: indexPath.row, context: self.notesContext)
@@ -272,7 +284,7 @@ extension NoteListViewController: UITableViewDelegate, UITableViewDataSource {
             self.noteListTableView.reloadData()
             completion(true)
         }
-        
+
         delete.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
         delete.image = UIImage(systemName: "trash.fill")
         return UISwipeActionsConfiguration(actions: [delete])
