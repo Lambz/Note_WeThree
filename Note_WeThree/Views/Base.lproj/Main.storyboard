@@ -72,7 +72,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="UQK-Hh-3cM"/>
                     </view>
-                    <navigationItem key="navigationItem" id="mHq-hg-Dnd">
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="mHq-hg-Dnd">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="info.circle" catalog="system" id="AgM-Y4-8LD">
                             <color key="tintColor" red="0.85882352941176465" green="0.68235294117647061" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
@@ -104,7 +104,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AhY-IU-OF4">
-                                <rect key="frame" x="0.0" y="140" width="414" height="680"/>
+                                <rect key="frame" x="0.0" y="150" width="414" height="671.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="noteCell" rowHeight="77" id="kHQ-ed-3uk" customClass="NoteCell" customModule="Note_WeThree" customModuleProvider="target">
@@ -161,22 +161,17 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E51-s7-Eqx">
-                                <rect key="frame" x="322" y="840" width="72" height="22"/>
-                                <color key="tintColor" red="0.85882352939999995" green="0.68235294120000001" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" image="square.and.pencil" catalog="system"/>
-                                <connections>
-                                    <action selector="newNoteButtonPressed:" destination="saD-TF-dU5" eventType="touchUpInside" id="Psh-eL-Gbg"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of notes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o97-kN-ng6">
-                                <rect key="frame" x="142.5" y="841.5" width="129" height="20.5"/>
+                                <rect key="frame" x="142.5" y="831.5" width="129" height="20.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20.5" id="87b-eO-03w"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.85882352939999995" green="0.68235294120000001" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nva-BS-rRD">
-                                <rect key="frame" x="20" y="840" width="102.5" height="30"/>
+                                <rect key="frame" x="20" y="831.5" width="38" height="28.5"/>
                                 <state key="normal" title="Move">
                                     <color key="titleColor" red="0.85882352939999995" green="0.68235294120000001" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -184,25 +179,33 @@
                                     <action selector="moveButtonPressed:" destination="saD-TF-dU5" eventType="touchUpInside" id="no0-YZ-n6a"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E51-s7-Eqx">
+                                <rect key="frame" x="373" y="830" width="20.5" height="22"/>
+                                <color key="tintColor" red="0.85882352939999995" green="0.68235294120000001" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" image="square.and.pencil" catalog="system"/>
+                                <connections>
+                                    <action selector="newNoteButtonPressed:" destination="saD-TF-dU5" eventType="touchUpInside" id="Psh-eL-Gbg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="E51-s7-Eqx" firstAttribute="top" secondItem="AhY-IU-OF4" secondAttribute="bottom" constant="20" id="2AB-lH-Eeg"/>
-                            <constraint firstItem="Nva-BS-rRD" firstAttribute="leading" secondItem="D93-K2-vzS" secondAttribute="leadingMargin" id="2Zm-XM-Qpd"/>
-                            <constraint firstItem="E51-s7-Eqx" firstAttribute="leading" secondItem="o97-kN-ng6" secondAttribute="trailing" constant="20" id="8UP-e4-AtZ"/>
-                            <constraint firstItem="E51-s7-Eqx" firstAttribute="trailing" secondItem="lLm-x7-0WO" secondAttribute="trailing" constant="20" id="El5-yq-Qbi"/>
+                            <constraint firstItem="o97-kN-ng6" firstAttribute="centerY" secondItem="E51-s7-Eqx" secondAttribute="centerY" id="4yo-hO-xCo"/>
+                            <constraint firstItem="lLm-x7-0WO" firstAttribute="trailing" secondItem="E51-s7-Eqx" secondAttribute="trailing" constant="20" id="7E9-a7-DDp"/>
                             <constraint firstItem="AhY-IU-OF4" firstAttribute="leading" secondItem="lLm-x7-0WO" secondAttribute="leading" id="FSm-Fi-HFF"/>
                             <constraint firstItem="o97-kN-ng6" firstAttribute="centerX" secondItem="D93-K2-vzS" secondAttribute="centerX" id="Faa-qI-BJj"/>
-                            <constraint firstItem="Nva-BS-rRD" firstAttribute="top" secondItem="E51-s7-Eqx" secondAttribute="top" id="k77-qx-aLu"/>
-                            <constraint firstItem="o97-kN-ng6" firstAttribute="leading" secondItem="Nva-BS-rRD" secondAttribute="trailing" constant="20" id="nCM-ck-9te"/>
-                            <constraint firstItem="lLm-x7-0WO" firstAttribute="bottom" secondItem="o97-kN-ng6" secondAttribute="bottom" id="qNo-sk-NhP"/>
-                            <constraint firstItem="AhY-IU-OF4" firstAttribute="top" secondItem="lLm-x7-0WO" secondAttribute="top" id="rq9-cH-QWi"/>
+                            <constraint firstItem="Nva-BS-rRD" firstAttribute="leading" secondItem="lLm-x7-0WO" secondAttribute="leading" constant="20" id="J2P-uR-zoF"/>
+                            <constraint firstItem="o97-kN-ng6" firstAttribute="top" secondItem="AhY-IU-OF4" secondAttribute="bottom" constant="10" id="JEP-sr-fSp"/>
+                            <constraint firstItem="AhY-IU-OF4" firstAttribute="top" secondItem="lLm-x7-0WO" secondAttribute="top" constant="10" id="M2q-eD-KSJ"/>
+                            <constraint firstItem="lLm-x7-0WO" firstAttribute="bottom" secondItem="E51-s7-Eqx" secondAttribute="bottom" constant="10" id="OfU-gZ-CkW"/>
+                            <constraint firstItem="lLm-x7-0WO" firstAttribute="bottom" secondItem="Nva-BS-rRD" secondAttribute="bottom" constant="2" id="lxV-1I-fcf"/>
+                            <constraint firstItem="Nva-BS-rRD" firstAttribute="top" secondItem="AhY-IU-OF4" secondAttribute="bottom" constant="10" id="ngn-Z5-ZOq"/>
                             <constraint firstItem="lLm-x7-0WO" firstAttribute="trailing" secondItem="AhY-IU-OF4" secondAttribute="trailing" id="yt5-Kr-wvw"/>
-                            <constraint firstItem="E51-s7-Eqx" firstAttribute="bottom" secondItem="lLm-x7-0WO" secondAttribute="bottom" id="z8m-Te-SIM"/>
+                            <constraint firstItem="E51-s7-Eqx" firstAttribute="top" secondItem="AhY-IU-OF4" secondAttribute="bottom" constant="10" id="zuC-sL-5Re"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="lLm-x7-0WO"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Ola-yi-CGm">
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="Ola-yi-CGm">
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="WNh-1u-8kK">
                             <color key="tintColor" red="0.85882352939999995" green="0.68235294120000001" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
@@ -389,7 +392,7 @@
                         <viewLayoutGuide key="safeArea" id="TtU-XV-Ny7"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Notes Details" id="vKZ-Cs-wRT">
+                    <navigationItem key="navigationItem" title="Notes Details" largeTitleDisplayMode="always" id="vKZ-Cs-wRT">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="AgP-aB-wwu">
                             <color key="tintColor" red="0.85882352939999995" green="0.68235294120000001" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
