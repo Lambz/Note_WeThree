@@ -72,6 +72,7 @@ class NoteViewController: UIViewController {
     
     
 
+//    MARK: UI event handler methods implemented
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
         
@@ -258,6 +259,11 @@ extension NoteViewController {
         
     }
     
+    
+    
+    
+// MARK: Note saving methods
+//    checks nil title before saving
     func checkTitle(titleText: String?) -> Bool {
         if(titleText == nil) {
             let alert = UIAlertController(title: "Oops!", message: "Title can't be left blank", preferredStyle: .alert)
@@ -268,6 +274,8 @@ extension NoteViewController {
         return true
     }
     
+    
+//    saves note if previously saved
     func saveOldNote() {
                         
         let title = self.noteTitle.text
@@ -281,9 +289,10 @@ extension NoteViewController {
             self.openedNote.mMessage = msg
             self.openedNote.mImage = img
             
-            if let noteIndex = tempNoteIndex {
+            if let noteIndex = selectedNote {
                 do {
                    try NotesHelper.getInstance().updateNote(oldNote: noteIndex, newNote: openedNote, context: self.noteViewContext)
+                    self.cancelButtonTapped(self)
                 }
                 catch {
                     print(error)
@@ -295,6 +304,7 @@ extension NoteViewController {
         
     }
     
+//    saves if new note
     func saveNewNote() {
         print("in func")
         do {
@@ -321,6 +331,8 @@ extension NoteViewController {
                 try NotesHelper.getInstance().addNote(note: self.openedNote, context: self.noteViewContext)
 
                 stopLocationManager()
+                
+                self.cancelButtonTapped(self)
             }
         }
         catch {
@@ -330,6 +342,7 @@ extension NoteViewController {
                 
     }
     
+//    shows error if note can't be saved
     func showSaveErrorAlert() {
         let alert = UIAlertController(title: "Error!", message: "Error while saving note. Please try again!", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
@@ -337,6 +350,8 @@ extension NoteViewController {
     }
 
 }
+
+
 
 
 
@@ -451,6 +466,9 @@ extension NoteViewController: CLLocationManagerDelegate {
 }
 
 
+
+
+// MARK: methods for handling image selection
 extension NoteViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     
