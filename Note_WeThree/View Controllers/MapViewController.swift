@@ -138,26 +138,29 @@ class MapViewController: UIViewController {
     /// Function to display directions on the MapView
     func getDirections()
     {
+        print("1")
         guard let location = mLocationManager.location?.coordinate else
         {
             showAlert(title: "Error", message: "The Application was not able to find your current location, please try again later.")
             return
         }
+        print(2)
         if mDestination != nil
         {
             mMapView.removeOverlays(mMapView.overlays)
             let request = createDirectionRequest(from: location)
             let directions = MKDirections(request: request)
-            
+            print(3)
             directions.calculate { [unowned self] (response, error) in
                 guard let response = response else
                 {
                     self.showAlert(title: "Error", message: "Directions could not be calculated")
                     return
                 }
-                
+                print(4)
                 for route in response.routes
                 {
+                    print(5)
                     self.mMapView.addOverlay(route.polyline)
                     self.mMapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
                 }

@@ -441,6 +441,7 @@ class NotesHelper
         deleteNote(note: note, context: context)
         note.mCategoryName = mCategories[toCategory]
         addNoteInDatabase(note: note, context: context)
+        loadCategoryNoteCount(context: context)
     }
     
     
@@ -460,6 +461,7 @@ class NotesHelper
         deleteNote(note: note, context: context)
         note.mCategoryName = mCategories[toCategory]
         addNoteInDatabase(note: note, context: context)
+        loadCategoryNoteCount(context: context)
     }
     
     /// Deletes Mutiple Notes
@@ -481,7 +483,7 @@ class NotesHelper
     /// - Throws: InvalidIndexException, if Index is greater than Notes Array
     internal func deleteMultipleNotes(withIndexes: [Int], context: NSManagedObjectContext) throws
     {
-        for index in withIndexes
+        for index in withIndexes.reversed()
         {
             try deleteNote(at: index, context: context)
         }

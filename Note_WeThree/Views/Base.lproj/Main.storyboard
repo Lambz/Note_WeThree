@@ -152,17 +152,20 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E51-s7-Eqx">
-                                <rect key="frame" x="373" y="831.5" width="20.5" height="20.5"/>
+                                <rect key="frame" x="373.5" y="831.5" width="20.5" height="20.5"/>
                                 <color key="tintColor" red="0.85882352939999995" green="0.68235294120000001" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" image="square.and.pencil" catalog="system"/>
                                 <connections>
                                     <action selector="newNoteButtonPressed:" destination="saD-TF-dU5" eventType="touchUpInside" id="Psh-eL-Gbg"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mGz-SC-3RQ">
-                                <rect key="frame" x="333.5" y="831.5" width="19.5" height="22"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mGz-SC-3RQ">
+                                <rect key="frame" x="334" y="831.5" width="19.5" height="22"/>
                                 <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="trash" catalog="system"/>
+                                <connections>
+                                    <action selector="deleteButtonTapped:" destination="saD-TF-dU5" eventType="touchUpInside" id="52R-Fu-xwa"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -178,7 +181,6 @@
                             <constraint firstItem="E51-s7-Eqx" firstAttribute="leading" secondItem="mGz-SC-3RQ" secondAttribute="trailing" constant="20" id="lmZ-Pq-Uyh"/>
                             <constraint firstItem="lLm-x7-0WO" firstAttribute="bottom" secondItem="Nva-BS-rRD" secondAttribute="bottom" constant="2" id="lxV-1I-fcf"/>
                             <constraint firstItem="Nva-BS-rRD" firstAttribute="top" secondItem="AhY-IU-OF4" secondAttribute="bottom" constant="10" id="ngn-Z5-ZOq"/>
-                            <constraint firstItem="lLm-x7-0WO" firstAttribute="trailing" secondItem="E51-s7-Eqx" secondAttribute="trailing" constant="20.5" id="nsA-h3-OjZ"/>
                             <constraint firstItem="mGz-SC-3RQ" firstAttribute="top" secondItem="AhY-IU-OF4" secondAttribute="bottom" constant="10" id="uTZ-uM-U3i"/>
                             <constraint firstItem="lLm-x7-0WO" firstAttribute="trailing" secondItem="AhY-IU-OF4" secondAttribute="trailing" id="yt5-Kr-wvw"/>
                             <constraint firstItem="E51-s7-Eqx" firstAttribute="top" secondItem="AhY-IU-OF4" secondAttribute="bottom" constant="10" id="zuC-sL-5Re"/>
@@ -194,6 +196,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="deleteButton" destination="mGz-SC-3RQ" id="A9q-Xd-n31"/>
                         <outlet property="editButtonLabel" destination="WNh-1u-8kK" id="BPX-q9-b8Y"/>
                         <outlet property="moveButtonLabel" destination="Nva-BS-rRD" id="buu-tI-ddR"/>
                         <outlet property="noOfNotesLabel" destination="o97-kN-ng6" id="Fw4-su-V0F"/>
@@ -386,6 +389,9 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="89D-TG-lNk">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <connections>
+                                    <outlet property="delegate" destination="32Y-QJ-NqI" id="7ab-mO-Qjv"/>
+                                </connections>
                             </mapView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="avn-zx-vFL">
                                 <rect key="frame" x="215" y="160" width="179" height="31"/>
