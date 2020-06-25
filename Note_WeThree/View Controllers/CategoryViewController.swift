@@ -33,7 +33,7 @@ class CategoryViewController: UIViewController {
         noteImage.contentMode = .scaleAspectFit
         splashView.addSubview(noteImage)
         // adding frame for the image
-        noteImage.frame = CGRect(x: splashView.frame.maxX-50, y: splashView.frame.maxY, width: 100, height: 100)
+        noteImage.frame = CGRect(x: splashView.frame.maxX-50, y: splashView.frame.maxY-50, width:100, height: 100)
         
         super.viewDidLoad()
 //        context for core data operations
