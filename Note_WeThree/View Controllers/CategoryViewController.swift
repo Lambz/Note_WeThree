@@ -28,14 +28,14 @@ class CategoryViewController: UIViewController {
         //color for splashView
         splashView.backgroundColor = UIColor(displayP3Red: 255/255, green: 185/255, blue: 73/255, alpha: 1.0)
         // add subview for splash screen
-       // view.addSubview(splashView)
+       //view.addSubview(splashView)
         
         // adding frame for splash view
         splashView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
        noteImage.contentMode = .scaleAspectFit
        splashView.addSubview(noteImage)
         // adding frame for the image
-        //noteImage.frame = CGRect(x: splashView.frame.midX-50, y: splashView.frame.midY-50, width:100, height: 100)
+        noteImage.frame = CGRect(x: splashView.frame.midX-50, y: splashView.frame.midY-50, width:100, height: 100)
         
         super.viewDidLoad()
 //        context for core data operations
