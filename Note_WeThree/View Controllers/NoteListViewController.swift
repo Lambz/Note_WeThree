@@ -235,7 +235,7 @@ extension NoteListViewController: UITableViewDelegate, UITableViewDataSource {
             var rows: Int = 0
             if let categoryIndex = indexValue {
                 do {
-                    rows = try NotesHelper.getInstance().getNumberOfNotes(forCategory: indexValue!)
+                    rows = try NotesHelper.getInstance().getNumberOfNotes(forCategory: categoryIndex)
                 }
                 catch {
                     print(error)
