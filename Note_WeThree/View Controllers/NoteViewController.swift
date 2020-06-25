@@ -215,12 +215,19 @@ extension NoteViewController {
                 if let noteIndex = self.selectedNote {
                     openedNote = try NotesHelper.getInstance().getNote(at: noteIndex)
                     if(openedNote.mAudioFileLocation != nil) {
-                        self.fileName = openedNote.mAudioFileLocation!
-                        self.micButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
-                        recordingIsAvailable = true
+                        if(openedNote.mAudioFileLocation!.count < 2) {
+                            self.micButton.isHidden = true
+                        }
+                        else {
+                            if let audioFile = openedNote.mAudioFileLocation {
+                                self.fileName = audioFile
+                            }
+                            self.micButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+                            recordingIsAvailable = true
+                        }
                     }
                     else {
-                        self.fileName = "note\(noteIndex).m4a"
+                        self.micButton.isHidden = true
                     }
                     showNoteOnLoad()
                 }
@@ -332,7 +339,7 @@ extension NoteViewController {
                 let msg = self.noteTextLabel.text
                 let img = self.noteImage.image
                 var audiolocation: String?
-                if fileName.count > 0 {
+                if fileName.count > 2 {
                     audiolocation = fileName
                 }
                 
@@ -440,6 +447,18 @@ extension NoteViewController: AVAudioPlayerDelegate, AVAudioRecorderDelegate {
     
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         self.micButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+    }
+    
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+        let path  = getCacheDirectory()
+        let filePath = path.appendingPathComponent("\(fileName)")
+        let savePath = path.appendingPathComponent("\(fileName)")
+        do {
+            try FileManager.default.moveItem(at: filePath, to: savePath)
+        }
+        catch {
+            print(error)
+        }
     }
     
 }
