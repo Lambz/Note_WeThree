@@ -17,7 +17,8 @@ class CategoryCell: UITableViewCell {
     func setValues(index: Int) {
         
         do {
-            self.categoryName.text = try NotesHelper.getInstance().getCategory(at: index)
+            let category = try NotesHelper.getInstance().getCategory(at: index)
+            self.categoryName.text = category
             self.categoryCount.text = try "\(NotesHelper.getInstance().getNumberOfNotes(forCategory: index)) item(s)"
         }
         catch {

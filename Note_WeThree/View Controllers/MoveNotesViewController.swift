@@ -27,7 +27,6 @@ class MoveNotesViewController: UIViewController {
         self.moveCategoryContext = moveCategoryDelegate.persistentContainer.viewContext
         NotesHelper.getInstance().loadAllCategories(context: moveCategoryContext)
         
-        
         categorySelectionTableView.delegate = self
         categorySelectionTableView.dataSource = self
     }
@@ -71,11 +70,23 @@ extension MoveNotesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = categorySelectionTableView.dequeueReusableCell(withIdentifier: "categoryCell", for: indexPath) as! CategoryCell
-        cell.setValues(index: indexPath.row)
+        var cell = categorySelectionTableView.dequeueReusableCell(withIdentifier: "categoryCell")
         
-        return cell
-        
+        if cell == nil
+        {
+            cell = UITableViewCell(style: .default, reuseIdentifier: "categoryCell")
+        }
+        do
+        {
+            cell?.textLabel?.text = try NotesHelper.getInstance().getCategory(at: indexPath.row)
+        }
+        catch
+        {
+            print(error)
+        }
+        cell?.imageView?.image = UIImage(systemName: "folder")
+        cell?.imageView?.tintColor = UIColor(displayP3Red: 219/255, green: 174/255, blue: 60/255, alpha: 1.0)
+        return cell!
     }
 
     

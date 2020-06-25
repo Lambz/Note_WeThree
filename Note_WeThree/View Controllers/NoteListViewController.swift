@@ -297,9 +297,8 @@ extension NoteListViewController: UITableViewDelegate, UITableViewDataSource {
             
             self.selectedNotesForMove.append(indexPath.row)
             self.segueForMoveView = true
-            self.performSegue(withIdentifier: "moveScreen", sender: nil)
+            self.performSegue(withIdentifier: "goBackNoteList", sender: nil)
             completion(true)
-            
         }
         
         moveNote.backgroundColor = #colorLiteral(red: 0.7254902124, green: 0.4784313738, blue: 0.09803921729, alpha: 1)
