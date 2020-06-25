@@ -33,7 +33,6 @@ class NoteListViewController: UIViewController {
     var selectedCategoryToMove: Int?
     
     @IBOutlet weak var editButtonLabel: UIBarButtonItem!
-    @IBOutlet weak var categoryLabel: UILabel!
     @IBOutlet weak var noteListTableView: UITableView!
     @IBOutlet weak var moveButtonLabel: UIButton!
     @IBOutlet weak var noOfNotesLabel: UILabel!
@@ -66,7 +65,7 @@ class NoteListViewController: UIViewController {
 //        sets the category name to header
         if let categoryIndex = self.indexValue {
             do {
-                self.categoryLabel.text = try NotesHelper.getInstance().getCategory(at: categoryIndex)
+                self.title = try NotesHelper.getInstance().getCategory(at: categoryIndex)
             }
             catch {
                 print(error)

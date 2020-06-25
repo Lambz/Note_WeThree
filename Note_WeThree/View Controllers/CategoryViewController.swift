@@ -28,7 +28,7 @@ class CategoryViewController: UIViewController {
 //        sets up delegate for table view
         categoryTableView.delegate = self
         categoryTableView.dataSource = self
-        
+        self.title = "Categories"
     }
     
     
