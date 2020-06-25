@@ -41,10 +41,11 @@ class NoteViewController: UIViewController {
     var imagePickerController = UIImagePickerController()
     
     
-//    screen element outlets
+    
+    //    screen element outlets
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var noteTextLabel: UITextField!
     @IBOutlet weak var noteImage: UIImageView!
-    @IBOutlet weak var noteText: UITextView!
     @IBOutlet weak var noteTitle: UITextField!
     @IBOutlet weak var micButton: UIButton!
     @IBOutlet weak var locationLabel: UIButton!
@@ -87,7 +88,7 @@ class NoteViewController: UIViewController {
         
         if(self.forCategory != nil) {
             let title = self.noteTitle.text
-            let msg = self.noteText.text
+            let msg = self.noteTextLabel.text
             let img = self.noteImage.image
             let date = Date()
             let category: String?
@@ -267,7 +268,7 @@ extension NoteViewController {
         self.dateLabel.text = date
         
         if let message = self.openedNote.mMessage {
-            self.noteText.text = message
+            self.noteTextLabel.text = message
         }
         if let image = self.openedNote.mImage {
             self.noteImage.image = image
