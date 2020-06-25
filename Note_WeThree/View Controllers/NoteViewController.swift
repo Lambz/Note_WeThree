@@ -469,8 +469,10 @@ extension NoteViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        longitude = locations.last?.coordinate.longitude
-        latitude = locations.last?.coordinate.latitude
+        if(forCategory != nil) {
+            longitude = locations.last?.coordinate.longitude
+            latitude = locations.last?.coordinate.latitude
+        }
         
     }
     
