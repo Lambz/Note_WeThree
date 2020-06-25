@@ -32,6 +32,7 @@ class NoteListViewController: UIViewController {
     //    for getting the category selected to move notes from move notes view
     var selectedCategoryToMove: Int?
     
+    @IBOutlet weak var deleteButton: UIButton!
     
     let mSearchController = UISearchController(searchResultsController: nil)
     
@@ -109,6 +110,7 @@ class NoteListViewController: UIViewController {
             self.selectedNotesForMove.removeAll()
             self.editingMode = false
             self.moveButtonLabel.isHidden = true
+            self.deleteButton.isHidden = true
         }
         else {
             self.noteListTableView.isEditing = true
@@ -116,6 +118,7 @@ class NoteListViewController: UIViewController {
             self.editButtonLabel.title = "Cancel"
             self.editingMode = true
             self.moveButtonLabel.isHidden = false
+            self.deleteButton.isHidden = false
         }
         
     }
@@ -232,6 +235,8 @@ class NoteListViewController: UIViewController {
         definesPresentationContext = true
     }
     
+    @IBAction func deleteButtonTapped(_ sender: Any) {
+    }
 }
 
 
@@ -305,7 +310,7 @@ extension NoteListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let moveNote = UIContextualAction(style: .normal, title: "Move") { (action, view, completion) in
             
-//            self.selectedNotesForMove.append(indexPath.row)
+            self.selectedNotesForMove.append(indexPath.row)
             self.segueForMoveView = true
             self.performSegue(withIdentifier: "goBackNoteList", sender: nil)
             completion(true)

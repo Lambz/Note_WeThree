@@ -441,6 +441,7 @@ class NotesHelper
         deleteNote(note: note, context: context)
         note.mCategoryName = mCategories[toCategory]
         addNoteInDatabase(note: note, context: context)
+        loadCategoryNoteCount(context: context)
     }
     
     
@@ -460,6 +461,7 @@ class NotesHelper
         deleteNote(note: note, context: context)
         note.mCategoryName = mCategories[toCategory]
         addNoteInDatabase(note: note, context: context)
+        loadCategoryNoteCount(context: context)
     }
     
     /// Deletes Mutiple Notes

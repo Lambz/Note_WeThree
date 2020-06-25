@@ -159,10 +159,13 @@
                                     <action selector="newNoteButtonPressed:" destination="saD-TF-dU5" eventType="touchUpInside" id="Psh-eL-Gbg"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mGz-SC-3RQ">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mGz-SC-3RQ">
                                 <rect key="frame" x="333.5" y="831.5" width="19.5" height="22"/>
                                 <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="trash" catalog="system"/>
+                                <connections>
+                                    <action selector="deleteButtonTapped:" destination="saD-TF-dU5" eventType="touchUpInside" id="52R-Fu-xwa"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -194,6 +197,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="deleteButton" destination="mGz-SC-3RQ" id="A9q-Xd-n31"/>
                         <outlet property="editButtonLabel" destination="WNh-1u-8kK" id="BPX-q9-b8Y"/>
                         <outlet property="moveButtonLabel" destination="Nva-BS-rRD" id="buu-tI-ddR"/>
                         <outlet property="noOfNotesLabel" destination="o97-kN-ng6" id="Fw4-su-V0F"/>
