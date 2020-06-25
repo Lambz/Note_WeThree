@@ -329,26 +329,19 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="uvs-8C-kde">
                                 <rect key="frame" x="0.0" y="108.5" width="414" height="681.5"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="x1i-OT-Sft">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="681.5"/>
-                                        <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title of the note" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6Ue-4z-Py1">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="307.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" text="Note's Description" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="m0V-tC-ABg">
-                                                <rect key="frame" x="0.0" y="315.5" width="414" height="84"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                            </textView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nvD-Tz-iiP">
-                                                <rect key="frame" x="0.0" y="407.5" width="414" height="274"/>
-                                            </imageView>
-                                        </subviews>
-                                    </stackView>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title of the note" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="6Ue-4z-Py1">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="364"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Enter note description" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="LDV-2w-cxo">
+                                        <rect key="frame" x="0.0" y="384" width="414" height="26.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nvD-Tz-iiP">
+                                        <rect key="frame" x="0.0" y="430.5" width="414" height="251"/>
+                                    </imageView>
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Date and Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JMA-Yt-zMn">
@@ -361,15 +354,22 @@
                                 <rect key="frame" x="0.0" y="790" width="414" height="23"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FZG-6T-xWv">
-                                        <rect key="frame" x="0.0" y="0.0" width="138" height="23"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="103.5" height="23"/>
                                         <color key="tintColor" red="0.85882352939999995" green="0.68235294120000001" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" image="trash.fill" catalog="system"/>
                                         <connections>
                                             <action selector="deleteNoteTapped:" destination="PNz-XS-HGL" eventType="touchUpInside" id="2v2-yr-2ng"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z4K-EF-Bqr">
+                                        <rect key="frame" x="103.5" y="0.0" width="103.5" height="23"/>
+                                        <state key="normal" image="location" catalog="system"/>
+                                        <connections>
+                                            <action selector="viewLocation:" destination="PNz-XS-HGL" eventType="touchUpInside" id="eVX-op-HSh"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U9U-PY-KZm">
-                                        <rect key="frame" x="138" y="0.0" width="138" height="23"/>
+                                        <rect key="frame" x="207" y="0.0" width="103.5" height="23"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                         <color key="tintColor" red="0.85882352939999995" green="0.68235294120000001" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" image="camera" catalog="system"/>
@@ -378,7 +378,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QQI-ui-C1s">
-                                        <rect key="frame" x="276" y="0.0" width="138" height="23"/>
+                                        <rect key="frame" x="310.5" y="0.0" width="103.5" height="23"/>
                                         <color key="tintColor" red="0.85882352939999995" green="0.68235294120000001" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" image="mic" catalog="system"/>
                                         <connections>
@@ -402,8 +402,6 @@
                             <constraint firstItem="JMA-Yt-zMn" firstAttribute="top" secondItem="TtU-XV-Ny7" secondAttribute="top" id="eZp-wv-sRa"/>
                             <constraint firstItem="JMA-Yt-zMn" firstAttribute="leading" secondItem="TtU-XV-Ny7" secondAttribute="leading" id="hM7-4J-ela"/>
                             <constraint firstItem="JMA-Yt-zMn" firstAttribute="centerX" secondItem="DV5-DE-Wec" secondAttribute="centerX" id="heo-yq-gD1"/>
-                            <constraint firstItem="aPh-Xs-aXb" firstAttribute="top" secondItem="uvs-8C-kde" secondAttribute="bottom" id="mgA-eD-n3X"/>
-                            <constraint firstItem="uvs-8C-kde" firstAttribute="top" secondItem="JMA-Yt-zMn" secondAttribute="bottom" id="q5b-iN-fv4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="TtU-XV-Ny7"/>
                     </view>
@@ -425,9 +423,9 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="dateLabel" destination="JMA-Yt-zMn" id="CBf-su-x1V"/>
+                        <outlet property="locationLabel" destination="z4K-EF-Bqr" id="K6L-uw-YMM"/>
                         <outlet property="micButton" destination="QQI-ui-C1s" id="MKo-dB-8TM"/>
                         <outlet property="noteImage" destination="nvD-Tz-iiP" id="oAq-7O-crR"/>
-                        <outlet property="noteText" destination="m0V-tC-ABg" id="8Ny-WO-L2Z"/>
                         <outlet property="noteTitle" destination="6Ue-4z-Py1" id="4li-vO-6NI"/>
                         <segue destination="32Y-QJ-NqI" kind="show" identifier="mapScreen" id="PHi-lI-fe8"/>
                         <segue destination="P7o-ja-hTM" kind="unwind" identifier="backToNoteView" unwindAction="calledAfterFolderSelection:" id="uag-0g-obT"/>

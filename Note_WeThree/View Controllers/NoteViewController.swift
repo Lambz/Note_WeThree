@@ -25,20 +25,31 @@ class NoteViewController: UIViewController {
     var longitude: Double?
     
     
-    
+//    for audio recording and playing
     var isRecording = false
     var recordingIsAvailable = false
     var voiceRecorder : AVAudioRecorder!
     var audioPlayer : AVAudioPlayer!
     var recordingSession: AVAudioSession!
-    var fileName = "audio_file.m4a"
+    var fileName = ""
     
+//    variables for location manager
+    let locationManager = CLLocationManager()
+    var didUpdatedLocation: (() -> ())?
+    
+//    image view variables
+    var imagePickerController = UIImagePickerController()
+    
+    
+//    screen element outlets
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var noteImage: UIImageView!
     @IBOutlet weak var noteText: UITextView!
     @IBOutlet weak var noteTitle: UITextField!
-    
     @IBOutlet weak var micButton: UIButton!
+    @IBOutlet weak var locationLabel: UIButton!
+    
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -47,11 +58,17 @@ class NoteViewController: UIViewController {
         let noteViewDelegate = UIApplication.shared.delegate as! AppDelegate
         self.noteViewContext = noteViewDelegate.persistentContainer.viewContext
         
-        
+        print(fileName.count)
         initalSetupOnViewLoad()
         
 //        audio setup
         setUpAudioMethods()
+        
+//        map coordinates setup
+        startLocationManager()
+
+        
+        
     }
     
     
@@ -94,30 +111,13 @@ class NoteViewController: UIViewController {
 //            catch {
 //                print(error)
 //            }
+            
+//            stopLocationManager()
         }
         
     }
     
-    func getCoordinates() {
-        let locationManager = CLLocationManager()
-        locationManager.requestWhenInUseAuthorization()
-        
-//        sets up value if new note
-        if(self.forCategory != nil) {
-            var currentLocation: CLLocation!
-
-            if
-               CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
-               CLLocationManager.authorizationStatus() ==  .authorizedAlways
-            {
-                currentLocation = locationManager.location
-            }
-            
-            self.longitude = currentLocation.coordinate.longitude
-            self.latitude = currentLocation.coordinate.latitude
-            
-        }
-    }
+    
     
     @IBAction func deleteNoteTapped(_ sender: Any) {
         
@@ -125,6 +125,7 @@ class NoteViewController: UIViewController {
             if let noteIndex = self.selectedNote {
                 do {
                     try NotesHelper.getInstance().deleteNote(at: noteIndex, context: self.noteViewContext)
+                    self.cancelButtonTapped(self)
                 }
                 catch {
                     print(error)
@@ -166,14 +167,57 @@ class NoteViewController: UIViewController {
         
     }
     
+    @IBAction func viewLocation(_ sender: Any) {
+        
+        if(self.forCategory == nil) {
+            if(self.openedNote.mLat != nil && self.openedNote.mLong != nil) {
+                performSegue(withIdentifier: "mapScreen", sender: self)
+            }
+            
+            else {
+                let alert = UIAlertController(title: "Location cannot be displayed!", message: "The location when this note was taken is not available. It could be due to insufficient permissions or network error on your device.", preferredStyle: .alert)
+                let action = UIAlertAction(title: "Okay", style: .default, handler: nil)
+                alert.addAction(action)
+                
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+        
+    }
     
     @IBAction func cameraButtonTapped(_ sender: Any) {
         
+        imagePickerController.delegate = self
         
+        let actionSheet = UIAlertController(title: "Add image to note", message: "Choose a source to add image", preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (action) in
+            
+            if(UIImagePickerController.isSourceTypeAvailable(.camera)) {
+                self.imagePickerController.sourceType = .camera
+                self.imagePickerController.allowsEditing = false
+                self.present(self.imagePickerController, animated: true, completion: nil)
+            }
+            else {
+                let alert = UIAlertController(title: "Camera Error!", message: "Can't access camera", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+            
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { (action) in
+            self.imagePickerController.sourceType = .photoLibrary
+            self.present(self.imagePickerController, animated: true, completion: nil)
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        self.present(actionSheet, animated: true, completion: nil)
     }
     
 }
 
+
+
+// MARK: implements other delegate methods
 extension NoteViewController {
 //    MARK: sets up initial values on view load
     func initalSetupOnViewLoad() {
@@ -195,6 +239,7 @@ extension NoteViewController {
                 }
             }
             else {
+                self.locationLabel.isHidden = true
                 if let category = self.forCategory {
                     self.tempNoteIndex = try NotesHelper.getInstance().getNumberOfNotes(forCategory: category)
                     if let noteIndex = self.tempNoteIndex {
@@ -320,4 +365,50 @@ extension NoteViewController: AVAudioPlayerDelegate, AVAudioRecorderDelegate {
 }
 
 
+// MARK: delegate methods to handle user lcoation
+extension NoteViewController: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        longitude = locations.last?.coordinate.longitude
+        latitude = locations.last?.coordinate.latitude
+        
+    }
+    
+    func startLocationManager() {
+        
+        let authorizationStatus = CLLocationManager.authorizationStatus()
+        if authorizationStatus == .notDetermined {
+            locationManager.requestWhenInUseAuthorization()
+        }
+        if(CLLocationManager.locationServicesEnabled()) {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.startUpdatingLocation()
+        }
+    
+    }
+    
+    func stopLocationManager() {
+        locationManager.stopUpdatingLocation()
+        locationManager.delegate = nil
+    }
+}
 
+
+extension NoteViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+        noteImage.image = image
+        picker.dismiss(animated: true, completion: nil)
+        
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        
+        picker.dismiss(animated: true, completion: nil)
+    }
+}
