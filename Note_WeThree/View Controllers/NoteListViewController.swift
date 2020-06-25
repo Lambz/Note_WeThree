@@ -83,6 +83,8 @@ class NoteListViewController: UIViewController {
     //    MARK: updates UI on every reload
     override func viewWillAppear(_ animated: Bool) {
         
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        
         //        sets the note count label
         if let categoryIndex = self.indexValue {
             do {

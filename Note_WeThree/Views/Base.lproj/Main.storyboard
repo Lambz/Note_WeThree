@@ -72,7 +72,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="UQK-Hh-3cM"/>
                     </view>
-                    <navigationItem key="navigationItem" id="mHq-hg-Dnd">
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="mHq-hg-Dnd">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="info.circle" catalog="system" id="AgM-Y4-8LD">
                             <color key="tintColor" red="0.85882352941176465" green="0.68235294117647061" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
@@ -202,7 +202,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="lLm-x7-0WO"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Ola-yi-CGm">
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="Ola-yi-CGm">
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="WNh-1u-8kK">
                             <color key="tintColor" red="0.85882352939999995" green="0.68235294120000001" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
@@ -389,7 +389,7 @@
                         <viewLayoutGuide key="safeArea" id="TtU-XV-Ny7"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Notes Details" id="vKZ-Cs-wRT">
+                    <navigationItem key="navigationItem" title="Notes Details" largeTitleDisplayMode="always" id="vKZ-Cs-wRT">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="AgP-aB-wwu">
                             <color key="tintColor" red="0.85882352939999995" green="0.68235294120000001" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
