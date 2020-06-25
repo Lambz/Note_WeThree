@@ -96,8 +96,10 @@ class CategoryViewController: UIViewController {
         alertForCategory.addTextField(configurationHandler: addCategoryName)
         alertForCategory.addAction(UIAlertAction(title: "Add", style: .default, handler: { (action) in
             if(self.categoryName?.text != nil) {
-                NotesHelper.getInstance().addCategory(named: (self.categoryName?.text)!, context: self.appContext)
-                self.categoryTableView.reloadData()
+                if(self.categoryName!.text!.count > 1) {
+                    NotesHelper.getInstance().addCategory(named: (self.categoryName?.text)!, context: self.appContext)
+                    self.categoryTableView.reloadData()
+                }
             }
         }))
         alertForCategory.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
