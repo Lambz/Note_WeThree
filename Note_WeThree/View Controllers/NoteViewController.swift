@@ -283,7 +283,7 @@ extension NoteViewController {
 // MARK: Note saving methods
 //    checks nil title before saving
     func checkTitle(titleText: String?) -> Bool {
-        if(titleText == nil) {
+        if(titleText == nil || titleText!.count < 1) {
             let alert = UIAlertController(title: "Oops!", message: "Title can't be left blank", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
