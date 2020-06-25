@@ -268,21 +268,7 @@ class NoteListViewController: UIViewController {
 extension NoteListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(self.indexValue != nil) {
-            var rows: Int = 0
-            if let categoryIndex = indexValue {
-                do {
-                    rows = try NotesHelper.getInstance().getNumberOfNotes(forCategory: categoryIndex)
-                }
-                catch {
-                    print(error)
-                }
-            }
-            return rows
-        }
-        else {
-            return 0
-        }
+        return NotesHelper.getInstance().getNumberOfNotes()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -400,6 +386,7 @@ extension NoteListViewController: UISearchBarDelegate {
             do
             {
                 try NotesHelper.getInstance().loadNotes(withCategory: indexValue!, context: notesContext)
+                print("hello")
             }
             catch
             {
@@ -410,5 +397,22 @@ extension NoteListViewController: UISearchBarDelegate {
             }
             noteListTableView.reloadData()
         }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        do
+        {
+            try NotesHelper.getInstance().loadNotes(withCategory: indexValue!, context: notesContext)
+            print("hello")
+        }
+        catch
+        {
+            print(error)
+        }
+        DispatchQueue.main.async {
+            searchBar.resignFirstResponder()
+        }
+        noteListTableView.reloadData()
+        searchBar.resignFirstResponder()
     }
 }

@@ -204,4 +204,20 @@ extension CategoryViewController: UISearchBarDelegate {
             categoryTableView.reloadData()
         }
     }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        do
+        {
+            try NotesHelper.getInstance().loadAllCategories(context: appContext)
+        }
+        catch
+        {
+            print(error)
+        }
+        DispatchQueue.main.async {
+            searchBar.resignFirstResponder()
+        }
+        categoryTableView.reloadData()
+        searchBar.resignFirstResponder()
+    }
 }

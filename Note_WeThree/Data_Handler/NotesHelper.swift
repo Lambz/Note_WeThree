@@ -238,6 +238,14 @@ class NotesHelper
     }
     
     
+    /// Gets the number of notes in Notes Array
+    /// - Returns: Number of Notes
+    internal func getNumberOfNotes() -> Int
+    {
+        return mNotes.count
+    }
+    
+    
     /// Loads all the Notes of a particular Category in memory
     /// - Parameters:
     ///   - withCategory: Index of Category
