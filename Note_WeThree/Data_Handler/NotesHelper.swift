@@ -372,6 +372,7 @@ class NotesHelper
             }
         }
         deleteNoteFromDatabase(note: note, context: context)
+        loadCategoryNoteCount(context: context)
     }
     
     
@@ -388,6 +389,7 @@ class NotesHelper
         }
         let note = mNotes[at]
         deleteNoteFromDatabase(note: note, context: context)
+        loadCategoryNoteCount(context: context)
     }
     
     /// Function to delete Note from Database
@@ -640,7 +642,7 @@ class NotesHelper
     /// - Throws: InavlidIndexException if the passed index is greated than Categories
     internal func loadNotes(withCategory: Int, context: NSManagedObjectContext, withPredicate: NSCompoundPredicate) throws
     {
-        mNotes = []
+        mNotes.removeAll()
         if mCategories.count <= withCategory
         {
             throw CustomExceptions.InavlidIndexException
