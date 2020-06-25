@@ -32,8 +32,6 @@ class NoteListViewController: UIViewController {
     //    for getting the category selected to move notes from move notes view
     var selectedCategoryToMove: Int?
     
-    @IBOutlet weak var deleteButton: UIButton!
-    
     @IBOutlet weak var newNoteButton: UIButton!
     let mSearchController = UISearchController(searchResultsController: nil)
     
@@ -111,8 +109,7 @@ class NoteListViewController: UIViewController {
             self.selectedNotesForMove.removeAll()
             self.editingMode = false
             self.moveButtonLabel.isHidden = true
-            self.deleteButton.isHidden = true
-            self.newNoteButton.isHidden = false
+            self.newNoteButton.setImage(UIImage(systemName: "square.and.pencil"), for: .normal)
         }
         else {
             self.noteListTableView.isEditing = true
@@ -120,8 +117,7 @@ class NoteListViewController: UIViewController {
             self.editButtonLabel.title = "Cancel"
             self.editingMode = true
             self.moveButtonLabel.isHidden = false
-            self.deleteButton.isHidden = false
-            self.newNoteButton.isHidden = true
+            self.newNoteButton.setImage(UIImage(systemName: "trash.fill"), for: .normal)
         }
         
     }
@@ -156,8 +152,33 @@ class NoteListViewController: UIViewController {
     //    MARK: performs segue to note view on button press
     @IBAction func newNoteButtonPressed(_ sender: Any) {
         
-        performSegue(withIdentifier: "noteScreen", sender: self)
-        
+        if(self.editingMode) {
+            if let indexes = noteListTableView.indexPathsForSelectedRows
+                {
+                    for index in indexes
+                    {
+                        selectedNotesForMove.append(index.row)
+                    }
+                    do
+                    {
+                        try NotesHelper.getInstance().deleteMultipleNotes(withIndexes: selectedNotesForMove, context: notesContext)
+                    }
+                    catch
+                    {
+                        print(error)
+                    }
+                    
+                }
+                selectedNotesForMove.removeAll()
+                noteListTableView.setEditing(false, animated: true)
+                noteListTableView.reloadData()
+                editingMode = false
+                self.editButtonLabel.title = "Edit"
+        }
+        else {
+            performSegue(withIdentifier: "noteScreen", sender: self)
+        }
+    
     }
     
     
@@ -238,29 +259,6 @@ class NoteListViewController: UIViewController {
         definesPresentationContext = true
     }
     
-    @IBAction func deleteButtonTapped(_ sender: Any) {
-        if let indexes = noteListTableView.indexPathsForSelectedRows
-        {
-            for index in indexes
-            {
-                selectedNotesForMove.append(index.row)
-            }
-            do
-            {
-                try NotesHelper.getInstance().deleteMultipleNotes(withIndexes: selectedNotesForMove, context: notesContext)
-            }
-            catch
-            {
-                print(error)
-            }
-            
-        }
-        selectedNotesForMove.removeAll()
-        noteListTableView.setEditing(false, animated: true)
-        noteListTableView.reloadData()
-        editingMode = false
-        self.editButtonLabel.title = "Edit"
-    }
 }
 
 
