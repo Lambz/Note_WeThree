@@ -11,26 +11,29 @@ import CoreData
 
 class NoteListViewController: UIViewController {
     
-//    value of category to load nots for
+    //    value of category to load nots for
     var indexValue: Int?
     
-//    selection for which segue to be performed - move notes view / note view
+    //    selection for which segue to be performed - move notes view / note view
     var segueForMoveView: Bool = false
     
-//    context for core data operation
+    //    context for core data operation
     var notesContext: NSManagedObjectContext!
     
-//    for selection of multiple rows
+    //    for selection of multiple rows
     var editingMode: Bool = false
     
-//    for sending the value to next screen
+    //    for sending the value to next screen
     var noteCellTapped: Int?
     
-//    stores the list of selected notes to move
+    //    stores the list of selected notes to move
     var selectedNotesForMove: [Int] = [Int]()
     
-//    for getting the category selected to move notes from move notes view
+    //    for getting the category selected to move notes from move notes view
     var selectedCategoryToMove: Int?
+    
+    
+    let mSearchController = UISearchController(searchResultsController: nil)
     
     @IBOutlet weak var editButtonLabel: UIBarButtonItem!
     @IBOutlet weak var noteListTableView: UITableView!
@@ -41,7 +44,7 @@ class NoteListViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-//        sets up context for data
+        //        sets up context for data
         let notesDelegate = UIApplication.shared.delegate as! AppDelegate
         self.notesContext = notesDelegate.persistentContainer.viewContext
         if(self.indexValue != nil) {
@@ -56,13 +59,13 @@ class NoteListViewController: UIViewController {
             
         }
         
-//        sets up the delegate
+        //        sets up the delegate
         noteListTableView.delegate = self
         noteListTableView.dataSource = self
-
-//        hides the button on initialization
+        
+        //        hides the button on initialization
         self.moveButtonLabel.isHidden = true
-//        sets the category name to header
+        //        sets the category name to header
         if let categoryIndex = self.indexValue {
             do {
                 self.title = try NotesHelper.getInstance().getCategory(at: categoryIndex)
@@ -71,16 +74,16 @@ class NoteListViewController: UIViewController {
                 print(error)
             }
         }
-        
+        showSearchBar()
     }
     
     
     
     
-//    MARK: updates UI on every reload
+    //    MARK: updates UI on every reload
     override func viewWillAppear(_ animated: Bool) {
         
-//        sets the note count label
+        //        sets the note count label
         if let categoryIndex = self.indexValue {
             do {
                 self.noOfNotesLabel.text = try "\(NotesHelper.getInstance().getNumberOfNotes(forCategory: categoryIndex)) Note(s)"
@@ -94,7 +97,7 @@ class NoteListViewController: UIViewController {
         
     }
     
-//    MARK: method to handle the set constraints for selection and edit button behavior
+    //    MARK: method to handle the set constraints for selection and edit button behavior
     @IBAction func editButtonPressed(_ sender: Any) {
         
         if(self.editingMode) {
@@ -118,7 +121,7 @@ class NoteListViewController: UIViewController {
     
     
     
-//    MARK: handler for move button on multiple selection
+    //    MARK: handler for move button on multiple selection
     @IBAction func moveButtonPressed(_ sender: Any) {
         
         if(self.editingMode) {
@@ -133,7 +136,7 @@ class NoteListViewController: UIViewController {
     
     
     
-//    MARK: performs segue to note view on button press
+    //    MARK: performs segue to note view on button press
     @IBAction func newNoteButtonPressed(_ sender: Any) {
         
         performSegue(withIdentifier: "noteScreen", sender: self)
@@ -143,12 +146,12 @@ class NoteListViewController: UIViewController {
     
     
     
-//    MARK: method to be invoked after exit from modal view
+    //    MARK: method to be invoked after exit from modal view
     @IBAction func calledAfterFolderSelection(_ unwindSegue: UIStoryboardSegue) {
         if(selectedCategoryToMove != nil) {
             moveNotesToSelectedCategory()
         }
-    
+        
         self.editingMode = false
         self.segueForMoveView = false
         self.selectedCategoryToMove = nil
@@ -157,7 +160,7 @@ class NoteListViewController: UIViewController {
     }
     
     
-//    methods calls the core data methods for moving notes
+    //    methods calls the core data methods for moving notes
     func moveNotesToSelectedCategory() {
         
         do {
@@ -174,10 +177,10 @@ class NoteListViewController: UIViewController {
     
     
     
-//    MARK: method to set values for next view
+    //    MARK: method to set values for next view
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-//        for case when segue to move notes view controller segue is to be performed
+        //        for case when segue to move notes view controller segue is to be performed
         if(self.segueForMoveView) {
             if let destinationView = segue.destination as? MoveNotesViewController {
                 if let category = self.indexValue {
@@ -186,26 +189,35 @@ class NoteListViewController: UIViewController {
             }
         }
             
-//            case when segue to open the note is to be performed
+            //            case when segue to open the note is to be performed
         else {
-//            for old note
+            //            for old note
             if(self.noteCellTapped != nil) {
                 if let destinationView = segue.destination as? NoteViewController {
-                               if let note = self.noteCellTapped {
-                                   destinationView.selectedNote = note
-                               }
+                    if let note = self.noteCellTapped {
+                        destinationView.selectedNote = note
                     }
+                }
             }
-//                for new note
+                //                for new note
             else {
                 if let destinationView = segue.destination as? NoteViewController {
-                              if let categoryIndex = self.indexValue {
-                                  destinationView.forCategory = categoryIndex
-                              }
+                    if let categoryIndex = self.indexValue {
+                        destinationView.forCategory = categoryIndex
                     }
+                }
             }
         }
         
+    }
+    
+    func showSearchBar() {
+        
+        mSearchController.obscuresBackgroundDuringPresentation = false
+        mSearchController.searchBar.placeholder = "Search Categories"
+        navigationItem.searchController = mSearchController
+        mSearchController.searchBar.delegate = self
+        definesPresentationContext = true
     }
     
 }
@@ -215,7 +227,7 @@ class NoteListViewController: UIViewController {
 
 //MARK: implements the table view specific delegate methods
 extension NoteListViewController: UITableViewDelegate, UITableViewDataSource {
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(self.indexValue != nil) {
             var rows: Int = 0
@@ -233,7 +245,7 @@ extension NoteListViewController: UITableViewDelegate, UITableViewDataSource {
             return 0
         }
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = noteListTableView.dequeueReusableCell(withIdentifier: "noteCell", for: indexPath) as! NoteCell
@@ -244,7 +256,7 @@ extension NoteListViewController: UITableViewDelegate, UITableViewDataSource {
     
     
     
-//    MARK: note deletion method by swipe
+    //    MARK: note deletion method by swipe
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let delete = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completion) in
@@ -258,14 +270,14 @@ extension NoteListViewController: UITableViewDelegate, UITableViewDataSource {
             self.noteListTableView.reloadData()
             completion(true)
         }
-
+        
         delete.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
         delete.image = UIImage(systemName: "trash.fill")
         return UISwipeActionsConfiguration(actions: [delete])
     }
     
     
-//    MARK: method to implement the seague to move note view on selecting an individual note by swipe
+    //    MARK: method to implement the seague to move note view on selecting an individual note by swipe
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let moveNote = UIContextualAction(style: .normal, title: "Move") { (action, view, completion) in
             
@@ -282,15 +294,15 @@ extension NoteListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     
-//    MARK: cell select or next segue selection method
+    //    MARK: cell select or next segue selection method
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-//        behavior of tapping when edit mode on
+        //        behavior of tapping when edit mode on
         if(self.editingMode) {
             self.selectedNotesForMove.removeAll()
             self.selectedNotesForMove.append(indexPath.row)
         }
-//            behavior when edit mode off - seague to note view
+            //            behavior when edit mode off - seague to note view
         else {
             self.segueForMoveView = false
             self.noteCellTapped = indexPath.row
@@ -304,5 +316,40 @@ extension NoteListViewController: UITableViewDelegate, UITableViewDataSource {
             self.selectedNotesForMove.remove(at: index)
         }
     }
+    
+}
 
+extension NoteListViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let predicate1 = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
+        let predicate2 = NSPredicate(format: "message CONTAINS[cd] %@", searchBar.text!)
+        do
+        {
+            try NotesHelper.getInstance().loadNotes(withCategory: indexValue!, context: notesContext, withPredicate: NSCompoundPredicate(orPredicateWithSubpredicates: [predicate1, predicate2]))
+        }
+        catch
+        {
+            print(error)
+        }
+        noteListTableView.reloadData()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text?.count == 0
+        {
+            do
+            {
+                try NotesHelper.getInstance().loadNotes(withCategory: indexValue!, context: notesContext)
+            }
+            catch
+            {
+                print(error)
+            }
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
+            }
+            noteListTableView.reloadData()
+        }
+    }
 }

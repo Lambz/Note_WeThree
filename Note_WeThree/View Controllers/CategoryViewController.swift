@@ -17,6 +17,7 @@ class CategoryViewController: UIViewController {
 
     var categoryName: UITextField?
     var tappedCellIndex: Int?
+    let mSearchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +30,7 @@ class CategoryViewController: UIViewController {
         categoryTableView.delegate = self
         categoryTableView.dataSource = self
         self.title = "Categories"
+        showSearchBar()
     }
     
     
@@ -69,6 +71,15 @@ class CategoryViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.categoryTableView.reloadData()
         self.tappedCellIndex = nil
+    }
+    
+    func showSearchBar() {
+        
+        mSearchController.obscuresBackgroundDuringPresentation = false
+        mSearchController.searchBar.placeholder = "Search Categories"
+        navigationItem.searchController = mSearchController
+        mSearchController.searchBar.delegate = self
+        definesPresentationContext = true
     }
 }
 
@@ -128,3 +139,22 @@ extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
     
 }
 
+extension CategoryViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let predicate = NSPredicate(format: "category CONTAINS[cd] %@", searchBar.text!)
+        NotesHelper.getInstance().loadAllCategories(context: appContext, withPredicate: predicate)
+        categoryTableView.reloadData()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text?.count == 0
+        {
+            NotesHelper.getInstance().loadAllCategories(context: appContext)
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
+            }
+            categoryTableView.reloadData()
+        }
+    }
+}

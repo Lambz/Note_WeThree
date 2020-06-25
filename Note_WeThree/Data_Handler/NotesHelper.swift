@@ -48,6 +48,7 @@ class NotesHelper
     /// - Parameter context: It is NSManagedObjectContext to be able to access Database
     internal func loadAllCategories(context: NSManagedObjectContext)
     {
+        mCategories = []
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Categories")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "category", ascending: true)]
         var results: [NSManagedObject] = []
@@ -87,13 +88,16 @@ class NotesHelper
         }
         for result in results
         {
-            if mCategoryNoteCount[mCategories.firstIndex(of: result.value(forKey: "category") as! String)!] == nil
+            if let category = result.value(forKey: "category") as? String, let index = mCategories.firstIndex(of: category)
             {
-                mCategoryNoteCount[mCategories.firstIndex(of: result.value(forKey: "category") as! String)!] = 1
-            }
-            else
-            {
-                mCategoryNoteCount[mCategories.firstIndex(of: result.value(forKey: "category") as! String)!]! += 1
+                if mCategoryNoteCount[index] == nil
+                {
+                    mCategoryNoteCount[index] = 1
+                }
+                else
+                {
+                    mCategoryNoteCount[index]! += 1
+                }
             }
         }
     }
@@ -566,5 +570,115 @@ class NotesHelper
     {
         try deleteNote(at: withIndex, context: context)
         try addNote(note: newNote, context: context)
+    }
+    
+    /// Function loads all the Categories in memory
+    /// - Parameter context: It is NSManagedObjectContext to be able to access Database
+    /// - Parameter withPredicate: Predicate to be searched with
+    internal func loadAllCategories(context: NSManagedObjectContext, withPredicate: NSPredicate)
+    {
+        mCategories = []
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Categories")
+        fetchRequest.predicate = withPredicate
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "category", ascending: true)]
+        var results: [NSManagedObject] = []
+        do
+        {
+            results = try context.fetch(fetchRequest)
+        }
+        catch
+        {
+            print(error)
+        }
+        for result in results
+        {
+            mCategories.append( result.value(forKey: "category") as! String)
+        }
+        loadCategoryNoteCount(context: context, withPredicate: withPredicate)
+    }
+    
+    /// Counts the Number of Notes grouped by Category
+    /// - Parameter context: NSManagedObjectContext to be able to access Database
+    /// - Parameter withPredicate: Predicate to be searched with
+    private func loadCategoryNoteCount(context: NSManagedObjectContext, withPredicate: NSPredicate)
+    {
+        mCategoryNoteCount = [:]
+        for i in 0..<mCategories.count
+        {
+            mCategoryNoteCount[i] = 0
+        }
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Notes")
+        var results: [NSManagedObject] = []
+        do
+        {
+            results = try context.fetch(fetchRequest)
+        }
+        catch
+        {
+            print(error)
+        }
+        for result in results
+        {
+            if let category = result.value(forKey: "category") as? String, let index = mCategories.firstIndex(of: category)
+            {
+                if mCategoryNoteCount[index] == nil
+                {
+                    mCategoryNoteCount[index] = 1
+                }
+                else
+                {
+                    mCategoryNoteCount[index]! += 1
+                }
+            }
+        }
+    }
+    
+    /// Loads all the Notes of a particular Category in memory
+    /// - Parameters:
+    ///   - withCategory: Index of Category
+    ///   - context: NSManagedObjectContext object to be able to access Database
+    /// - Throws: InavlidIndexException if the passed index is greated than Categories
+    internal func loadNotes(withCategory: Int, context: NSManagedObjectContext, withPredicate: NSCompoundPredicate) throws
+    {
+        mNotes = []
+        if mCategories.count <= withCategory
+        {
+            throw CustomExceptions.InavlidIndexException
+        }
+        let category = mCategories[withCategory]
+        let fetch_request = NSFetchRequest<NSFetchRequestResult>(entityName: "Notes")
+        fetch_request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+        let predicate1 = NSPredicate(format: "category = %@", category)
+        fetch_request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate1, withPredicate])
+        do
+        {
+            let notes = try context.fetch(fetch_request)
+            for note1 in notes
+            {
+                let note = note1 as! NSManagedObject
+                let title = note.value(forKey: "title") as! String
+                let category = note.value(forKey: "category") as! String
+                let date = note.value(forKey: "date") as! Date
+                let audio_string = note.value(forKey: "audio") as? String
+                let image_data = note.value(forKey: "image") as? NSData
+                let lat = note.value(forKey: "lat") as? Double
+                let long = note.value(forKey: "long") as? Double
+                let msg = note.value(forKey: "message") as? String
+                
+                if image_data != nil
+                {
+                    let image = UIImage(data: image_data! as Data)
+                    mNotes.append(Note(title: title, message: msg, lat: lat, long: long, image: image, date: date, categoryName: category, audioFileLocation: audio_string))
+                }
+                else
+                {
+                    mNotes.append(Note(title: title, message: msg, lat: lat, long: long, image: nil, date: date, categoryName: category, audioFileLocation: audio_string))
+                }
+            }
+        }
+        catch
+        {
+            print(error)
+        }
     }
 }
