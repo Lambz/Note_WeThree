@@ -26,6 +26,7 @@ class NoteViewController: UIViewController {
     
     
 //    for audio recording and playing
+    var didRecord = false
     var isRecording = false
     var recordingIsAvailable = false
     var voiceRecorder : AVAudioRecorder!
@@ -339,7 +340,7 @@ extension NoteViewController {
                 let msg = self.noteTextLabel.text
                 let img = self.noteImage.image
                 var audiolocation: String?
-                if fileName.count > 2 {
+                if didRecord {
                     audiolocation = fileName
                 }
                 
@@ -450,6 +451,8 @@ extension NoteViewController: AVAudioPlayerDelegate, AVAudioRecorderDelegate {
     }
     
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+        
+        self.didRecord = true
         let path  = getCacheDirectory()
         let filePath = path.appendingPathComponent("\(fileName)")
         let savePath = path.appendingPathComponent("\(fileName)")

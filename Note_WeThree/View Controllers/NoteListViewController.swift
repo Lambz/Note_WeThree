@@ -34,6 +34,7 @@ class NoteListViewController: UIViewController {
     
     @IBOutlet weak var deleteButton: UIButton!
     
+    @IBOutlet weak var newNoteButton: UIButton!
     let mSearchController = UISearchController(searchResultsController: nil)
     
     @IBOutlet weak var editButtonLabel: UIBarButtonItem!
@@ -111,6 +112,7 @@ class NoteListViewController: UIViewController {
             self.editingMode = false
             self.moveButtonLabel.isHidden = true
             self.deleteButton.isHidden = true
+            self.newNoteButton.isHidden = false
         }
         else {
             self.noteListTableView.isEditing = true
@@ -119,6 +121,7 @@ class NoteListViewController: UIViewController {
             self.editingMode = true
             self.moveButtonLabel.isHidden = false
             self.deleteButton.isHidden = false
+            self.newNoteButton.isHidden = true
         }
         
     }

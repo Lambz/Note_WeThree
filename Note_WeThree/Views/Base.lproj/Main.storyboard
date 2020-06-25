@@ -199,6 +199,7 @@
                         <outlet property="deleteButton" destination="mGz-SC-3RQ" id="A9q-Xd-n31"/>
                         <outlet property="editButtonLabel" destination="WNh-1u-8kK" id="BPX-q9-b8Y"/>
                         <outlet property="moveButtonLabel" destination="Nva-BS-rRD" id="buu-tI-ddR"/>
+                        <outlet property="newNoteButton" destination="E51-s7-Eqx" id="DwG-zB-8vU"/>
                         <outlet property="noOfNotesLabel" destination="o97-kN-ng6" id="Fw4-su-V0F"/>
                         <outlet property="noteListTableView" destination="AhY-IU-OF4" id="1Dp-9k-KDQ"/>
                         <segue destination="PNz-XS-HGL" kind="show" identifier="noteScreen" id="Ym5-rh-Mqa"/>
