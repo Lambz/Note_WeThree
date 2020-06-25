@@ -236,6 +236,27 @@ class NoteListViewController: UIViewController {
     }
     
     @IBAction func deleteButtonTapped(_ sender: Any) {
+        if let indexes = noteListTableView.indexPathsForSelectedRows
+        {
+            for index in indexes
+            {
+                selectedNotesForMove.append(index.row)
+            }
+            do
+            {
+                try NotesHelper.getInstance().deleteMultipleNotes(withIndexes: selectedNotesForMove, context: notesContext)
+            }
+            catch
+            {
+                print(error)
+            }
+            
+        }
+        selectedNotesForMove.removeAll()
+        noteListTableView.setEditing(false, animated: true)
+        noteListTableView.reloadData()
+        editingMode = false
+        self.editButtonLabel.title = "Edit"
     }
 }
 

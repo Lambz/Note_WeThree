@@ -483,7 +483,7 @@ class NotesHelper
     /// - Throws: InvalidIndexException, if Index is greater than Notes Array
     internal func deleteMultipleNotes(withIndexes: [Int], context: NSManagedObjectContext) throws
     {
-        for index in withIndexes
+        for index in withIndexes.reversed()
         {
             try deleteNote(at: index, context: context)
         }
