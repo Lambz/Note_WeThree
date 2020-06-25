@@ -345,6 +345,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z4K-EF-Bqr">
                                         <rect key="frame" x="103.5" y="0.0" width="103.5" height="23"/>
+                                        <color key="tintColor" red="0.85882352939999995" green="0.68235294120000001" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" image="location" catalog="system"/>
                                         <connections>
                                             <action selector="viewLocation:" destination="PNz-XS-HGL" eventType="touchUpInside" id="eVX-op-HSh"/>
