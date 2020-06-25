@@ -529,11 +529,17 @@ class NotesHelper
     /// - Throws: InavlidIndexException if the passed index is greated than Categories  or if Index is greater than Notes Array
     internal func moveNotes(withIndexes: [Int], toCategory: Int, context: NSManagedObjectContext) throws
     {
+        print("Got Number of Notes: \(withIndexes.count)")
         if mCategories.count <= toCategory
         {
             throw CustomExceptions.InavlidIndexException
         }
-        for index in withIndexes
+        for i in 0..<mNotes.count
+        {
+            print("note \(mNotes[i].mTitle) i: \(i)")
+        }
+        let indexes = withIndexes
+        for index in indexes.sorted().reversed()
         {
             try moveNote(withIndex: index, toCategory: toCategory, context: context)
         }
