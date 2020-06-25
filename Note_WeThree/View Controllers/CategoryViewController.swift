@@ -10,6 +10,9 @@ import UIKit
 import CoreData
 
 class CategoryViewController: UIViewController {
+    //variables for launch screen
+    let noteImage = UIImageView(image: UIImage(named: "notebook-clip-art")!)
+    let splashView = UIView()
     
     @IBOutlet weak var categoryTableView: UITableView!
 //    context variable
@@ -19,6 +22,19 @@ class CategoryViewController: UIViewController {
     var tappedCellIndex: Int?
     
     override func viewDidLoad() {
+        
+        //color for splashView
+        splashView.backgroundColor = UIColor(displayP3Red: 219/255, green: 174/255, blue: 60/255, alpha: 1.0)
+        // add subview for splash screen
+        view.addSubview(splashView)
+        
+        // adding frame for splash view
+        splashView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
+        noteImage.contentMode = .scaleAspectFit
+        splashView.addSubview(noteImage)
+        // adding frame for the image
+        noteImage.frame = CGRect(x: splashView.frame.maxX-50, y: splashView.frame.maxY, width: 100, height: 100)
+        
         super.viewDidLoad()
 //        context for core data operations
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -31,7 +47,35 @@ class CategoryViewController: UIViewController {
         self.title = "Categories"
     }
     
+    //MARK: SplashView(launchScreen)
+    override func viewDidAppear(_ animated:Bool){
+        //Adding delay
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+2){
+            self.scaleDownAnimation()
+        }
+    }
+    func scaleDownAnimation(){
+        UIView.animate(withDuration: 0.5, animations: {
+            self.noteImage.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+        }){(success)in
+            self.scaleUpAnimation()
+        }
+    }
+    func scaleUpAnimation(){
+        UIView.animate(withDuration: 0.35, delay: 0.1, options: .curveEaseIn, animations:{
+            self.noteImage.transform = CGAffineTransform(scaleX: 5, y: 5)
+            
+        }){(success)in
+            self.removeSplashScreen()
     
+    }
+        
+        }
+    //To remove splashView
+    func removeSplashScreen(){
+        splashView.removeFromSuperview()
+        
+    }
     
 //    MARK:   alert for info button
     @IBAction func showInfo(_ sender: Any) {
