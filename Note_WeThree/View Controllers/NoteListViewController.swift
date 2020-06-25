@@ -127,9 +127,18 @@ class NoteListViewController: UIViewController {
     @IBAction func moveButtonPressed(_ sender: Any) {
         
         if(self.editingMode) {
-            if(self.selectedNotesForMove.count > 0) {
+//            if(self.selectedNotesForMove.count > 0) {
+//                self.segueForMoveView = true
+//                performSegue(withIdentifier: "moveScreen", sender: self)
+//            }
+            if let indexes = noteListTableView.indexPathsForSelectedRows
+            {
+                for index in indexes
+                {
+                    selectedNotesForMove.append(index.row)
+                }
                 self.segueForMoveView = true
-                performSegue(withIdentifier: "moveScreen", sender: self)
+                performSegue(withIdentifier: "goBackNoteList", sender: self)
             }
         }
         
@@ -167,6 +176,7 @@ class NoteListViewController: UIViewController {
         
         do {
             if let category = self.selectedCategoryToMove {
+                print("Number of Notes: \(selectedNotesForMove.count)")
                 try NotesHelper.getInstance().moveNotes(withIndexes: self.selectedNotesForMove, toCategory: category, context: self.notesContext)
             }
         }
@@ -295,11 +305,10 @@ extension NoteListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let moveNote = UIContextualAction(style: .normal, title: "Move") { (action, view, completion) in
             
-            self.selectedNotesForMove.append(indexPath.row)
+//            self.selectedNotesForMove.append(indexPath.row)
             self.segueForMoveView = true
-            self.performSegue(withIdentifier: "moveScreen", sender: nil)
+            self.performSegue(withIdentifier: "goBackNoteList", sender: nil)
             completion(true)
-            
         }
         
         moveNote.backgroundColor = #colorLiteral(red: 0.7254902124, green: 0.4784313738, blue: 0.09803921729, alpha: 1)
@@ -314,7 +323,7 @@ extension NoteListViewController: UITableViewDelegate, UITableViewDataSource {
         //        behavior of tapping when edit mode on
         if(self.editingMode) {
             self.selectedNotesForMove.removeAll()
-            self.selectedNotesForMove.append(indexPath.row)
+//            self.selectedNotesForMove.append(indexPath.row)
         }
             //            behavior when edit mode off - seague to note view
         else {

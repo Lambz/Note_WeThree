@@ -11,7 +11,7 @@ import CoreData
 
 class CategoryViewController: UIViewController {
     //variables for launch screen
-    let titleImage = UIImageView(image: UIImage(named: "let'sNote.jpg")!)
+    //let titleImage = UIImageView(image: UIImage(named: "let'sNote.jpg")!)
     let noteImage = UIImageView(image: UIImage(named: "notebook-clip-art")!)
     let splashView = UIView()
     
@@ -26,14 +26,14 @@ class CategoryViewController: UIViewController {
     override func viewDidLoad() {
         
         //color for splashView
-        splashView.backgroundColor = UIColor(displayP3Red: 0/255, green: 0/255, blue: 0/255, alpha: 1.0)
+        splashView.backgroundColor = UIColor(displayP3Red: 255/255, green: 185/255, blue: 73/255, alpha: 1.0)
         // add subview for splash screen
-        view.addSubview(splashView)
+       //view.addSubview(splashView)
         
         // adding frame for splash view
         splashView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
-        noteImage.contentMode = .scaleAspectFit
-        splashView.addSubview(noteImage)
+       noteImage.contentMode = .scaleAspectFit
+       splashView.addSubview(noteImage)
         // adding frame for the image
         noteImage.frame = CGRect(x: splashView.frame.midX-50, y: splashView.frame.midY-50, width:100, height: 100)
         
@@ -51,34 +51,34 @@ class CategoryViewController: UIViewController {
     }
     
     //MARK: SplashView(launchScreen)
-    override func viewDidAppear(_ animated:Bool){
-        //Adding delay
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+2){
-            self.scaleDownAnimation()
-        }
-    }
-    func scaleDownAnimation(){
-        UIView.animate(withDuration: 0.5, animations: {
-            self.noteImage.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
-        }){(success)in
-            self.scaleUpAnimation()
-        }
-    }
-    func scaleUpAnimation(){
-        UIView.animate(withDuration: 0.35, delay: 0.1, options: .curveEaseIn, animations:{
-            self.noteImage.transform = CGAffineTransform(scaleX: 5, y: 5)
-            
-        }){(success)in
-            self.removeSplashScreen()
-    
-    }
-        
-        }
+//    override func viewDidAppear(_ animated:Bool){
+//        //Adding delay
+//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+2){
+//            self.scaleDownAnimation()
+//        }
+//    }
+//    func scaleDownAnimation(){
+//        UIView.animate(withDuration: 0.5, animations: {
+//            self.noteImage.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+//        }){(success)in
+//            self.scaleUpAnimation()
+//        }
+//    }
+//    func scaleUpAnimation(){
+//        UIView.animate(withDuration: 0.35, delay: 0.1, options: .curveEaseIn, animations:{
+//            self.noteImage.transform = CGAffineTransform(scaleX: 5, y: 5)
+//
+//        }){(success)in
+//            self.removeSplashScreen()
+//
+//    }
+//
+//        }
     //To remove splashView
-    func removeSplashScreen(){
-        splashView.removeFromSuperview()
-        
-    }
+//    func removeSplashScreen(){
+//        splashView.removeFromSuperview()
+//
+//    }
     
 //    MARK:   alert for info button
     @IBAction func showInfo(_ sender: Any) {
