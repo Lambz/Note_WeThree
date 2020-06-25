@@ -55,7 +55,7 @@ class MapViewController: UIViewController {
     /// Add the Notes Location as Annotation
     private func addAnnotation()
     {
-        mMapView.removeAnnotations(mMapView.annotations)
+//        mMapView.removeAnnotations(mMapView.annotations)
         let annotation = MKPointAnnotation()
         annotation.coordinate = mDestination!.coordinate
         CLGeocoder().reverseGeocodeLocation(self.mDestination!, completionHandler: {(placemarks, error) -> Void in
