@@ -15,27 +15,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="notebook-clip-art" translatesAutoresizingMaskIntoConstraints="NO" id="1R1-dR-kxc">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="notebook-clip-art" translatesAutoresizingMaskIntoConstraints="NO" id="1R1-dR-kxc">
                                 <rect key="frame" x="157" y="398" width="100" height="100"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="let'sNote.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="WK0-Uo-ebi">
+                                <rect key="frame" x="11" y="102" width="383" height="259"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="DUa-AN-TfM"/>
-                                    <constraint firstAttribute="width" constant="100" id="sJf-Uk-hN9"/>
+                                    <constraint firstAttribute="height" constant="259" id="uY9-Ro-RJU"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let's Note" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TLK-2B-QMW">
-                                <rect key="frame" x="76" y="107" width="148" height="42"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                                <color key="shadowColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.85882352941176465" green="0.68235294117647061" blue="0.28627450980392155" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="1R1-dR-kxc" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="5tR-ap-pzu"/>
-                            <constraint firstItem="TLK-2B-QMW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="76" id="7OS-W6-SbC"/>
-                            <constraint firstItem="TLK-2B-QMW" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="63" id="JAm-OG-wfq"/>
-                            <constraint firstItem="1R1-dR-kxc" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="klr-Qa-yXa"/>
+                            <constraint firstItem="1R1-dR-kxc" firstAttribute="top" secondItem="WK0-Uo-ebi" secondAttribute="bottom" constant="37" id="Xqx-No-cY9"/>
+                            <constraint firstItem="WK0-Uo-ebi" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="58" id="akT-Mz-45c"/>
+                            <constraint firstItem="WK0-Uo-ebi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="11" id="kLG-6w-rxb"/>
+                            <constraint firstItem="WK0-Uo-ebi" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailingMargin" id="pLk-qg-7UO"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -46,6 +41,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="let'sNote.jpg" width="431" height="180"/>
         <image name="notebook-clip-art" width="329.5" height="388.5"/>
     </resources>
 </document>

@@ -11,6 +11,7 @@ import CoreData
 
 class CategoryViewController: UIViewController {
     //variables for launch screen
+    let titleImage = UIImageView(image: UIImage(named: "let'sNote.jpg")!)
     let noteImage = UIImageView(image: UIImage(named: "notebook-clip-art")!)
     let splashView = UIView()
     
@@ -25,7 +26,7 @@ class CategoryViewController: UIViewController {
     override func viewDidLoad() {
         
         //color for splashView
-        splashView.backgroundColor = UIColor(displayP3Red: 219/255, green: 174/255, blue: 60/255, alpha: 1.0)
+        splashView.backgroundColor = UIColor(displayP3Red: 0/255, green: 0/255, blue: 0/255, alpha: 1.0)
         // add subview for splash screen
         view.addSubview(splashView)
         
@@ -34,7 +35,7 @@ class CategoryViewController: UIViewController {
         noteImage.contentMode = .scaleAspectFit
         splashView.addSubview(noteImage)
         // adding frame for the image
-        noteImage.frame = CGRect(x: splashView.frame.maxX-50, y: splashView.frame.maxY-50, width:100, height: 100)
+        noteImage.frame = CGRect(x: splashView.frame.midX-50, y: splashView.frame.midY-50, width:100, height: 100)
         
         super.viewDidLoad()
 //        context for core data operations
