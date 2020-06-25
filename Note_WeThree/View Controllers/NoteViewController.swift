@@ -67,8 +67,6 @@ class NoteViewController: UIViewController {
         
 //        map coordinates setup
         startLocationManager()
-
-        
         
     }
     
@@ -87,33 +85,10 @@ class NoteViewController: UIViewController {
     @IBAction func saveButtonTapped(_ sender: Any) {
         
         if(self.forCategory != nil) {
-            let title = self.noteTitle.text
-            let msg = self.noteTextLabel.text
-            let img = self.noteImage.image
-            let date = Date()
-            let category: String?
-            if let categoryIndex = self.forCategory {
-                do {
-                    category = try NotesHelper.getInstance().getCategory(at: categoryIndex)
-                }
-                catch {
-                    print(error)
-                }
-            }
-//            getCoordinates()
-//
-//            let audiolocation: String?
-//            if(title != nil) {
-//                self.openedNote = Note(title: title!, message: msg, lat: self.latitude, long: self.longitude, image: img, date: date, categoryName: category!, audioFileLocation: audiolocation)
-//            }
-//            do {
-//                try NotesHelper.getInstance().addNote(note: self.openedNote, context: self.noteViewContext)
-//            }
-//            catch {
-//                print(error)
-//            }
-            
-//            stopLocationManager()
+            saveNewNote()
+        }
+        else {
+            saveOldNote()
         }
         
     }
@@ -241,6 +216,7 @@ extension NoteViewController {
             }
             else {
                 self.locationLabel.isHidden = true
+                self.dateLabel.isHidden = true
                 if let category = self.forCategory {
                     self.tempNoteIndex = try NotesHelper.getInstance().getNumberOfNotes(forCategory: category)
                     if let noteIndex = self.tempNoteIndex {
@@ -280,6 +256,84 @@ extension NoteViewController {
             self.longitude = long
         }
         
+    }
+    
+    func checkTitle(titleText: String?) -> Bool {
+        if(titleText == nil) {
+            let alert = UIAlertController(title: "Oops!", message: "Title can't be left blank", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return false
+        }
+        return true
+    }
+    
+    func saveOldNote() {
+                        
+        let title = self.noteTitle.text
+        if(!checkTitle(titleText: title)) {
+            return
+        }
+        else {
+            let msg = self.noteTextLabel.text
+            let img = self.noteImage.image
+            self.openedNote.mTitle = title!
+            self.openedNote.mMessage = msg
+            self.openedNote.mImage = img
+            
+            if let noteIndex = tempNoteIndex {
+                do {
+                   try NotesHelper.getInstance().updateNote(oldNote: noteIndex, newNote: openedNote, context: self.noteViewContext)
+                }
+                catch {
+                    print(error)
+                    showSaveErrorAlert()
+                }
+            }
+            self.stopLocationManager()
+        }
+        
+    }
+    
+    func saveNewNote() {
+        print("in func")
+        do {
+            let title = self.noteTitle.text
+            let date = Date()
+            var category: String!
+            if let categoryIndex = self.forCategory {
+                category = try NotesHelper.getInstance().getCategory(at: categoryIndex)
+            }
+            if(!checkTitle(titleText: title)) {
+                return
+            }
+            else {
+                print("conditions checked")
+                let msg = self.noteTextLabel.text
+                let img = self.noteImage.image
+                var audiolocation: String?
+                if fileName.count > 0 {
+                    audiolocation = fileName
+                }
+                
+                self.openedNote = Note(title: title!, message: msg, lat: self.latitude, long: self.longitude, image: img, date: date, categoryName: category, audioFileLocation: audiolocation)
+                
+                try NotesHelper.getInstance().addNote(note: self.openedNote, context: self.noteViewContext)
+
+                stopLocationManager()
+            }
+        }
+        catch {
+            print(error.localizedDescription)
+            showSaveErrorAlert()
+        }
+                
+    }
+    
+    func showSaveErrorAlert() {
+        let alert = UIAlertController(title: "Error!", message: "Error while saving note. Please try again!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 
 }
