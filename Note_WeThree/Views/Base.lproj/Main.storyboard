@@ -426,6 +426,7 @@
                         <outlet property="locationLabel" destination="z4K-EF-Bqr" id="K6L-uw-YMM"/>
                         <outlet property="micButton" destination="QQI-ui-C1s" id="MKo-dB-8TM"/>
                         <outlet property="noteImage" destination="nvD-Tz-iiP" id="oAq-7O-crR"/>
+                        <outlet property="noteTextLabel" destination="LDV-2w-cxo" id="arE-nO-bU1"/>
                         <outlet property="noteTitle" destination="6Ue-4z-Py1" id="4li-vO-6NI"/>
                         <segue destination="32Y-QJ-NqI" kind="show" identifier="mapScreen" id="PHi-lI-fe8"/>
                         <segue destination="P7o-ja-hTM" kind="unwind" identifier="backToNoteView" unwindAction="calledAfterFolderSelection:" id="uag-0g-obT"/>
