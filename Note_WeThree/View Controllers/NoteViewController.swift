@@ -26,13 +26,8 @@ class NoteViewController: UIViewController {
     
     
     //    for audio recording and playing
-    //    var didRecord = false
-    //    var isRecording = false
+    
     var recordingIsAvailable = false
-    //    var voiceRecorder : AVAudioRecorder!
-    //    var audioPlayer : AVAudioPlayer!
-    //    var recordingSession: AVAudioSession!
-    //    var fileName = ""
     var recordingSession: AVAudioSession!
     var audioRecorder: AVAudioRecorder!
     var audioPlayer : AVAudioPlayer!
@@ -50,7 +45,6 @@ class NoteViewController: UIViewController {
     
     //    screen element outlets
     @IBOutlet weak var dateLabel: UILabel!
-    //    @IBOutlet weak var noteTextLabel: UITextField!
     @IBOutlet weak var noteImage: UIImageView!
     @IBOutlet weak var noteTitle: UITextField!
     @IBOutlet weak var noteText: UITextView!
@@ -67,10 +61,6 @@ class NoteViewController: UIViewController {
         self.noteViewContext = noteViewDelegate.persistentContainer.viewContext
         initalSetupOnViewLoad()
         
-        //        audio setup
-//        setUpAudioMethods()
-        
-        //        map coordinates setup
         startLocationManager()
         
     }
@@ -192,6 +182,9 @@ class NoteViewController: UIViewController {
         self.present(actionSheet, animated: true, completion: nil)
     }
     
+    
+    
+//    handler for variable passing for next screen
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -377,6 +370,8 @@ extension NoteViewController {
     
 }
 
+
+//MARK: delegate for audio recording
 extension NoteViewController: AVAudioRecorderDelegate
 {
     
@@ -427,16 +422,13 @@ extension NoteViewController: AVAudioRecorderDelegate
     
     func finishRecording(success: Bool) {
         audioRecorder.stop()
-//        audioRecorder = nil
         
         if success {
-//            recordButton.setTitle("Tap to Re-record", for: .normal)
             print("success")
             mDidRecord = true
             
         } else {
             print("not success")
-            // recording failed :(
         }
     }
     
@@ -448,6 +440,8 @@ extension NoteViewController: AVAudioRecorderDelegate
     
 }
 
+
+//MARK: delegate for audio playing
 extension NoteViewController: AVAudioPlayerDelegate
 {
     func playAudio()
