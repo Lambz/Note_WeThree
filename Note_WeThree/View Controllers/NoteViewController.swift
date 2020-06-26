@@ -376,103 +376,6 @@ extension NoteViewController {
     
 }
 
-
-
-
-
-//    MARK: audio record and play methods
-//extension NoteViewController: AVAudioPlayerDelegate, AVAudioRecorderDelegate {
-//
-//
-//    func setUpAudioMethods() {
-//        self.startAudioSession()
-//        recordingSession = AVAudioSession.sharedInstance()
-//        try! recordingSession.setCategory(
-//            AVAudioSession.Category.playAndRecord)
-//    }
-//
-//    func startAudioSession(){
-//        recordingSession = AVAudioSession.sharedInstance()
-//
-//        do {
-//            try recordingSession.setCategory(AVAudioSession.Category.playAndRecord)
-//            try recordingSession.setActive(true)
-//            recordingSession.requestRecordPermission() { [unowned self] allowed in
-//                DispatchQueue.main.async {
-//                    if allowed {
-//                        self.setupRecorder()
-//                    } else {
-//                        print("permisssion for audio denied")
-//                    }
-//                }
-//            }
-//        } catch {
-//            print(error)
-//        }
-//    }
-//
-//    func setupRecorder(){
-//        let recordSettings = [AVFormatIDKey : kAudioFormatAppleLossless,
-//                              AVEncoderAudioQualityKey : AVAudioQuality.max.rawValue,
-//                              AVEncoderBitRateKey : 320000,
-//                              AVNumberOfChannelsKey : 2,
-//                              AVSampleRateKey : 44100.0 ] as [String : Any]
-//
-//        do {
-//            voiceRecorder = try AVAudioRecorder(url: getFileURL(), settings: recordSettings)
-//            voiceRecorder.delegate = self
-//            voiceRecorder.prepareToRecord()
-//        }
-//        catch {
-//            print(error)
-//        }
-//
-//    }
-//
-//    func getCacheDirectory() -> URL {
-//        let fm = FileManager.default
-//        let docsurl = try! fm.url(for:.documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-//        return docsurl
-//    }
-//
-//    func getFileURL() -> URL{
-//        let path  = getCacheDirectory()
-//        let filePath = path.appendingPathComponent("\(fileName)")
-//        return filePath
-//    }
-//
-//    func preparePlayer(){
-//        do {
-//            audioPlayer =  try AVAudioPlayer(contentsOf: getFileURL())
-//
-//            audioPlayer.delegate = self
-//            audioPlayer.prepareToPlay()
-//            audioPlayer.volume = 1.0
-//        } catch {
-//            print(error)
-//        }
-//    }
-//
-//    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-//        self.micButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
-//    }
-//
-//    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
-//
-//        self.didRecord = true
-//        let path  = getCacheDirectory()
-//        let filePath = path.appendingPathComponent("\(fileName)")
-//        let savePath = path.appendingPathComponent("\(fileName)")
-//        do {
-//            try FileManager.default.moveItem(at: filePath, to: savePath)
-//        }
-//        catch {
-//            print(error)
-//        }
-//    }
-//
-//}
-
 extension NoteViewController: AVAudioRecorderDelegate
 {
     
@@ -548,10 +451,6 @@ extension NoteViewController: AVAudioPlayerDelegate
     func playAudio()
     {
         dump(audioRecorder)
-//        if audioRecorder.isRecording == false{
-//            stopButton.enabled = true
-//            recordButton.enabled = false
-            
             var error : NSError?
             do
             {
@@ -579,18 +478,9 @@ extension NoteViewController: AVAudioPlayerDelegate
                 print(error)
                 
             }
-            
-            
-            
-            
-//        }
+
     }
-    
-//    func audioPlayerDidFinishPlaying(player: AVAudioPlayer!, successfully flag: Bool) {
-//        recordButton.enabled = true
-//        stopButton.enabled = false
-//    }
-    
+
     func audioPlayerDecodeErrorDidOccur(player: AVAudioPlayer!, error: NSError!) {
         print("Audio Play Decode Error")
     }

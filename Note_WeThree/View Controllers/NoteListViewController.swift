@@ -268,6 +268,7 @@ class NoteListViewController: UIViewController {
 extension NoteListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("number: \(NotesHelper.getInstance().getNumberOfNotes())")
         return NotesHelper.getInstance().getNumberOfNotes()
     }
     
