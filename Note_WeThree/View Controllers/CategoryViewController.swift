@@ -10,8 +10,7 @@ import UIKit
 import CoreData
 
 class CategoryViewController: UIViewController {
-    //variables for launch screen
-    //let titleImage = UIImageView(image: UIImage(named: "let'sNote.jpg")!)
+    
     let noteImage = UIImageView(image: UIImage(named: "notebook-clip-art")!)
     let splashView = UIView()
     
