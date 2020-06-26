@@ -48,6 +48,7 @@ class NoteViewController: UIViewController {
     @IBOutlet weak var noteTextLabel: UITextField!
     @IBOutlet weak var noteImage: UIImageView!
     @IBOutlet weak var noteTitle: UITextField!
+    @IBOutlet weak var noteText: UITextView!
     @IBOutlet weak var micButton: UIButton!
     @IBOutlet weak var locationLabel: UIButton!
     
@@ -211,6 +212,10 @@ extension NoteViewController {
     func initalSetupOnViewLoad() {
         
         do {
+            self.noteText.isEditable = true
+            self.noteText.isUserInteractionEnabled = true
+            
+            
             if(forCategory == nil) {
     //            sets up note object if saved note opened
                 if let noteIndex = self.selectedNote {

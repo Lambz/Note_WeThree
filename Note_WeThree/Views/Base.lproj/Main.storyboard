@@ -260,19 +260,38 @@
                                 <rect key="frame" x="0.0" y="160.5" width="414" height="629.5"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title of the note" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="6Ue-4z-Py1">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="312"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="164"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Enter note description" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="LDV-2w-cxo">
-                                        <rect key="frame" x="0.0" y="332" width="414" height="26.5"/>
+                                        <rect key="frame" x="0.0" y="184" width="414" height="26.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nvD-Tz-iiP">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" contentInsetAdjustmentBehavior="never" text="Add description: " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="AoH-MS-VVP">
+                                        <rect key="frame" x="0.0" y="230.5" width="414" height="128"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nvD-Tz-iiP">
                                         <rect key="frame" x="0.0" y="378.5" width="414" height="251"/>
                                     </imageView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="AoH-MS-VVP" secondAttribute="trailing" id="6Ei-cc-UXP"/>
+                                    <constraint firstItem="nvD-Tz-iiP" firstAttribute="top" secondItem="AoH-MS-VVP" secondAttribute="bottom" id="GGO-wj-Hg6"/>
+                                    <constraint firstItem="AoH-MS-VVP" firstAttribute="leading" secondItem="uvs-8C-kde" secondAttribute="leading" id="Hlw-24-fkk"/>
+                                    <constraint firstAttribute="trailing" secondItem="nvD-Tz-iiP" secondAttribute="trailing" id="M3K-iK-Jhr"/>
+                                    <constraint firstItem="LDV-2w-cxo" firstAttribute="top" secondItem="6Ue-4z-Py1" secondAttribute="bottom" id="Xu0-TT-EKp"/>
+                                    <constraint firstItem="nvD-Tz-iiP" firstAttribute="leading" secondItem="uvs-8C-kde" secondAttribute="leading" id="cMH-rY-mfb"/>
+                                    <constraint firstItem="LDV-2w-cxo" firstAttribute="leading" secondItem="uvs-8C-kde" secondAttribute="leading" id="i1D-qr-ciQ"/>
+                                    <constraint firstAttribute="trailing" secondItem="LDV-2w-cxo" secondAttribute="trailing" id="rGm-1C-kGH"/>
+                                    <constraint firstItem="AoH-MS-VVP" firstAttribute="top" secondItem="LDV-2w-cxo" secondAttribute="bottom" id="xUD-Ov-4mh"/>
+                                    <constraint firstAttribute="bottom" secondItem="nvD-Tz-iiP" secondAttribute="bottom" id="yEX-cv-cm3"/>
+                                </constraints>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Date and Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JMA-Yt-zMn">
                                 <rect key="frame" x="0.0" y="117" width="414" height="50"/>
@@ -357,6 +376,7 @@
                         <outlet property="locationLabel" destination="z4K-EF-Bqr" id="K6L-uw-YMM"/>
                         <outlet property="micButton" destination="QQI-ui-C1s" id="MKo-dB-8TM"/>
                         <outlet property="noteImage" destination="nvD-Tz-iiP" id="oAq-7O-crR"/>
+                        <outlet property="noteText" destination="AoH-MS-VVP" id="YeC-cF-dON"/>
                         <outlet property="noteTextLabel" destination="LDV-2w-cxo" id="arE-nO-bU1"/>
                         <outlet property="noteTitle" destination="6Ue-4z-Py1" id="4li-vO-6NI"/>
                         <segue destination="32Y-QJ-NqI" kind="show" identifier="mapScreen" id="PHi-lI-fe8"/>
@@ -365,7 +385,6 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k7v-aB-fvU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="P7o-ja-hTM" userLabel="Exit" sceneMemberID="exit"/>
-                <tapGestureRecognizer id="uos-1b-GDE"/>
             </objects>
             <point key="canvasLocation" x="2379.7101449275365" y="-1028.5714285714284"/>
         </scene>
