@@ -13,10 +13,10 @@ import AVFoundation
 
 class NoteViewController: UIViewController {
     
-//    variables to distinguish between weather old note opened or new note
+    //    variables to distinguish between weather old note opened or new note
     var selectedNote: Int?
     var forCategory: Int?
-//    index variable to store the new note
+    //    index variable to store the new note
     var tempNoteIndex: Int?
     
     var noteViewContext: NSManagedObjectContext!
@@ -25,27 +25,32 @@ class NoteViewController: UIViewController {
     var longitude: Double?
     
     
-//    for audio recording and playing
-    var didRecord = false
-    var isRecording = false
+    //    for audio recording and playing
+    //    var didRecord = false
+    //    var isRecording = false
     var recordingIsAvailable = false
-    var voiceRecorder : AVAudioRecorder!
-    var audioPlayer : AVAudioPlayer!
+    //    var voiceRecorder : AVAudioRecorder!
+    //    var audioPlayer : AVAudioPlayer!
+    //    var recordingSession: AVAudioSession!
+    //    var fileName = ""
     var recordingSession: AVAudioSession!
-    var fileName = ""
+    var audioRecorder: AVAudioRecorder!
+    var audioPlayer : AVAudioPlayer!
+    var mDidRecord = false
+    var mAudioFileName: String!
     
-//    variables for location manager
+    //    variables for location manager
     let locationManager = CLLocationManager()
     var didUpdatedLocation: (() -> ())?
     
-//    image view variables
+    //    image view variables
     var imagePickerController = UIImagePickerController()
     
     
     
     //    screen element outlets
     @IBOutlet weak var dateLabel: UILabel!
-//    @IBOutlet weak var noteTextLabel: UITextField!
+    //    @IBOutlet weak var noteTextLabel: UITextField!
     @IBOutlet weak var noteImage: UIImageView!
     @IBOutlet weak var noteTitle: UITextField!
     @IBOutlet weak var noteText: UITextView!
@@ -57,24 +62,22 @@ class NoteViewController: UIViewController {
         
         super.viewDidLoad()
         
-//        sets up context for data
+        //        sets up context for data
         let noteViewDelegate = UIApplication.shared.delegate as! AppDelegate
         self.noteViewContext = noteViewDelegate.persistentContainer.viewContext
-        
-        print(fileName.count)
         initalSetupOnViewLoad()
         
-//        audio setup
-        setUpAudioMethods()
+        //        audio setup
+//        setUpAudioMethods()
         
-//        map coordinates setup
+        //        map coordinates setup
         startLocationManager()
         
     }
     
     
-
-//    MARK: UI event handler methods implemented
+    
+    //    MARK: UI event handler methods implemented
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
         
@@ -124,26 +127,22 @@ class NoteViewController: UIViewController {
     
     
     @IBAction func recordAudio(_ sender: Any) {
-        
-        if(recordingIsAvailable) {
-            preparePlayer()
-            audioPlayer.play()
-            self.micButton.setImage(UIImage(systemName: "stop.fill"), for: .normal)
+        if recordingIsAvailable || mDidRecord
+        {
+            playAudio()
         }
-        else {
-            if(!isRecording){
-                self.micButton.setImage(UIImage(systemName: "stop.fill"), for: .normal)
-                voiceRecorder.record()
-                isRecording = true
-            }
-            else{
-                self.micButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
-                voiceRecorder.stop()
-                isRecording = false
-                recordingIsAvailable = true
+        else
+        {
+            if audioRecorder == nil
+            {
+                startRecording()
+                micButton.setImage(UIImage(systemName: "stop.fill"), for: .normal)
+            } else
+            {
+                finishRecording(success: true)
+                micButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
             }
         }
-        
     }
     
     @IBAction func viewLocation(_ sender: Any) {
@@ -152,7 +151,7 @@ class NoteViewController: UIViewController {
             if(self.openedNote.mLat != nil && self.openedNote.mLong != nil) {
                 performSegue(withIdentifier: "mapScreen", sender: self)
             }
-            
+                
             else {
                 let alert = UIAlertController(title: "Location cannot be displayed!", message: "The location when this note was taken is not available. It could be due to insufficient permissions or network error on your device.", preferredStyle: .alert)
                 let action = UIAlertAction(title: "Okay", style: .default, handler: nil)
@@ -202,13 +201,17 @@ class NoteViewController: UIViewController {
         
     }
     
+    func randomString(length: Int) -> String {
+        let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        return String((0..<length).map{ _ in letters.randomElement()! })
+    }
 }
 
 
 
 // MARK: implements other delegate methods
 extension NoteViewController {
-//    MARK: sets up initial values on view load
+    //    MARK: sets up initial values on view load
     func initalSetupOnViewLoad() {
         
         do {
@@ -217,22 +220,17 @@ extension NoteViewController {
             
             
             if(forCategory == nil) {
-    //            sets up note object if saved note opened
+                //            sets up note object if saved note opened
                 if let noteIndex = self.selectedNote {
                     openedNote = try NotesHelper.getInstance().getNote(at: noteIndex)
-                    if(openedNote.mAudioFileLocation != nil) {
-                        if(openedNote.mAudioFileLocation!.count < 2) {
-                            self.micButton.isHidden = true
-                        }
-                        else {
-                            if let audioFile = openedNote.mAudioFileLocation {
-                                self.fileName = audioFile
-                            }
-                            self.micButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
-                            recordingIsAvailable = true
-                        }
+                    if(openedNote.mAudioFileLocation != nil)
+                    {
+                        mAudioFileName = openedNote.mAudioFileLocation
+                        self.micButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+                        recordingIsAvailable = true
                     }
                     else {
+                        mAudioFileName = randomString(length: 10) + ".m4a"
                         self.micButton.isHidden = true
                     }
                     showNoteOnLoad()
@@ -243,11 +241,10 @@ extension NoteViewController {
                 self.dateLabel.isHidden = true
                 if let category = self.forCategory {
                     self.tempNoteIndex = try NotesHelper.getInstance().getNumberOfNotes(forCategory: category)
-                    if let noteIndex = self.tempNoteIndex {
-                        self.fileName = "note\(noteIndex).m4a"
-                    }
+                    self.mAudioFileName = randomString(length: 10) + ".m4a"
                 }
             }
+            setupRecording()
         }
         catch {
             print(error.localizedDescription)
@@ -257,18 +254,18 @@ extension NoteViewController {
     
     
     
-//    MARK: loads note incase old note opened
+    //    MARK: loads note incase old note opened
     func showNoteOnLoad() {
         
         self.noteTitle.text = self.openedNote.mTitle
-//        show date after formatting
+        //        show date after formatting
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let date = formatter.string(from: self.openedNote.mDate)
         self.dateLabel.text = date
         
         if let message = self.openedNote.mMessage {
-//            self.noteTextLabel.text = message
+            //            self.noteTextLabel.text = message
             self.noteText.text = message
         }
         if let image = self.openedNote.mImage {
@@ -286,8 +283,8 @@ extension NoteViewController {
     
     
     
-// MARK: Note saving methods
-//    checks nil title before saving
+    // MARK: Note saving methods
+    //    checks nil title before saving
     func checkTitle(titleText: String?) -> Bool {
         if(titleText == nil || titleText!.count < 1) {
             let alert = UIAlertController(title: "Oops!", message: "Title can't be left blank", preferredStyle: .alert)
@@ -299,15 +296,15 @@ extension NoteViewController {
     }
     
     
-//    saves note if previously saved
+    //    saves note if previously saved
     func saveOldNote() {
-                        
+        
         let title = self.noteTitle.text
         if(!checkTitle(titleText: title)) {
             return
         }
         else {
-//            let msg = self.noteTextLabel.text
+            //            let msg = self.noteTextLabel.text
             let msg = self.noteText.text
             let img = self.noteImage.image
             self.openedNote.mTitle = title!
@@ -316,7 +313,7 @@ extension NoteViewController {
             
             if let noteIndex = selectedNote {
                 do {
-                   try NotesHelper.getInstance().updateNote(oldNote: noteIndex, newNote: openedNote, context: self.noteViewContext)
+                    try NotesHelper.getInstance().updateNote(oldNote: noteIndex, newNote: openedNote, context: self.noteViewContext)
                     self.cancelButtonTapped(self)
                 }
                 catch {
@@ -329,7 +326,7 @@ extension NoteViewController {
         
     }
     
-//    saves if new note
+    //    saves if new note
     func saveNewNote() {
         print("in func")
         do {
@@ -344,18 +341,20 @@ extension NoteViewController {
             }
             else {
                 print("conditions checked")
-//                let msg = self.noteTextLabel.text
+                //                let msg = self.noteTextLabel.text
                 let msg = self.noteText.text
                 let img = self.noteImage.image
                 var audiolocation: String?
-                if didRecord {
-                    audiolocation = fileName
+                if mDidRecord
+                {
+                    audiolocation = mAudioFileName
+                    print("audiolocation: \(audiolocation)")
                 }
                 
                 self.openedNote = Note(title: title!, message: msg, lat: self.latitude, long: self.longitude, image: img, date: date, categoryName: category, audioFileLocation: audiolocation)
                 
                 try NotesHelper.getInstance().addNote(note: self.openedNote, context: self.noteViewContext)
-
+                
                 stopLocationManager()
                 
                 self.cancelButtonTapped(self)
@@ -365,16 +364,16 @@ extension NoteViewController {
             print(error.localizedDescription)
             showSaveErrorAlert()
         }
-                
+        
     }
     
-//    shows error if note can't be saved
+    //    shows error if note can't be saved
     func showSaveErrorAlert() {
         let alert = UIAlertController(title: "Error!", message: "Error while saving note. Please try again!", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
-
+    
 }
 
 
@@ -382,28 +381,114 @@ extension NoteViewController {
 
 
 //    MARK: audio record and play methods
-extension NoteViewController: AVAudioPlayerDelegate, AVAudioRecorderDelegate {
+//extension NoteViewController: AVAudioPlayerDelegate, AVAudioRecorderDelegate {
+//
+//
+//    func setUpAudioMethods() {
+//        self.startAudioSession()
+//        recordingSession = AVAudioSession.sharedInstance()
+//        try! recordingSession.setCategory(
+//            AVAudioSession.Category.playAndRecord)
+//    }
+//
+//    func startAudioSession(){
+//        recordingSession = AVAudioSession.sharedInstance()
+//
+//        do {
+//            try recordingSession.setCategory(AVAudioSession.Category.playAndRecord)
+//            try recordingSession.setActive(true)
+//            recordingSession.requestRecordPermission() { [unowned self] allowed in
+//                DispatchQueue.main.async {
+//                    if allowed {
+//                        self.setupRecorder()
+//                    } else {
+//                        print("permisssion for audio denied")
+//                    }
+//                }
+//            }
+//        } catch {
+//            print(error)
+//        }
+//    }
+//
+//    func setupRecorder(){
+//        let recordSettings = [AVFormatIDKey : kAudioFormatAppleLossless,
+//                              AVEncoderAudioQualityKey : AVAudioQuality.max.rawValue,
+//                              AVEncoderBitRateKey : 320000,
+//                              AVNumberOfChannelsKey : 2,
+//                              AVSampleRateKey : 44100.0 ] as [String : Any]
+//
+//        do {
+//            voiceRecorder = try AVAudioRecorder(url: getFileURL(), settings: recordSettings)
+//            voiceRecorder.delegate = self
+//            voiceRecorder.prepareToRecord()
+//        }
+//        catch {
+//            print(error)
+//        }
+//
+//    }
+//
+//    func getCacheDirectory() -> URL {
+//        let fm = FileManager.default
+//        let docsurl = try! fm.url(for:.documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+//        return docsurl
+//    }
+//
+//    func getFileURL() -> URL{
+//        let path  = getCacheDirectory()
+//        let filePath = path.appendingPathComponent("\(fileName)")
+//        return filePath
+//    }
+//
+//    func preparePlayer(){
+//        do {
+//            audioPlayer =  try AVAudioPlayer(contentsOf: getFileURL())
+//
+//            audioPlayer.delegate = self
+//            audioPlayer.prepareToPlay()
+//            audioPlayer.volume = 1.0
+//        } catch {
+//            print(error)
+//        }
+//    }
+//
+//    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+//        self.micButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+//    }
+//
+//    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+//
+//        self.didRecord = true
+//        let path  = getCacheDirectory()
+//        let filePath = path.appendingPathComponent("\(fileName)")
+//        let savePath = path.appendingPathComponent("\(fileName)")
+//        do {
+//            try FileManager.default.moveItem(at: filePath, to: savePath)
+//        }
+//        catch {
+//            print(error)
+//        }
+//    }
+//
+//}
 
+extension NoteViewController: AVAudioRecorderDelegate
+{
     
-    func setUpAudioMethods() {
-        self.startAudioSession()
-        recordingSession = AVAudioSession.sharedInstance()
-        try! recordingSession.setCategory(
-            AVAudioSession.Category.playAndRecord)
-    }
-    
-    func startAudioSession(){
+    func setupRecording()
+    {
         recordingSession = AVAudioSession.sharedInstance()
         
         do {
-            try recordingSession.setCategory(AVAudioSession.Category.playAndRecord)
+            try recordingSession.setCategory(.playAndRecord, mode: .default)
             try recordingSession.setActive(true)
             recordingSession.requestRecordPermission() { [unowned self] allowed in
                 DispatchQueue.main.async {
                     if allowed {
-                        self.setupRecorder()
+                        //                        self.loadRecordingUI()
                     } else {
-                        print("permisssion for audio denied")
+                        print("not allowed")
                     }
                 }
             }
@@ -412,66 +497,103 @@ extension NoteViewController: AVAudioPlayerDelegate, AVAudioRecorderDelegate {
         }
     }
     
-    func setupRecorder(){
-        let recordSettings = [AVFormatIDKey : kAudioFormatAppleLossless,
-                              AVEncoderAudioQualityKey : AVAudioQuality.max.rawValue,
-                              AVEncoderBitRateKey : 320000,
-                              AVNumberOfChannelsKey : 2,
-                              AVSampleRateKey : 44100.0 ] as [String : Any]
+    func startRecording() {
+        let audioFilename = getDocumentsDirectory().appendingPathComponent(mAudioFileName)
+        
+        let settings = [
+            AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+            AVSampleRateKey: 12000,
+            AVNumberOfChannelsKey: 1,
+            AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
+        ]
         
         do {
-            voiceRecorder = try AVAudioRecorder(url: getFileURL(), settings: recordSettings)
-            voiceRecorder.delegate = self
-            voiceRecorder.prepareToRecord()
-        }
-        catch {
-            print(error)
-        }
-        
-    }
-    
-    func getCacheDirectory() -> URL {
-        let fm = FileManager.default
-        let docsurl = try! fm.url(for:.documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-        return docsurl
-    }
-    
-    func getFileURL() -> URL{
-        let path  = getCacheDirectory()
-        let filePath = path.appendingPathComponent("\(fileName)")
-        return filePath
-    }
-
-    func preparePlayer(){
-        do {
-            audioPlayer =  try AVAudioPlayer(contentsOf: getFileURL())
-            
-            audioPlayer.delegate = self
-            audioPlayer.prepareToPlay()
-            audioPlayer.volume = 1.0
+            audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
+            audioRecorder.delegate = self
+            audioRecorder.record()
         } catch {
-            print(error)
+            finishRecording(success: false)
         }
     }
     
-    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        self.micButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
+    }
+    
+    func finishRecording(success: Bool) {
+        audioRecorder.stop()
+//        audioRecorder = nil
+        
+        if success {
+//            recordButton.setTitle("Tap to Re-record", for: .normal)
+            print("success")
+            mDidRecord = true
+            
+        } else {
+            print("not success")
+            // recording failed :(
+        }
     }
     
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
-        
-        self.didRecord = true
-        let path  = getCacheDirectory()
-        let filePath = path.appendingPathComponent("\(fileName)")
-        let savePath = path.appendingPathComponent("\(fileName)")
-        do {
-            try FileManager.default.moveItem(at: filePath, to: savePath)
-        }
-        catch {
-            print(error)
+        if !flag {
+            finishRecording(success: false)
         }
     }
+}
+
+extension NoteViewController: AVAudioPlayerDelegate
+{
+    func playAudio()
+    {
+        dump(audioRecorder)
+//        if audioRecorder.isRecording == false{
+//            stopButton.enabled = true
+//            recordButton.enabled = false
+            
+            var error : NSError?
+            do
+            {
+                var url: URL
+                if recordingIsAvailable
+                {
+                    url = getDocumentsDirectory().appendingPathComponent(mAudioFileName)
+//                    url = URL.init(string: urlString)!
+                }
+                else
+                {
+                    url = audioRecorder.url
+                }
+                print(url)
+                audioPlayer = try AVAudioPlayer(contentsOf: url)
+                if let err = error{
+                    print("audioPlayer error: \(err.localizedDescription)")
+                }else{
+                    audioPlayer.play()
+                }
+                audioPlayer.delegate = self
+            }
+            catch
+            {
+                print(error)
+                
+            }
+            
+            
+            
+            
+//        }
+    }
     
+//    func audioPlayerDidFinishPlaying(player: AVAudioPlayer!, successfully flag: Bool) {
+//        recordButton.enabled = true
+//        stopButton.enabled = false
+//    }
+    
+    func audioPlayerDecodeErrorDidOccur(player: AVAudioPlayer!, error: NSError!) {
+        print("Audio Play Decode Error")
+    }
 }
 
 
@@ -498,7 +620,7 @@ extension NoteViewController: CLLocationManagerDelegate {
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation()
         }
-    
+        
     }
     
     func stopLocationManager() {
