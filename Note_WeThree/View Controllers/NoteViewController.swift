@@ -130,6 +130,7 @@ class NoteViewController: UIViewController {
         if recordingIsAvailable || mDidRecord
         {
             playAudio()
+            micButton.setImage(UIImage(systemName: "stop.fill"), for: .normal)
         }
         else
         {
@@ -444,6 +445,7 @@ extension NoteViewController: AVAudioRecorderDelegate
             finishRecording(success: false)
         }
     }
+    
 }
 
 extension NoteViewController: AVAudioPlayerDelegate
@@ -484,6 +486,8 @@ extension NoteViewController: AVAudioPlayerDelegate
     func audioPlayerDecodeErrorDidOccur(player: AVAudioPlayer!, error: NSError!) {
         print("Audio Play Decode Error")
     }
+    
+
 }
 
 
