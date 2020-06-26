@@ -52,4 +52,10 @@ class Note
         self.mCategoryName = categoryName
         self.mAudioFileLocation = audioFileLocation
     }
+    
+    static func getCopy(note: Note) -> Note
+    {
+        let note = Note(title: note.mTitle, message: note.mMessage, lat: note.mLat, long: note.mLong, image: note.mImage, date: note.mDate, categoryName: note.mCategoryName, audioFileLocation: note.mAudioFileLocation)
+        return note
+    }
 }

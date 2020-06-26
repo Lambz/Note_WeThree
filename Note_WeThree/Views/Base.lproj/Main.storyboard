@@ -267,8 +267,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="never" text="Add description: " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="AoH-MS-VVP">
-                                <rect key="frame" x="20" y="199.5" width="374" height="150"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="never" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="AoH-MS-VVP">
+                                <rect key="frame" x="20" y="240" width="374" height="150"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="VAR-AH-xRo"/>
@@ -278,7 +278,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nvD-Tz-iiP">
-                                <rect key="frame" x="0.0" y="389.5" width="414" height="340.5"/>
+                                <rect key="frame" x="0.0" y="410" width="414" height="320"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="aPh-Xs-aXb">
                                 <rect key="frame" x="20" y="770" width="374" height="23"/>
@@ -318,11 +318,17 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VmN-oE-kYN">
+                                <rect key="frame" x="20" y="209.5" width="92.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="systemGray4Color" red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="highlightedColor" cocoaTouchSystemColor="lightTextColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="AoH-MS-VVP" firstAttribute="trailing" secondItem="TtU-XV-Ny7" secondAttribute="trailing" constant="-20" id="195-vR-rkU"/>
-                            <constraint firstItem="AoH-MS-VVP" firstAttribute="top" secondItem="6Ue-4z-Py1" secondAttribute="bottom" constant="10" id="5Bw-lj-oFP"/>
+                            <constraint firstItem="AoH-MS-VVP" firstAttribute="top" secondItem="VmN-oE-kYN" secondAttribute="bottom" constant="10" id="5Bw-lj-oFP"/>
                             <constraint firstItem="AoH-MS-VVP" firstAttribute="leading" secondItem="TtU-XV-Ny7" secondAttribute="leading" constant="20" id="6pM-KE-ydt"/>
                             <constraint firstItem="aPh-Xs-aXb" firstAttribute="bottom" secondItem="TtU-XV-Ny7" secondAttribute="bottom" constant="-20" id="72C-gN-PDF"/>
                             <constraint firstItem="aPh-Xs-aXb" firstAttribute="leading" secondItem="TtU-XV-Ny7" secondAttribute="leading" constant="20" id="Eca-In-XMx"/>
@@ -334,9 +340,11 @@
                             <constraint firstItem="6Ue-4z-Py1" firstAttribute="top" secondItem="JMA-Yt-zMn" secondAttribute="bottom" constant="10" id="Rd9-He-EDa"/>
                             <constraint firstItem="TtU-XV-Ny7" firstAttribute="trailing" secondItem="aPh-Xs-aXb" secondAttribute="trailing" constant="20" id="SMm-a1-EIo"/>
                             <constraint firstItem="nvD-Tz-iiP" firstAttribute="leading" secondItem="TtU-XV-Ny7" secondAttribute="leading" id="jvA-ji-JTk"/>
+                            <constraint firstItem="VmN-oE-kYN" firstAttribute="top" secondItem="6Ue-4z-Py1" secondAttribute="bottom" constant="20" id="pTb-AB-1JZ"/>
                             <constraint firstItem="nvD-Tz-iiP" firstAttribute="trailing" secondItem="TtU-XV-Ny7" secondAttribute="trailing" id="qPj-MF-Ocf"/>
+                            <constraint firstItem="VmN-oE-kYN" firstAttribute="leading" secondItem="TtU-XV-Ny7" secondAttribute="leading" constant="20" id="tAw-CD-Qtc"/>
                             <constraint firstItem="JMA-Yt-zMn" firstAttribute="top" secondItem="TtU-XV-Ny7" secondAttribute="top" id="vfT-oW-QOF"/>
-                            <constraint firstItem="nvD-Tz-iiP" firstAttribute="top" secondItem="AoH-MS-VVP" secondAttribute="bottom" constant="40" id="xdI-Qt-auB"/>
+                            <constraint firstItem="nvD-Tz-iiP" firstAttribute="top" secondItem="AoH-MS-VVP" secondAttribute="bottom" constant="20" id="xdI-Qt-auB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="TtU-XV-Ny7"/>
                     </view>

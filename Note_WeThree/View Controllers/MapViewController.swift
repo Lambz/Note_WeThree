@@ -66,7 +66,7 @@ class MapViewController: UIViewController {
             
             if placemarks?.count ?? 0 > 0 {
                 let pm = placemarks![0]
-                annotation.title = pm.thoroughfare ?? "nil" + ", " + pm.subThoroughfare!
+                annotation.title = self.getTitle(placemark: pm)
                 annotation.subtitle = pm.subLocality
                 self.mMapView.addAnnotation(annotation)
                 print(pm)
@@ -78,6 +78,28 @@ class MapViewController: UIViewController {
                 print("Problem with the data received from geocoder")
             }
         })
+    }
+    
+    func getTitle(placemark: CLPlacemark) -> String
+    {
+        var title: String = ""
+        if let stf = placemark.subThoroughfare
+        {
+            title.append(stf)
+        }
+        if let tf = placemark.thoroughfare
+        {
+            if title != ""
+            {
+                title.append(", ")
+            }
+            title.append(tf)
+        }
+        if title == ""
+        {
+            return "Note Creation Location"
+        }
+        return title
     }
     
     /// Checks if the Location Services is enabled or not

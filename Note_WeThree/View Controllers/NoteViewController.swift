@@ -299,15 +299,15 @@ extension NoteViewController {
         }
         else {
             //            let msg = self.noteTextLabel.text
+            let newNote: Note = Note.getCopy(note: openedNote)
             let msg = self.noteText.text
             let img = self.noteImage.image
-            self.openedNote.mTitle = title!
-            self.openedNote.mMessage = msg
-            self.openedNote.mImage = img
-            
+            newNote.mTitle = title!
+            newNote.mMessage = msg
+            newNote.mImage = img
             if let noteIndex = selectedNote {
                 do {
-                    try NotesHelper.getInstance().updateNote(oldNote: noteIndex, newNote: openedNote, context: self.noteViewContext)
+                    try NotesHelper.getInstance().updateNote(oldNote: noteIndex, newNote: newNote, context: self.noteViewContext)
                     self.cancelButtonTapped(self)
                 }
                 catch {

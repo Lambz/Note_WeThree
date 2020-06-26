@@ -391,13 +391,19 @@ class NotesHelper
     /// - Throws: InvalidIndexException, if Index is greater than Notes Array
     internal func deleteNote(at: Int, context: NSManagedObjectContext) throws
     {
+        print(2)
         if mNotes.count <= at
         {
             throw CustomExceptions.InavlidIndexException
         }
-        let note = mNotes[at]
+        print(3)
+        let note = mNotes.remove(at: at)
+        dump(note)
+        print(4)
         deleteNoteFromDatabase(note: note, context: context)
+        print(5)
         loadCategoryNoteCount(context: context)
+        print(6)
     }
     
     /// Function to delete Note from Database
@@ -415,6 +421,7 @@ class NotesHelper
             let notes = try context.fetch(fetch_request)
             for note1 in notes
             {
+                print(9)
                 let object_to_delete = note1 as! NSManagedObject
                 context.delete(object_to_delete)
                 do
@@ -586,8 +593,11 @@ class NotesHelper
     /// - Throws: InvalidCategoryException if passed Note's Category does not exist  or if Index is greater than Notes Array
     internal func updateNote(oldNote withIndex: Int, newNote: Note, context: NSManagedObjectContext) throws
     {
+        print(1)
         try deleteNote(at: withIndex, context: context)
+        print("7 mNotes.count: \(mNotes.count)")
         try addNote(note: newNote, context: context)
+        print("8 mNotes.count: \(mNotes.count)")
     }
     
     /// Function loads all the Categories in memory
