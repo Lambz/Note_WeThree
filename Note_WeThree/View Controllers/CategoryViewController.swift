@@ -11,8 +11,6 @@ import CoreData
 
 class CategoryViewController: UIViewController {
     
-    let noteImage = UIImageView(image: UIImage(named: "notebook-clip-art")!)
-    let splashView = UIView()
     
     @IBOutlet weak var categoryTableView: UITableView!
 //    context variable
