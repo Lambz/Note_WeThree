@@ -266,6 +266,9 @@
                                 <rect key="frame" x="20" y="170.5" width="414" height="19"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="PNz-XS-HGL" id="mzh-Pu-gZt"/>
+                                </connections>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="never" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="AoH-MS-VVP">
                                 <rect key="frame" x="20" y="240" width="374" height="150"/>

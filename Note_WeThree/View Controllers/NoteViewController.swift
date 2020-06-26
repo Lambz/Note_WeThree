@@ -62,7 +62,7 @@ class NoteViewController: UIViewController {
         initalSetupOnViewLoad()
         
         startLocationManager()
-        
+        dismissKey()
     }
     
     
@@ -184,7 +184,7 @@ class NoteViewController: UIViewController {
     
     
     
-//    handler for variable passing for next screen
+    //    handler for variable passing for next screen
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -447,41 +447,41 @@ extension NoteViewController: AVAudioPlayerDelegate
     func playAudio()
     {
         dump(audioRecorder)
-            var error : NSError?
-            do
+        var error : NSError?
+        do
+        {
+            var url: URL
+            if recordingIsAvailable
             {
-                var url: URL
-                if recordingIsAvailable
-                {
-                    url = getDocumentsDirectory().appendingPathComponent(mAudioFileName)
-//                    url = URL.init(string: urlString)!
-                }
-                else
-                {
-                    url = audioRecorder.url
-                }
-                print(url)
-                audioPlayer = try AVAudioPlayer(contentsOf: url)
-                if let err = error{
-                    print("audioPlayer error: \(err.localizedDescription)")
-                }else{
-                    audioPlayer.play()
-                }
-                audioPlayer.delegate = self
+                url = getDocumentsDirectory().appendingPathComponent(mAudioFileName)
+                //                    url = URL.init(string: urlString)!
             }
-            catch
+            else
             {
-                print(error)
-                
+                url = audioRecorder.url
             }
-
+            print(url)
+            audioPlayer = try AVAudioPlayer(contentsOf: url)
+            if let err = error{
+                print("audioPlayer error: \(err.localizedDescription)")
+            }else{
+                audioPlayer.play()
+            }
+            audioPlayer.delegate = self
+        }
+        catch
+        {
+            print(error)
+            
+        }
+        
     }
-
+    
     func audioPlayerDecodeErrorDidOccur(player: AVAudioPlayer!, error: NSError!) {
         print("Audio Play Decode Error")
     }
     
-
+    
 }
 
 
@@ -535,5 +535,29 @@ extension NoteViewController: UIImagePickerControllerDelegate, UINavigationContr
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         
         picker.dismiss(animated: true, completion: nil)
+    }
+}
+
+
+extension NoteViewController: UITextFieldDelegate
+{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
+
+extension NoteViewController {
+    func dismissKey()
+    {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer( target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard()
+    {
+        noteTitle.resignFirstResponder()
+        noteText.resignFirstResponder()
     }
 }
