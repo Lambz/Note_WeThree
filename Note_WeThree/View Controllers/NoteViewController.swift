@@ -45,7 +45,7 @@ class NoteViewController: UIViewController {
     
     //    screen element outlets
     @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var noteTextLabel: UITextField!
+//    @IBOutlet weak var noteTextLabel: UITextField!
     @IBOutlet weak var noteImage: UIImageView!
     @IBOutlet weak var noteTitle: UITextField!
     @IBOutlet weak var noteText: UITextView!
@@ -268,7 +268,8 @@ extension NoteViewController {
         self.dateLabel.text = date
         
         if let message = self.openedNote.mMessage {
-            self.noteTextLabel.text = message
+//            self.noteTextLabel.text = message
+            self.noteText.text = message
         }
         if let image = self.openedNote.mImage {
             self.noteImage.image = image
@@ -306,7 +307,8 @@ extension NoteViewController {
             return
         }
         else {
-            let msg = self.noteTextLabel.text
+//            let msg = self.noteTextLabel.text
+            let msg = self.noteText.text
             let img = self.noteImage.image
             self.openedNote.mTitle = title!
             self.openedNote.mMessage = msg
@@ -342,7 +344,8 @@ extension NoteViewController {
             }
             else {
                 print("conditions checked")
-                let msg = self.noteTextLabel.text
+//                let msg = self.noteTextLabel.text
+                let msg = self.noteText.text
                 let img = self.noteImage.image
                 var audiolocation: String?
                 if didRecord {
