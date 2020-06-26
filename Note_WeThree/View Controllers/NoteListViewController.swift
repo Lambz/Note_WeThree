@@ -75,6 +75,7 @@ class NoteListViewController: UIViewController {
             }
         }
         showSearchBar()
+        self.navigationController?.navigationBar.tintColor = UIColor(displayP3Red: 255/255, green: 185/255, blue: 73/255, alpha: 1.0)
     }
     
     
