@@ -254,7 +254,7 @@ class NoteListViewController: UIViewController {
     func showSearchBar() {
         
         mSearchController.obscuresBackgroundDuringPresentation = false
-        mSearchController.searchBar.placeholder = "Search Categories"
+        mSearchController.searchBar.placeholder = "Search Note"
         navigationItem.searchController = mSearchController
         mSearchController.searchBar.delegate = self
         definesPresentationContext = true

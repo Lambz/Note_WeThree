@@ -40,7 +40,7 @@ class CategoryViewController: UIViewController {
     @IBAction func showInfo(_ sender: Any) {
         let msg = "This is a Note taking app, where you can write, organize and manage your ideas quickly and easily.\n\nAll you need to do is to click + button to add a category/note and add note to that.\n\nJust swipe the category/note to delete.\n\nEasy!"
         let alert = UIAlertController(title: "Welcome to Notes", message: msg, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Cool!", comment: "Default action"), style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Okay", comment: "Default action"), style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
     
