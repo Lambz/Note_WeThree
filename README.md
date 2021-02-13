@@ -1,4 +1,6 @@
 # Notes
+Android Version: [link](https://github.com/Lambz/Notes-Android-Application)
+<br/>
 It is a native application for iPhone or iPad that allows the user to take and organize notes.  The notes should be stored with the time and date of creation.
 <br/>The application have the following features:
 - Data is stored with CoreData
